@@ -1,0 +1,15 @@
+
+#include "resource.h"
+#include <windows.h>
+
+IDI_ICON2				ICON	DISCARDABLE		"qe3.ico"
+
+// shader resources	belong in the Reflib but must be embedded in the main .exe to load successfully
+IDR_DRAWSHADER		RCDATA		"fxDraw.fx"
+IDR_MESHSHADER		RCDATA		"fxMesh.fx"
+IDR_PARTICLESHADER	RCDATA		"fxParticle.fx"
+IDR_WATERWARP		RCDATA		"fxWaterwarp.fx"
+IDR_SPRITESHADER	RCDATA		"fxSprite.fx"
+IDR_SURFSHADER		RCDATA		"fxSurf.fx"
+IDR_COMMON			RCDATA		"fxCommon.fx"
+

@@ -1,0 +1,14 @@
+
+check m_oldmission cvar (yes, only used for selecting maps in the MP menus)
+
+check interpolation with hammer of thyrion because i think some MDLs animate at different rates...
+(HoT doesn't have interpolation!  are there any other Hexen II source ports???)
+
+
+put clears through D_ClearRenderTarget
+get rid of the OMGetRenderTargets in D_ClearRenderTargets;
+
+implement gl_finish via D_SyncPipeline
+
+check sizing of MAX_QUAD_VERTS and MAX_QUAD_INDEXES
+
