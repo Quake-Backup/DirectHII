@@ -15,7 +15,7 @@ qboolean	m_recursiveDraw;
 
 int			m_return_state;
 qboolean	m_return_onerror;
-char		m_return_reason [32];
+char		m_return_reason[32];
 
 static float TitlePercent = 0;
 static float TitleTargetPercent = 1;
@@ -433,7 +433,7 @@ void M_DrawBigString (int x, int y, char *string)
 
 	for (c = 0; c < length; c++)
 	{
-		x += M_DrawBigCharacter (x, y, string[c], string[c+1]);
+		x += M_DrawBigCharacter (x, y, string[c], string[c + 1]);
 	}
 }
 
@@ -497,7 +497,7 @@ void ScrollTitle (char *name)
 
 	p = Draw_CachePic (LastName);
 	finaly = ((float) p->height * TitlePercent) - p->height;
-	M_DrawTransPicCropped ((320 - p->width) / 2, finaly , p);
+	M_DrawTransPicCropped ((320 - p->width) / 2, finaly, p);
 
 	switch (m_state)
 	{

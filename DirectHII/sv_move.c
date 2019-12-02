@@ -37,9 +37,9 @@ qboolean SV_CheckBottom (edict_t *ent)
 	// the corners must be within 16 of the midpoint
 	start[2] = mins[2] - 1;
 
-	for	(x = 0; x < 2; x++)
+	for (x = 0; x < 2; x++)
 	{
-		for	(y = 0; y < 2; y++)
+		for (y = 0; y < 2; y++)
 		{
 			if (x)
 				start[0] = maxs[0];
@@ -86,12 +86,12 @@ realcheck:	// check it for real...
 
 	/*	if((int)ent->v.flags&FL_MONSTER)
 		{
-			if(trace.allsolid)
-				Con_DPrintf("Checkbottom midpoint check was all solid!!!\n");
-			else if(trace.startsolid)
-				Con_DPrintf("Checkbottom midpoint check started solid!!!\n");
+		if(trace.allsolid)
+		Con_DPrintf("Checkbottom midpoint check was all solid!!!\n");
+		else if(trace.startsolid)
+		Con_DPrintf("Checkbottom midpoint check started solid!!!\n");
 		}
-	*/
+		*/
 	if (trace.fraction == 1.0)
 		return false;
 
@@ -101,8 +101,8 @@ realcheck:	// check it for real...
 	mid = bottom = trace.endpos[2];
 
 	// the corners must be within 16 of the midpoint
-	for	(x = 0; x < 2; x++)
-		for	(y = 0; y < 2; y++)
+	for (x = 0; x < 2; x++)
+		for (y = 0; y < 2; y++)
 		{
 			//check 4 corners, in this order:
 			//x = 0, y = 0 (NE)
@@ -130,10 +130,10 @@ realcheck:	// check it for real...
 
 			/*			if((int)ent->v.flags&FL_MONSTER)
 						{
-							if(trace.allsolid)
-								Con_DPrintf("Checkbottom (x=%d,y=%d) check was all solid!!!\n",x,y);
-							else if(trace.startsolid)
-								Con_DPrintf("Checkbottom (x=%d,y=%d) check started solid!!!\n",x,y);
+						if(trace.allsolid)
+						Con_DPrintf("Checkbottom (x=%d,y=%d) check was all solid!!!\n",x,y);
+						else if(trace.startsolid)
+						Con_DPrintf("Checkbottom (x=%d,y=%d) check started solid!!!\n",x,y);
 						}*/
 			//Hit a closer surface than did when checked center,
 			//so set the "bottom" to the new, closer z height
@@ -164,7 +164,7 @@ void set_move_trace (trace_t *trace)
 	pr_global_struct->trace_inopen = trace->inopen;
 	VectorCopy (trace->endpos, pr_global_struct->trace_endpos);
 	VectorCopy (trace->plane.normal, pr_global_struct->trace_plane_normal);
-	pr_global_struct->trace_plane_dist =  trace->plane.dist;
+	pr_global_struct->trace_plane_dist = trace->plane.dist;
 
 	if (trace->ent)
 		pr_global_struct->trace_ent = EDICT_TO_PROG (trace->ent);
@@ -444,11 +444,11 @@ void SV_NewChaseDir (edict_t *actor, edict_t *enemy, float dist)
 
 	/*	if (deltaz < -10)//Below
 			d[0]= ;
-		else if (deltaz>10)//above
+			else if (deltaz>10)//above
 			d[0]= ;
-		else
+			else
 			d[0]= DI_NODIR;
-	*/
+			*/
 	// try direct route
 	if (d[1] != DI_NODIR && d[2] != DI_NODIR)
 	{
@@ -462,7 +462,7 @@ void SV_NewChaseDir (edict_t *actor, edict_t *enemy, float dist)
 	}
 
 	// try other directions
-	if (((rand () & 3) & 1) ||  abs (deltay) > abs (deltax)) //If north/sounth diff is greater than east/west diff?!!
+	if (((rand () & 3) & 1) || abs (deltay) > abs (deltax)) //If north/sounth diff is greater than east/west diff?!!
 	{
 		tdir = d[1];
 		d[1] = d[2];
@@ -470,11 +470,11 @@ void SV_NewChaseDir (edict_t *actor, edict_t *enemy, float dist)
 	}
 
 	if (d[1] != DI_NODIR && d[1] != turnaround
-			&& SV_StepDirection (actor, d[1], dist))
+		&& SV_StepDirection (actor, d[1], dist))
 		return;
 
 	if (d[2] != DI_NODIR && d[2] != turnaround
-			&& SV_StepDirection (actor, d[2], dist))
+		&& SV_StepDirection (actor, d[2], dist))
 		return;
 
 	/* there is no direct path to the player, so pick another direction */

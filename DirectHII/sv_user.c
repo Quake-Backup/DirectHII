@@ -71,7 +71,7 @@ void SV_SetIdealPitch (void)
 		tr = SV_Move (top, vec3_origin, vec3_origin, bottom, 1, sv_player);
 
 		if ((tr.allsolid) || // looking at a wall, leave ideal the way is was
-				(tr.fraction == 1)) // near a dropoff
+			(tr.fraction == 1)) // near a dropoff
 		{
 			sv_player->v.hull = save_hull;
 			return;
@@ -87,7 +87,7 @@ void SV_SetIdealPitch (void)
 
 	for (j = 1; j < i; j++)
 	{
-		step = z[j] - z[j-1];
+		step = z[j] - z[j - 1];
 
 		if (step > -ON_EPSILON && step < ON_EPSILON)
 			continue;
@@ -154,12 +154,12 @@ void SV_UserFriction (void)
 
 	/*
 	if (trace.fraction == 1.0)
-		friction = sv_friction.value*sv_edgefriction.value*sv_player->v.friction;
+	friction = sv_friction.value*sv_edgefriction.value*sv_player->v.friction;
 	else
-		friction = sv_friction.value*sv_player->v.friction;
+	friction = sv_friction.value*sv_player->v.friction;
 
 	if(sv_player->v.friction!=1)//reset their friction to 1, only a trigger touching can change it again
-		sv_player->v.friction=1;
+	sv_player->v.friction=1;
 	*/
 
 	// apply friction
@@ -746,8 +746,7 @@ nextmsg:
 				break;
 			}
 		}
-	}
-	while (ret == 1);
+	} while (ret == 1);
 
 	return true;
 }

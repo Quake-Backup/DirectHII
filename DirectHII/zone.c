@@ -65,8 +65,7 @@ permanent, this game, this map, loading or per-frame.
 ==============================================================================
 */
 
-typedef struct hunk_s
-{
+typedef struct hunk_s {
 	byte *buffer;
 	int maxsize;
 	int lowmark;

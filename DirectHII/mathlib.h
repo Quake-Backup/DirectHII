@@ -115,8 +115,8 @@ qboolean Vector3Compare (const float *v1, const float *v2);
 qboolean Vector4Compare (const float *v1, const float *v2);
 
 float fclamp (const float val, const float mins, const float maxs);
-float fmin (const float _1, const float _2);
-float fmax (const float _1, const float _2);
+float Q_fmin (const float _1, const float _2);
+float Q_fmax (const float _1, const float _2);
 
 int Q_rint (const float x);
 

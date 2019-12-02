@@ -124,7 +124,7 @@ float V_CalcBob (void)
 /*
 ==============================================================================
 
-						PALETTE FLASHES
+PALETTE FLASHES
 
 ==============================================================================
 */
@@ -444,7 +444,7 @@ void V_UpdatePalette (void)
 /*
 ==============================================================================
 
-						VIEW RENDERING
+VIEW RENDERING
 
 ==============================================================================
 */
@@ -517,7 +517,7 @@ void CalcGunAngle (void)
 	oldpitch = pitch;
 
 	cl.viewent.angles[1] = r_refdef.viewangles[1] + yaw;
-	cl.viewent.angles[0] = - (r_refdef.viewangles[0] + pitch);
+	cl.viewent.angles[0] = -(r_refdef.viewangles[0] + pitch);
 
 	cl.viewent.angles[2] -= v_idlescale.value * sin (cl.time * v_iroll_cycle.value) * v_iroll_level.value;
 	cl.viewent.angles[0] -= v_idlescale.value * sin (cl.time * v_ipitch_cycle.value) * v_ipitch_level.value;

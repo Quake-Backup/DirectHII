@@ -650,13 +650,13 @@ float fclamp (const float val, const float mins, const float maxs)
 }
 
 
-float fmin (const float _1, const float _2)
+float Q_fmin (const float _1, const float _2)
 {
 	return ((_1 < _2) ? _1 : _2);
 }
 
 
-float fmax (const float _1, const float _2)
+float Q_fmax (const float _1, const float _2)
 {
 	return ((_1 > _2) ? _1 : _2);
 }

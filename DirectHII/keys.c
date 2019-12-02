@@ -36,8 +36,7 @@ int		keyshift[256];		// key to map to if shift held down in console
 int		key_repeats[256];	// if > 1, it is autorepeating
 qboolean	keydown[256];
 
-typedef struct keyname_s
-{
+typedef struct keyname_s {
 	char	*name;
 	int		keynum;
 } keyname_t;
@@ -130,7 +129,7 @@ keyname_t keynames[] =
 /*
 ==============================================================================
 
-			LINE TYPING INTO THE CONSOLE
+LINE TYPING INTO THE CONSOLE
 
 ==============================================================================
 */
@@ -196,9 +195,8 @@ void Key_Console (int key)
 		do
 		{
 			history_line = (history_line - 1) & 31;
-		}
-		while (history_line != edit_line
-				&& !key_lines[history_line][1]);
+		} while (history_line != edit_line
+			&& !key_lines[history_line][1]);
 
 		if (history_line == edit_line)
 			history_line = (edit_line + 1) & 31;
@@ -215,9 +213,8 @@ void Key_Console (int key)
 		do
 		{
 			history_line = (history_line + 1) & 31;
-		}
-		while (history_line != edit_line
-				&& !key_lines[history_line][1]);
+		} while (history_line != edit_line
+			&& !key_lines[history_line][1]);
 
 		if (history_line == edit_line)
 		{
@@ -652,7 +649,7 @@ void Key_Init (void)
 	menubound[K_ESCAPE] = true;
 
 	for (i = 0; i < 12; i++)
-		menubound[K_F1+i] = true;
+		menubound[K_F1 + i] = true;
 
 	// register our functions
 	Cmd_AddCommand ("bind", Key_Bind_f);

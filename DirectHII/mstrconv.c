@@ -24,7 +24,7 @@ int MidiOffset, MidiSize;
 // down, we must scan for them and free them.  Malloc blocks are only created as
 // temporary storgae blocks for extra parameter data associated with MIDI_SYSEX,
 // MIDI_SYSEXEND, and MIDI_META events.
-static DWORD    dwMallocBlocks  = 0;
+static DWORD    dwMallocBlocks = 0;
 
 extern DWORD    dwBufferTickLength, dwTempoMultiplier, dwCurrentTempo;
 extern DWORD    dwProgressBytes, dwVolumePercent;
@@ -32,9 +32,9 @@ extern BOOL bLooped;
 
 // Messages
 //
-static char szInitErrMem[]  = "Out of memory.\n";
-static char szInitErrInFile[]   = "Read error on input file or file is corrupt.\n";
-static char szNoTrackBuffMem[]  = "Insufficient memory for track buffer allocation\n";
+static char szInitErrMem[] = "Out of memory.\n";
+static char szInitErrInFile[] = "Read error on input file or file is corrupt.\n";
+static char szNoTrackBuffMem[] = "Insufficient memory for track buffer allocation\n";
 
 #ifdef DEBUG
 static char gteBadRunStat[]     = "Reference to missing running status.";
@@ -138,34 +138,34 @@ BOOL ConverterInit (LPSTR szInFile)
 	MidiSize = ifs.cbFileLength;
 
 	/*    hInFile = CreateFile( szInFile, GENERIC_READ,
-	            FILE_SHARE_READ, NULL, OPEN_EXISTING,
-	            FILE_ATTRIBUTE_NORMAL, NULL);
-	    if( hInFile == INVALID_HANDLE_VALUE )
-	    {
-	    wsprintf( szTemp, "Could not open \"%s\" for read.\n", szInFile );
-	    MessageBox( GetActiveWindo (), szTemp,
-	            "TEST", MB_OK | MB_ICONEXCLAMATION );
-	    goto Init_Cleanup;
-	    }
-		*/
+				FILE_SHARE_READ, NULL, OPEN_EXISTING,
+				FILE_ATTRIBUTE_NORMAL, NULL);
+				if( hInFile == INVALID_HANDLE_VALUE )
+				{
+				wsprintf( szTemp, "Could not open \"%s\" for read.\n", szInFile );
+				MessageBox( GetActiveWindo (), szTemp,
+				"TEST", MB_OK | MB_ICONEXCLAMATION );
+				goto Init_Cleanup;
+				}
+				*/
 
 	// Figure out how big the input file is.
 	/*    if((( ifs.cbFileLength = GetFileSize( hInFile, NULL )) == (UINT)-1 ))
-	    {
-	    MessageBox( GetActiveWindo (), "File system error on input file.\n",
-	                "TEST", MB_OK | MB_ICONEXCLAMATION );
-	    goto Init_Cleanup;
-	    }*/
+		{
+		MessageBox( GetActiveWindo (), "File system error on input file.\n",
+		"TEST", MB_OK | MB_ICONEXCLAMATION );
+		goto Init_Cleanup;
+		}*/
 
 	// Set up to read from the memory buffer. Read and validate
 	// - MThd header
 	// - size of file header chunk
 	// - file header itself
 	if (GetInFileData (&dwTag, sizeof (DWORD))
-			|| (dwTag != MThd)
-			|| GetInFileData (&cbHeader, sizeof (DWORD))
-			|| ((cbHeader = DWORDSWAP (cbHeader)) < sizeof (MIDIFILEHDR))
-			|| GetInFileData (&Header, cbHeader))
+		|| (dwTag != MThd)
+		|| GetInFileData (&cbHeader, sizeof (DWORD))
+		|| ((cbHeader = DWORDSWAP (cbHeader)) < sizeof (MIDIFILEHDR))
+		|| GetInFileData (&Header, cbHeader))
 	{
 		Con_Printf (PRINT_NORMAL, va ("MIDI: %s\n", szInitErrInFile));
 		goto Init_Cleanup;
@@ -181,7 +181,7 @@ BOOL ConverterInit (LPSTR szInFile)
 	// them. The parse merely looks at the MTrk signature and track chunk length
 	// in order to skip to the next track header.
 	ifs.pitsTracks = (PINTRACKSTATE) GlobalAllocPtr (GPTR,
-					 ifs.dwTrackCount * sizeof (INTRACKSTATE));
+		ifs.dwTrackCount * sizeof (INTRACKSTATE));
 
 	if (ifs.pitsTracks == NULL)
 	{
@@ -190,17 +190,17 @@ BOOL ConverterInit (LPSTR szInFile)
 	}
 
 	for (idx = 0, ptsTrack = ifs.pitsTracks; idx < ifs.dwTrackCount;
-			++idx, ++ptsTrack)
+		++idx, ++ptsTrack)
 	{
 		if ((ptsTrack->pTrackStart
-				= GlobalAllocPtr (GHND, TRACK_BUFFER_SIZE)) == NULL)
+			= GlobalAllocPtr (GHND, TRACK_BUFFER_SIZE)) == NULL)
 		{
 			Con_Printf (PRINT_NORMAL, va ("MIDI: %s\n", szNoTrackBuffMem));
 			goto Init_Cleanup;
 		}
 
 		if (GetInFileData (&dwTag, sizeof (dwTag)) || (dwTag != MTrk)
-				|| GetInFileData (&cbHeader, sizeof (cbHeader)))
+			|| GetInFileData (&cbHeader, sizeof (cbHeader)))
 		{
 			Con_Printf (PRINT_NORMAL, va ("MIDI: %s\n", szInitErrInFile));
 			goto Init_Cleanup;
@@ -216,9 +216,9 @@ BOOL ConverterInit (LPSTR szInFile)
 
 		// Save the file offset of the beginning of this track
 		/*    ptsTrack->foTrackStart = SetFilePointer( hInFile, 0, NULL,
-		                        FILE_CURRENT );*/
+								FILE_CURRENT );*/
 		ptsTrack->foTrackStart = SetFilePointer2 (0, NULL,
-								 FILE_CURRENT);
+			FILE_CURRENT);
 
 		if (ptsTrack->dwTrackLength > TRACK_BUFFER_SIZE)
 			dwToRead = TRACK_BUFFER_SIZE;
@@ -226,14 +226,14 @@ BOOL ConverterInit (LPSTR szInFile)
 			dwToRead = ptsTrack->dwTrackLength;
 
 		/*    if( !ReadFile( hInFile, ptsTrack->pTrackStart, dwToRead, &cbRead, NULL )
-		        || ( cbRead != dwToRead ))
-		        {
-		        MessageBox( GetActiveWindo (), szInitErrInFile,
-		                "TEST", MB_OK | MB_ICONEXCLAMATION );
-		        goto Init_Cleanup;
-		        }*/
+				|| ( cbRead != dwToRead ))
+				{
+				MessageBox( GetActiveWindo (), szInitErrInFile,
+				"TEST", MB_OK | MB_ICONEXCLAMATION );
+				goto Init_Cleanup;
+				}*/
 		if (!ReadFile2 (ptsTrack->pTrackStart, dwToRead, &cbRead, NULL)
-				|| (cbRead != dwToRead))
+			|| (cbRead != dwToRead))
 		{
 			Con_Printf (PRINT_NORMAL, va ("MIDI: %s\n", szInitErrInFile));
 			goto Init_Cleanup;
@@ -244,9 +244,9 @@ BOOL ConverterInit (LPSTR szInFile)
 		ptsTrack->dwLeftInBuffer = cbRead;
 		// Save the current file offset so we can seek to it later
 		/*    ptsTrack->foNextReadStart = SetFilePointer( hInFile, 0,
-		                            NULL, FILE_CURRENT );*/
+									NULL, FILE_CURRENT );*/
 		ptsTrack->foNextReadStart = SetFilePointer2 (0,
-									NULL, FILE_CURRENT);
+			NULL, FILE_CURRENT);
 
 		// Setup pointer to the current position in the track
 		ptsTrack->pTrackCurrent = ptsTrack->pTrackStart;
@@ -272,9 +272,9 @@ BOOL ConverterInit (LPSTR szInFile)
 		// Step over any unread data, advancing to the beginning of the next
 		// track's data
 		/*    SetFilePointer( hInFile, ptsTrack->foTrackStart + ptsTrack->dwTrackLength,
-		            NULL, FILE_BEGIN );*/
+					NULL, FILE_BEGIN );*/
 		SetFilePointer2 (ptsTrack->foTrackStart + ptsTrack->dwTrackLength,
-						 NULL, FILE_BEGIN);
+			NULL, FILE_BEGIN);
 
 	}   // End of track initialization code
 
@@ -302,12 +302,12 @@ static BOOL GetInFileData (LPVOID lpDest, DWORD cbToGet)
 	DWORD   cbRead;
 
 	/*    if( !ReadFile( hInFile, lpDest, cbToGet, &cbRead, NULL )
-	            || ( cbRead != cbToGet ))
-	        {
-	        return( TRUE );
-	        }*/
+				|| ( cbRead != cbToGet ))
+				{
+				return( TRUE );
+				}*/
 	if (!ReadFile2 (lpDest, cbToGet, &cbRead, NULL)
-			|| (cbRead != cbToGet))
+		|| (cbRead != cbToGet))
 	{
 		return (TRUE);
 	}
@@ -326,10 +326,10 @@ void ConverterCleanup (void)
 	DWORD   idx;
 
 	/*    if( hInFile != INVALID_HANDLE_VALUE )
-	        {
-	        CloseHandle( hInFile );
-	    hInFile = INVALID_HANDLE_VALUE;
-	    }*/
+			{
+			CloseHandle( hInFile );
+			hInFile = INVALID_HANDLE_VALUE;
+			}*/
 
 	if (ifs.pitsTracks)
 	{
@@ -361,7 +361,7 @@ static BOOL RewindConverter (void)
 	tkCurrentTime = 0;
 
 	for (idx = 0, ptsTrack = ifs.pitsTracks; idx < ifs.dwTrackCount;
-			++idx, ++ptsTrack)
+		++idx, ++ptsTrack)
 	{
 		///////////////////////////////////////////////////////////////////////////////
 		// Here we need to determine if all track data will fit into a single one of
@@ -378,14 +378,14 @@ static BOOL RewindConverter (void)
 			dwToRead = ptsTrack->dwTrackLength;
 
 		/*    if( !ReadFile( hInFile, ptsTrack->pTrackStart, dwToRead, &cbRead, NULL )
-		        || ( cbRead != dwToRead ))
-		        {
-		        MessageBox( GetActiveWindo (), szInitErrInFile,
-		                "TEST", MB_OK | MB_ICONEXCLAMATION );
-		        goto Rewind_Cleanup;
-		        }*/
+				|| ( cbRead != dwToRead ))
+				{
+				MessageBox( GetActiveWindo (), szInitErrInFile,
+				"TEST", MB_OK | MB_ICONEXCLAMATION );
+				goto Rewind_Cleanup;
+				}*/
 		if (!ReadFile2 (ptsTrack->pTrackStart, dwToRead, &cbRead, NULL)
-				|| (cbRead != dwToRead))
+			|| (cbRead != dwToRead))
 		{
 			Con_Printf (PRINT_NORMAL, va ("MIDI: %s\n", szInitErrInFile));
 			goto Rewind_Cleanup;
@@ -396,9 +396,9 @@ static BOOL RewindConverter (void)
 		ptsTrack->dwLeftInBuffer = cbRead;
 		// Save the current file offset so we can seek to it later
 		/*    ptsTrack->foNextReadStart = SetFilePointer( hInFile, 0,
-		                            NULL, FILE_CURRENT );*/
+									NULL, FILE_CURRENT );*/
 		ptsTrack->foNextReadStart = SetFilePointer2 (0,
-									NULL, FILE_CURRENT);
+			NULL, FILE_CURRENT);
 
 		// Setup pointer to the current position in the track
 		ptsTrack->pTrackCurrent = ptsTrack->pTrackStart;
@@ -425,9 +425,9 @@ static BOOL RewindConverter (void)
 		// Step over any unread data, advancing to the beginning of the next
 		// track's data
 		/*    SetFilePointer( hInFile, ptsTrack->foTrackStart + ptsTrack->dwTrackLength,
-		            NULL, FILE_BEGIN );*/
+					NULL, FILE_BEGIN );*/
 		SetFilePointer2 (ptsTrack->foTrackStart + ptsTrack->dwTrackLength,
-						 NULL, FILE_BEGIN);
+			NULL, FILE_BEGIN);
 	}   // End of track initialization code
 
 	fRet = FALSE;
@@ -506,7 +506,7 @@ int ConvertToBuffer (DWORD dwFlags, LPCONVERTINFO lpciInfo)
 
 		// Don't add end of track event 'til we're done
 		if (teTemp.byShortData[0] == MIDI_META
-				&& teTemp.byShortData[1] == MIDI_META_EOT)
+			&& teTemp.byShortData[1] == MIDI_META_EOT)
 		{
 			if (dwMallocBlocks)
 			{
@@ -516,7 +516,7 @@ int ConvertToBuffer (DWORD dwFlags, LPCONVERTINFO lpciInfo)
 		}
 
 		else if ((nChkErr = AddEventToStreamBuffer (&teTemp, lpciInfo))
-				  != CONVERTERR_NOERROR)
+			!= CONVERTERR_NOERROR)
 		{
 			if (nChkErr == CONVERTERR_BUFFERFULL)
 			{
@@ -543,7 +543,7 @@ int ConvertToBuffer (DWORD dwFlags, LPCONVERTINFO lpciInfo)
 		}
 	}
 
-	for (; ;)
+	for (;;)
 	{
 		ptsFound = NULL;
 		tkNext = 0xFFFFFFFFL;
@@ -552,7 +552,7 @@ int ConvertToBuffer (DWORD dwFlags, LPCONVERTINFO lpciInfo)
 		for (idx = 0, ptsTrack = ifs.pitsTracks; idx < ifs.dwTrackCount; ++idx, ++ptsTrack)
 		{
 			if ((!(ptsTrack->fdwTrack & ITS_F_ENDOFTRK))
-					&& (ptsTrack->tkNextEventDue < tkNext))
+				&& (ptsTrack->tkNextEventDue < tkNext))
 			{
 				tkNext = ptsTrack->tkNextEventDue;
 				ptsFound = ptsTrack;
@@ -649,8 +649,7 @@ static BOOL GetTrackVDWord (PINTRACKSTATE ptsTrack, LPDWORD lpdw)
 			return (TRUE);
 
 		dw = (dw << 7) | (byByte & 0x7F);
-	}
-	while (byByte & 0x80);
+	} while (byByte & 0x80);
 
 	*lpdw = dw;
 
@@ -698,7 +697,7 @@ static BOOL GetTrackEvent (INTRACKSTATE *ptsTrack, PTEMPEVENT pteTemp)
 
 	// Already at end of track? There's nothing to read.
 	if ((ptsTrack->fdwTrack & ITS_F_ENDOFTRK)
-			|| (!ptsTrack->dwLeftInBuffer && !ptsTrack->dwLeftOnDisk))
+		|| (!ptsTrack->dwLeftInBuffer && !ptsTrack->dwLeftOnDisk))
 		return (TRUE);
 
 	// Get the first byte, which determines the type of event.
@@ -788,7 +787,7 @@ static BOOL GetTrackEvent (INTRACKSTATE *ptsTrack, PTEMPEVENT pteTemp)
 		}
 
 		if ((ptsTrack->dwLeftInBuffer + ptsTrack->dwLeftOnDisk)
-				< pteTemp->dwEventLength)
+			< pteTemp->dwEventLength)
 		{
 			TRACKERR (ptsTrack, gteSysExTrunc);
 			ptsTrack->fdwTrack |= ITS_F_ENDOFTRK;
@@ -845,7 +844,7 @@ static BOOL GetTrackEvent (INTRACKSTATE *ptsTrack, PTEMPEVENT pteTemp)
 		if (pteTemp->dwEventLength)
 		{
 			if ((ptsTrack->dwLeftInBuffer + ptsTrack->dwLeftOnDisk)
-					< pteTemp->dwEventLength)
+				< pteTemp->dwEventLength)
 			{
 				TRACKERR (ptsTrack, gteMetaTrunc);
 				ptsTrack->fdwTrack |= ITS_F_ENDOFTRK;
@@ -854,7 +853,7 @@ static BOOL GetTrackEvent (INTRACKSTATE *ptsTrack, PTEMPEVENT pteTemp)
 
 			// Malloc a temporary memory block to hold the parameter data
 			if ((pteTemp->pLongData = malloc (pteTemp->dwEventLength))
-					== NULL)
+				== NULL)
 			{
 				TRACKERR (ptsTrack, gteNoMem);
 				return (TRUE);
@@ -945,17 +944,17 @@ BOOL RefillTrackBuffer (PINTRACKSTATE ptsTrack)
 		// up to a maximum of the buffer size.
 
 		/*        if(( dwResult = SetFilePointer( hInFile,
-		                        (long)ptsTrack->foNextReadStart,
-		                        0L, FILE_BEGIN )) == 0xFFFFFFFF )
-		            {
-		            MessageBox( GetActiveWindo (),
-		                "Unable to seek to track buffer location in RefillTrackBuffe ()!!",
-		                "TEST", MB_OK | MB_ICONEXCLAMATION );
-		            return( TRUE );
-		            }*/
+								(long)ptsTrack->foNextReadStart,
+								0L, FILE_BEGIN )) == 0xFFFFFFFF )
+								{
+								MessageBox( GetActiveWindo (),
+								"Unable to seek to track buffer location in RefillTrackBuffe ()!!",
+								"TEST", MB_OK | MB_ICONEXCLAMATION );
+								return( TRUE );
+								}*/
 		if ((dwResult = SetFilePointer2 (
-							 (long) ptsTrack->foNextReadStart,
-							 0L, FILE_BEGIN)) == 0xFFFFFFFF)
+			(long) ptsTrack->foNextReadStart,
+			0L, FILE_BEGIN)) == 0xFFFFFFFF)
 		{
 			Con_Printf (PRINT_NORMAL, "MIDI: Unable to seek to track buffer location in RefillTrackBuffe ()!!\n");
 			return (TRUE);
@@ -967,11 +966,11 @@ BOOL RefillTrackBuffer (PINTRACKSTATE ptsTrack)
 			ptsTrack->dwLeftInBuffer = ptsTrack->dwLeftOnDisk;
 
 		/*        bResult = ReadFile( hInFile, ptsTrack->pTrackStart,
-		                ptsTrack->dwLeftInBuffer,
-		                &dwBytesRead, NULL );*/
+						ptsTrack->dwLeftInBuffer,
+						&dwBytesRead, NULL );*/
 		bResult = ReadFile2 (ptsTrack->pTrackStart,
-							 ptsTrack->dwLeftInBuffer,
-							 &dwBytesRead, NULL);
+			ptsTrack->dwLeftInBuffer,
+			&dwBytesRead, NULL);
 
 		ptsTrack->dwLeftOnDisk -= dwBytesRead;
 		ptsTrack->foNextReadStart = dwResult + dwBytesRead;
@@ -1009,8 +1008,8 @@ static int AddEventToStreamBuffer (PTEMPEVENT pteTemp, CONVERTINFO *lpciInfo)
 	char szTemp[256];
 
 	pmeEvent = (MIDIEVENT *) (lpciInfo->mhBuffer.lpData
-							  + lpciInfo->dwStartOffset
-							  + lpciInfo->dwBytesRecorded);
+		+ lpciInfo->dwStartOffset
+		+ lpciInfo->dwBytesRecorded);
 
 	// When we see a new, empty buffer, set the start time on it...
 	if (!lpciInfo->dwBytesRecorded)
@@ -1071,12 +1070,12 @@ static int AddEventToStreamBuffer (PTEMPEVENT pteTemp, CONVERTINFO *lpciInfo)
 		pmeEvent->dwDeltaTime = tkDelta;
 		pmeEvent->dwStreamID = 0;
 		pmeEvent->dwEvent = (pteTemp->byShortData[0])
-							| (((DWORD) pteTemp->byShortData[1]) << 8)
-							| (((DWORD) pteTemp->byShortData[2]) << 16)
-							| MEVT_F_SHORT;
+			| (((DWORD) pteTemp->byShortData[1]) << 8)
+			| (((DWORD) pteTemp->byShortData[2]) << 16)
+			| MEVT_F_SHORT;
 
 		if (((pteTemp->byShortData[0] & 0xF0) == MIDI_CTRLCHANGE)
-				&& (pteTemp->byShortData[1] == MIDICTRL_VOLUME))
+			&& (pteTemp->byShortData[1] == MIDICTRL_VOLUME))
 		{
 			// If this is a volume change, generate a callback so we can grab
 			// the new volume for our cache
@@ -1086,7 +1085,7 @@ static int AddEventToStreamBuffer (PTEMPEVENT pteTemp, CONVERTINFO *lpciInfo)
 		lpciInfo->dwBytesRecorded += 3 * sizeof (DWORD);
 	}
 	else if ((pteTemp->byShortData[0] == MIDI_SYSEX)
-			  || (pteTemp->byShortData[0] == MIDI_SYSEXEND))
+		|| (pteTemp->byShortData[0] == MIDI_SYSEXEND))
 	{
 		DebugPrint ("AddEventToStreamBuffer: Ignoring SysEx event.");
 
@@ -1138,8 +1137,8 @@ static int AddEventToStreamBuffer (PTEMPEVENT pteTemp, CONVERTINFO *lpciInfo)
 		// Note: this is backwards from above because we're converting a single
 		//       data value from hi-lo to lo-hi format...
 		pmeEvent->dwEvent = (pteTemp->pLongData[2])
-							| (((DWORD) pteTemp->pLongData[1]) << 8)
-							| (((DWORD) pteTemp->pLongData[0]) << 16);
+			| (((DWORD) pteTemp->pLongData[1]) << 8)
+			| (((DWORD) pteTemp->pLongData[0]) << 16);
 
 		/* This next step has absolutely nothing to do with the conversion of a
 		 * MIDI file to a stream, it's simply put here to add the functionality
@@ -1172,10 +1171,10 @@ static int AddEventToStreamBuffer (PTEMPEVENT pteTemp, CONVERTINFO *lpciInfo)
 static void ShowTrackError (PINTRACKSTATE ptsTrack, LPSTR lpszErr)
 {
 	wsprintf (szTemp, "Track buffer offset %lu",
-			  (DWORD) (ptsTrack->pTrackCurrent - ptsTrack->pTrackStart));
+		(DWORD) (ptsTrack->pTrackCurrent - ptsTrack->pTrackStart));
 	DebugPrint (szTemp);
 	wsprintf (szTemp, "Track total %lu  Track left %lu",
-			  ptsTrack->dwTrackLength, ptsTrack->dwLeftInBuffer);
+		ptsTrack->dwTrackLength, ptsTrack->dwLeftInBuffer);
 	DebugPrint (szTemp);
 }
 

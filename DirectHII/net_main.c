@@ -447,8 +447,7 @@ NET_CheckNewConnections
 ===================
 */
 
-struct
-{
+struct {
 	double	time;
 	int		op;
 	long	session;
@@ -530,8 +529,7 @@ returns -1 if connection is invalid
 =================
 */
 
-struct
-{
+struct {
 	double	time;
 	int		op;
 	long	session;
@@ -614,13 +612,12 @@ NET_SendMessage
 
 Try to send a complete length+message unit over the reliable stream.
 returns 0 if the message cannot be delivered reliably, but the connection
-		is still considered valid
+is still considered valid
 returns 1 if the message was sent properly
 returns -1 if the connection died
 ==================
 */
-struct
-{
+struct {
 	double	time;
 	int		op;
 	long	session;
@@ -731,8 +728,8 @@ int NET_SendToAll (sizebuf_t *data, int blocktime)
 	double		start;
 	int			i;
 	int			count = 0;
-	qboolean	state1 [MAX_SCOREBOARD];
-	qboolean	state2 [MAX_SCOREBOARD];
+	qboolean	state1[MAX_SCOREBOARD];
+	qboolean	state2[MAX_SCOREBOARD];
 
 	for (i = 0, host_client = svs.clients; i < svs.maxclients; i++, host_client++)
 	{
@@ -842,7 +839,7 @@ void NET_Init (void)
 	if (i)
 	{
 		if (i < com_argc - 1)
-			DEFAULTnet_hostport = atoi (com_argv[i+1]);
+			DEFAULTnet_hostport = atoi (com_argv[i + 1]);
 		else
 			Sys_Error ("NET_Init: you must specify a number after -port");
 	}

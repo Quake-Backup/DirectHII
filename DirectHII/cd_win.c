@@ -149,7 +149,7 @@ void CDAudio_Play (byte track, qboolean looping)
 		if (playTrack == track)
 			return;
 
-		CDAudio_Stop();
+		CDAudio_Stop ();
 	}
 
 	mciPlayParms.dwFrom = MCI_MAKE_TMSF (track, 0, 0, 0);
@@ -266,7 +266,7 @@ static void CD_f (void)
 	if (Q_strcasecmp (command, "off") == 0)
 	{
 		if (playing)
-			CDAudio_Stop();
+			CDAudio_Stop ();
 
 		enabled = false;
 		return;
@@ -277,7 +277,7 @@ static void CD_f (void)
 		enabled = true;
 
 		if (playing)
-			CDAudio_Stop();
+			CDAudio_Stop ();
 
 		for (n = 0; n < 100; n++)
 			remap[n] = n;
@@ -336,7 +336,7 @@ static void CD_f (void)
 
 	if (Q_strcasecmp (command, "stop") == 0)
 	{
-		CDAudio_Stop();
+		CDAudio_Stop ();
 		return;
 	}
 
@@ -535,7 +535,7 @@ void CDAudio_Shutdown (void)
 	if (!initialized)
 		return;
 
-	CDAudio_Stop();
+	CDAudio_Stop ();
 
 	if (mciSendCommand (wDeviceID, MCI_CLOSE, MCI_WAIT, (DWORD) NULL))
 		Con_Printf (PRINT_DEVELOPER, va ("CDAudio_Shutdown: MCI_CLOSE failed\n"));

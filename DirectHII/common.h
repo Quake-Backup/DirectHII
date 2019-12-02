@@ -8,13 +8,12 @@ typedef unsigned char 		byte;
 
 #ifndef qboolean_defined
 #define qboolean_defined
-typedef enum {false, true}	qboolean;
+typedef enum { false, true }	qboolean;
 #endif
 
 //============================================================================
 
-typedef struct sizebuf_s
-{
+typedef struct sizebuf_s {
 	qboolean	allowoverflow;	// if false, do a Sys_Error
 	qboolean	overflowed;		// set to true if the buffer size failed
 	byte		*data;
@@ -33,8 +32,7 @@ void SZ_Print (sizebuf_t *buf, char *data);	// strcats onto the sizebuf
 
 //============================================================================
 
-typedef struct link_s
-{
+typedef struct link_s {
 	struct link_s	*prev, *next;
 } link_t;
 
@@ -71,12 +69,12 @@ void InsertLinkAfter (link_t *l, link_t *after);
 
 extern	qboolean		bigendien;
 
-extern	short	(*BigShort) (short l);
-extern	short	(*LittleShort) (short l);
-extern	int	(*BigLong) (int l);
-extern	int	(*LittleLong) (int l);
-extern	float	(*BigFloat) (float l);
-extern	float	(*LittleFloat) (float l);
+extern	short (*BigShort) (short l);
+extern	short (*LittleShort) (short l);
+extern	int (*BigLong) (int l);
+extern	int (*LittleLong) (int l);
+extern	float (*BigFloat) (float l);
+extern	float (*LittleFloat) (float l);
 
 //============================================================================
 

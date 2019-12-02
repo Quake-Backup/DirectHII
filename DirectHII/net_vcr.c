@@ -14,8 +14,7 @@ extern int vcrFile;
 // everything necessary (events, timestamps, and data) to duplicate the game
 // from the viewpoint of everything above the network layer.
 
-static struct
-{
+static struct {
 	double	time;
 	int		op;
 	long	session;
@@ -65,7 +64,7 @@ int VCR_GetMessage (qsocket_t *sock)
 {
 	int	ret;
 
-	if (realtime != next.time || next.op != VCR_OP_GETMESSAGE || next.session != * (long *) (&sock->driverdata))
+	if (realtime != next.time || next.op != VCR_OP_GETMESSAGE || next.session != *(long *) (&sock->driverdata))
 		Sys_Error ("VCR missmatch");
 
 	Sys_FileRead (vcrFile, &ret, sizeof (int));
@@ -89,7 +88,7 @@ int VCR_SendMessage (qsocket_t *sock, sizebuf_t *data)
 {
 	int	ret;
 
-	if (realtime != next.time || next.op != VCR_OP_SENDMESSAGE || next.session != * (long *) (&sock->driverdata))
+	if (realtime != next.time || next.op != VCR_OP_SENDMESSAGE || next.session != *(long *) (&sock->driverdata))
 		Sys_Error ("VCR missmatch");
 
 	Sys_FileRead (vcrFile, &ret, sizeof (int));
@@ -104,7 +103,7 @@ qboolean VCR_CanSendMessage (qsocket_t *sock)
 {
 	qboolean	ret;
 
-	if (realtime != next.time || next.op != VCR_OP_CANSENDMESSAGE || next.session != * (long *) (&sock->driverdata))
+	if (realtime != next.time || next.op != VCR_OP_CANSENDMESSAGE || next.session != *(long *) (&sock->driverdata))
 		Sys_Error ("VCR missmatch");
 
 	Sys_FileRead (vcrFile, &ret, sizeof (int));
@@ -145,7 +144,7 @@ qsocket_t *VCR_CheckNewConnections (void)
 	}
 
 	sock = NET_NewQSocket ();
-	* (long *) (&sock->driverdata) = next.session;
+	*(long *) (&sock->driverdata) = next.session;
 
 	Sys_FileRead (vcrFile, sock->address, NET_NAMELEN);
 	VCR_ReadNext ();

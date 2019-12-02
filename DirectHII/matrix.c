@@ -29,9 +29,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 /*
 ============================================================================================================
 
-		MATRIX OPS
+MATRIX OPS
 
-	These happen in pace on the matrix and update it's current values
+These happen in pace on the matrix and update it's current values
 
 ============================================================================================================
 */
@@ -44,27 +44,34 @@ QMATRIX *R_MatrixIdentity (QMATRIX *m)
 
 QMATRIX *R_MatrixMultiply (QMATRIX *out, QMATRIX *m1, QMATRIX *m2)
 {
-	// up to 4x the perf of raw C code
-	__m128 mrow;
+	// https://github.com/mhQuake/DirectQII/issues/1
+	int i;
 
-	__m128 m2c0 = _mm_load_ps (m2->m4x4[0]);
-	__m128 m2c1 = _mm_load_ps (m2->m4x4[1]);
-	__m128 m2c2 = _mm_load_ps (m2->m4x4[2]);
-	__m128 m2c3 = _mm_load_ps (m2->m4x4[3]);
+	__m128 row1 = _mm_load_ps (m2->m4x4[0]);
+	__m128 row2 = _mm_load_ps (m2->m4x4[1]);
+	__m128 row3 = _mm_load_ps (m2->m4x4[2]);
+	__m128 row4 = _mm_load_ps (m2->m4x4[3]);
 
-	_MM_TRANSPOSE4_PS (m2c0, m2c1, m2c2, m2c3);
+	for (i = 0; i < 4; i++)
+	{
+		__m128 brod1 = _mm_set1_ps (m1->m4x4[i][0]);
+		__m128 brod2 = _mm_set1_ps (m1->m4x4[i][1]);
+		__m128 brod3 = _mm_set1_ps (m1->m4x4[i][2]);
+		__m128 brod4 = _mm_set1_ps (m1->m4x4[i][3]);
 
-	mrow = _mm_load_ps (m1->m4x4[0]);
-	_mm_store_ps (out->m4x4[0], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
+		__m128 row = _mm_add_ps (
+			_mm_add_ps (
+			_mm_mul_ps (brod1, row1),
+			_mm_mul_ps (brod2, row2)
+			),
+			_mm_add_ps (
+			_mm_mul_ps (brod3, row3),
+			_mm_mul_ps (brod4, row4)
+			)
+			);
 
-	mrow = _mm_load_ps (m1->m4x4[1]);
-	_mm_store_ps (out->m4x4[1], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
-
-	mrow = _mm_load_ps (m1->m4x4[2]);
-	_mm_store_ps (out->m4x4[2], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
-
-	mrow = _mm_load_ps (m1->m4x4[3]);
-	_mm_store_ps (out->m4x4[3], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
+		_mm_store_ps (out->m4x4[i], row);
+	}
 
 	return out;
 }
@@ -72,8 +79,7 @@ QMATRIX *R_MatrixMultiply (QMATRIX *out, QMATRIX *m1, QMATRIX *m2)
 
 QMATRIX *R_MatrixOrtho (QMATRIX *m, float left, float right, float bottom, float top, float zNear, float zFar)
 {
-	return R_MatrixMultiplyf (
-		m,
+	QMATRIX m1 = {
 		2 / (right - left),
 		0,
 		0,
@@ -90,7 +96,9 @@ QMATRIX *R_MatrixOrtho (QMATRIX *m, float left, float right, float bottom, float
 		-((top + bottom) / (top - bottom)),
 		-((zFar + zNear) / (zFar - zNear)),
 		1
-	);
+	};
+
+	return R_MatrixMultiply (m, &m1, m);
 }
 
 
@@ -124,33 +132,6 @@ QMATRIX *R_MatrixFrustum (QMATRIX *m, float fovx, float fovy, float zn, float zf
 	};
 
 	return R_MatrixMultiply (m, &m2, m);
-}
-
-
-QMATRIX *R_MatrixMultiplyf (QMATRIX *m, float _11, float _12, float _13, float _14, float _21, float _22, float _23, float _24, float _31, float _32, float _33, float _34, float _41, float _42, float _43, float _44)
-{
-	__m128 mrow;
-
-	__m128 m2c0 = _mm_load_ps (m->m4x4[0]);
-	__m128 m2c1 = _mm_load_ps (m->m4x4[1]);
-	__m128 m2c2 = _mm_load_ps (m->m4x4[2]);
-	__m128 m2c3 = _mm_load_ps (m->m4x4[3]);
-
-	_MM_TRANSPOSE4_PS (m2c0, m2c1, m2c2, m2c3);
-
-	mrow = _mm_set_ps (_14, _13, _12, _11);
-	_mm_store_ps (m->m4x4[0], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
-
-	mrow = _mm_set_ps (_24, _23, _22, _21);
-	_mm_store_ps (m->m4x4[1], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
-
-	mrow = _mm_set_ps (_34, _33, _32, _31);
-	_mm_store_ps (m->m4x4[2], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
-
-	mrow = _mm_set_ps (_44, _43, _42, _41);
-	_mm_store_ps (m->m4x4[3], _mm_hadd_ps (_mm_hadd_ps (_mm_mul_ps (mrow, m2c0), _mm_mul_ps (mrow, m2c1)), _mm_hadd_ps (_mm_mul_ps (mrow, m2c2), _mm_mul_ps (mrow, m2c3))));
-
-	return m;
 }
 
 
@@ -202,8 +183,7 @@ QMATRIX *R_MatrixRotate (QMATRIX *m, float p, float y, float r)
 	float cp = cos (DEG2RAD (p));
 	float cy = cos (DEG2RAD (y));
 
-	return R_MatrixMultiplyf (
-		m,
+	QMATRIX m1 = {
 		(cp * cy),
 		(cp * sy),
 		-sp,
@@ -220,7 +200,9 @@ QMATRIX *R_MatrixRotate (QMATRIX *m, float p, float y, float r)
 		0.0f,
 		0.0f,
 		1.0f
-	);
+	};
+
+	return R_MatrixMultiply (m, &m1, m);
 }
 
 
@@ -246,9 +228,12 @@ QMATRIX *R_MatrixCamera (QMATRIX *m, const float *origin, const float *angles)
 	float _33 = sp;
 
 	QMATRIX m2 = {
-		_11, _12, _13, 0.0f,
-		_21, _22, _23, 0.0f,
-		_31, _32, _33, 0.0f,
+		_11, _12, _13,
+		0.0f,
+		_21, _22, _23,
+		0.0f,
+		_31, _32, _33,
+		0.0f,
 		-origin[0] * _11 - origin[1] * _21 - origin[2] * _31,
 		-origin[0] * _12 - origin[1] * _22 - origin[2] * _32,
 		-origin[0] * _13 - origin[1] * _23 - origin[2] * _33,

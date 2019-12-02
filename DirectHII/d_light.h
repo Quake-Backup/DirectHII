@@ -3,8 +3,7 @@
 #define	LIGHTMAP_SIZE	256
 #define	MAX_LIGHTMAPS	64
 
-typedef struct lighttexel_s
-{
+typedef struct lighttexel_s {
 	byte styles[4];
 } lighttexel_t;
 

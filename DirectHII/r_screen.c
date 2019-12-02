@@ -54,9 +54,9 @@ the refresh is allways rendered, unless the console is full screen
 
 
 console is:
-	notify lines
-	half
-	full
+notify lines
+half
+full
 
 
 */
@@ -169,7 +169,7 @@ void UpdateInfoMessage (void)
 
 		if (cl.info_mask2 & check)
 		{
-			newmessage = &pr_global_info_strings[pr_info_string_index[i+32]];
+			newmessage = &pr_global_info_strings[pr_info_string_index[i + 32]];
 			strcat (infomessage, "@@");
 			strcat (infomessage, newmessage);
 		}
@@ -187,7 +187,7 @@ void FindTextBreaks (char *message, int Width)
 	while (1)
 	{
 		if (pos - start >= Width || message[pos] == '@' ||
-				message[pos] == 0)
+			message[pos] == 0)
 		{
 			oldlast = lastspace;
 
@@ -585,7 +585,7 @@ void SCR_DrawLoading (void)
 
 	pic = Draw_CachePic ("gfx/menu/loading.lmp");
 	offset = (vid.width2d - pic->width) / 2;
-	Draw_TransPic (offset , 0, pic);
+	Draw_TransPic (offset, 0, pic);
 
 	if (loading_stage == 0)
 		return;
@@ -699,13 +699,12 @@ void SCR_DrawConsole (void)
 /*
 ==============================================================================
 
-						SCREEN SHOTS
+SCREEN SHOTS
 
 ==============================================================================
 */
 
-typedef struct _TargaHeader
-{
+typedef struct _TargaHeader {
 	unsigned char 	id_length, colormap_type, image_type;
 	unsigned short	colormap_index, colormap_length;
 	unsigned char	colormap_size;
@@ -1022,7 +1021,7 @@ void SB_IntermissionOverlay (void)
 	if (cl.intermission <= 4 && cl.intermission + 394 <= pr_string_count)
 		message = &pr_global_strings[pr_string_index[cl.intermission + 394]];
 	else if (cl.intermission == 5)
-		message = &pr_global_strings[pr_string_index[ABILITIES_STR_INDEX+NUM_CLASSES*2+1]];
+		message = &pr_global_strings[pr_string_index[ABILITIES_STR_INDEX + NUM_CLASSES * 2 + 1]];
 	else if (cl.intermission >= 6 && cl.intermission <= 8 && cl.intermission + 386 <= pr_string_count)
 		message = &pr_global_strings[pr_string_index[cl.intermission + 386]];
 	else if (cl.intermission == 9)

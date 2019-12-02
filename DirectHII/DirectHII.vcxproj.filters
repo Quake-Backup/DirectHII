@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{afc9b61c-3482-43cf-8149-21c111aaecea}</UniqueIdentifier>
+      <Extensions>*.rc</Extensions>
+    </Filter>
+    <Filter Include="Menu System">
+      <UniqueIdentifier>{38877329-1928-4792-bccc-72d2b3d8ad7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Files">
+      <UniqueIdentifier>{269923cf-45d1-4624-af86-587de692d6f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{090991c8-8293-4a68-b973-52ef698806a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{243c780c-3661-4085-bc7e-86143afc0fa5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="qe3.ico">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="winquake.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="menu.h">
+      <Filter>Menu System</Filter>
+    </ClInclude>
+    <ClInclude Include="menu_common.h">
+      <Filter>Menu System</Filter>
+    </ClInclude>
+    <ClInclude Include="bspfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cdaudio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cl_effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="crc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cvar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_local.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_particles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_quadbatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_surf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="d_video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="glquake.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="keys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mathlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="midi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="midstuff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modelgen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net_dgrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net_loop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net_ser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net_vcr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net_wins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net_wipx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="particles.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pr_comp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="precompiled.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="progdefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="progs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="quakedef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="screen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spritegn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winquake.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="world.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="menu_class.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_common.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_difficulty.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_gameoptions.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_help.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_keys.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_lanconfig.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_main.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_modem.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_multiplayer.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_net.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_options.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_quit.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_saveload.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_search.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_serial.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_setup.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_singleplayer.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_slist.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_video.c">
+      <Filter>Menu System</Filter>
+    </ClCompile>
+    <ClCompile Include="cd_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_demo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_effect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_parse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_particles.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_refrag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_tent.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_view.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cvar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_draw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_image.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_light.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_mesh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_quadbatch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_shader.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_state.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_surf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_texture.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_video.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="host.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="host_cmd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="in_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keys.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mathlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="midi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mod_alias.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mod_brush.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mod_sprite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mstrconv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_dgrm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_loop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_vcr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_wins.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_wipx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pr_cmds.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pr_edict.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pr_exec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="precompiled.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_draw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_light.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_mesh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_misc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_screen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_surf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_vcache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sbar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_dma.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_mem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_mix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_move.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_phys.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_user.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_world.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vid_cmds.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vidnt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zone.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bugs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fxCommon.shader">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fxDraw.shader">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fxMesh.shader">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fxParticle.shader">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fxSprite.shader">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fxSurf.shader">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fxWaterwarp.shader">
+      <Filter>Shader Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

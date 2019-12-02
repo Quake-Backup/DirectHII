@@ -27,46 +27,38 @@
 #define THINGTYPE_BONE			24
 
 
-struct EffectT
-{
+struct EffectT {
 	int type;
 	float expire_time;
 
-	union
-	{
-		struct
-		{
+	union {
+		struct {
 			vec3_t e_size, dir, min_org, max_org;
 			float next_time, wait;
-			int color, count , veer , flags;
+			int color, count, veer, flags;
 		} Rain;
-		struct
-		{
+		struct {
 			vec3_t pos, angle, movedir;
 			vec3_t vforward, vup, vright;
 			int color, cnt;
 		} Fountain;
-		struct
-		{
+		struct {
 			vec3_t origin;
 			float radius;
 		} Quake;
-		struct
-		{
+		struct {
 			vec3_t origin;
 			vec3_t velocity;
 			int entity_index;
 			float time_amount, framelength, frame;
 		} Smoke;
-		struct
-		{
+		struct {
 			vec3_t origin;
 			int entity_index;
 			float time_amount;
 			int		reverse;  // Forward animation has been run, now go backwards
 		} Flash;
-		struct
-		{
+		struct {
 			vec3_t origin;
 			int entity_index[13];
 			float time_amount;
@@ -74,16 +66,14 @@ struct EffectT
 			int color;
 			float lifetime;
 		} RD; // Rider Death
-		struct
-		{
+		struct {
 			int entity_index[16];
 			vec3_t origin;
 			vec3_t velocity[16];
 			float time_amount, framelength;
 			float skinnum;
 		} Teleporter;
-		struct
-		{
+		struct {
 			vec3_t angle;
 			vec3_t origin;
 			vec3_t avelocity;
@@ -91,8 +81,7 @@ struct EffectT
 			int entity_index;
 			float time_amount;
 		} Missile;
-		struct
-		{
+		struct {
 			int		entity_index[16];
 			vec3_t	velocity[16];
 			vec3_t	avel[3];

@@ -38,8 +38,7 @@
 
 // TYPES -------------------------------------------------------------------
 
-typedef struct stream_s
-{
+typedef struct stream_s {
 	int type;
 	int entity;
 	int tag;
@@ -129,7 +128,7 @@ void CL_ParseTEnt (void)
 #ifdef QUAKE2
 	vec3_t endpos;
 #endif
-//	dlight_t *dl;
+	//	dlight_t *dl;
 	int rnd;
 
 	type = MSG_ReadByte ();

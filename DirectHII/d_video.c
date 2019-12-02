@@ -191,7 +191,7 @@ IDXGIOutput *D_GetOutput (IDXGIAdapter *d3d_Adapter)
 {
 	int i;
 
-	for (i = 0; ; i++)
+	for (i = 0;; i++)
 	{
 		IDXGIOutput *d3d_Output = NULL;
 		DXGI_OUTPUT_DESC Desc;
@@ -563,31 +563,31 @@ void D_HandleAltEnter (HWND hWnd, DWORD WindowStyle, DWORD ExWindowStyle)
 	// to do: if switching to fullscreen, store out the last windowed resolution so that we can switch back to it
 	if (d3d_PresentParameters.Windowed)
 	{
-		memcpy (&d3d_LastPresentParameters, &d3d_PresentParameters, sizeof (D3DPRESENT_PARAMETERS));
-		D_ResetD3DDevice (hWnd, d3d_DesktopMode.Width, d3d_DesktopMode.Height, TRUE, FALSE);
+	memcpy (&d3d_LastPresentParameters, &d3d_PresentParameters, sizeof (D3DPRESENT_PARAMETERS));
+	D_ResetD3DDevice (hWnd, d3d_DesktopMode.Width, d3d_DesktopMode.Height, TRUE, FALSE);
 	}
 	else
-		D_ResetD3DDevice (hWnd, 800, 600, FALSE, FALSE);
+	D_ResetD3DDevice (hWnd, 800, 600, FALSE, FALSE);
 
 	// center the screen if windowed
 	if (d3d_PresentParameters.Windowed)
 	{
-		RECT WorkArea;
-		RECT WindowRect;
+	RECT WorkArea;
+	RECT WindowRect;
 
-		SetRect (&WindowRect, 0, 0, d3d_PresentParameters.BackBufferWidth, d3d_PresentParameters.BackBufferHeight);
-		AdjustWindowRectEx (&WindowRect, WindowStyle, FALSE, ExWindowStyle);
-		SystemParametersInfo (SPI_GETWORKAREA, 0, &WorkArea, 0);
+	SetRect (&WindowRect, 0, 0, d3d_PresentParameters.BackBufferWidth, d3d_PresentParameters.BackBufferHeight);
+	AdjustWindowRectEx (&WindowRect, WindowStyle, FALSE, ExWindowStyle);
+	SystemParametersInfo (SPI_GETWORKAREA, 0, &WorkArea, 0);
 
-		SetWindowPos (
-			hWnd,
-			HWND_TOP,
-			WorkArea.left + ((WorkArea.right - WorkArea.left) - (WindowRect.right - WindowRect.left)) / 2,
-			WorkArea.top + ((WorkArea.bottom - WorkArea.top) - (WindowRect.bottom - WindowRect.top)) / 2,
-			(WindowRect.right - WindowRect.left),
-			(WindowRect.bottom - WindowRect.top),
-			0
-		);
+	SetWindowPos (
+	hWnd,
+	HWND_TOP,
+	WorkArea.left + ((WorkArea.right - WorkArea.left) - (WindowRect.right - WindowRect.left)) / 2,
+	WorkArea.top + ((WorkArea.bottom - WorkArea.top) - (WindowRect.bottom - WindowRect.top)) / 2,
+	(WindowRect.right - WindowRect.left),
+	(WindowRect.bottom - WindowRect.top),
+	0
+	);
 	}
 	*/
 }

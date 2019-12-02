@@ -665,7 +665,7 @@ void CL_RelinkEntities (void)
 			if (cl_prettylights.value)
 			{
 				dl = CL_AllocDlight (i);
-				VectorCopy (ent->origin,  dl->origin);
+				VectorCopy (ent->origin, dl->origin);
 				dl->origin[2] += 16;
 				AngleVectors (ent->angles, fv, rv, uv);
 
@@ -685,7 +685,7 @@ void CL_RelinkEntities (void)
 			if (cl_prettylights.value)
 			{
 				dl = CL_AllocDlight (i);
-				VectorCopy (ent->origin,  dl->origin);
+				VectorCopy (ent->origin, dl->origin);
 				dl->origin[2] += 16;
 				dl->radius = dl->baseradius = 400 + (rand () & 31);
 				dl->die = cl.time + 0.001;
@@ -697,7 +697,7 @@ void CL_RelinkEntities (void)
 			if (cl_prettylights.value)
 			{
 				dl = CL_AllocDlight (i);
-				VectorCopy (ent->origin,  dl->origin);
+				VectorCopy (ent->origin, dl->origin);
 				dl->radius = dl->baseradius = 200 + (rand () & 31);
 				dl->die = cl.time + 0.001;
 			}
@@ -708,7 +708,7 @@ void CL_RelinkEntities (void)
 			if (cl_prettylights.value)
 			{
 				dl = CL_AllocDlight (i);
-				VectorCopy (ent->origin,  dl->origin);
+				VectorCopy (ent->origin, dl->origin);
 				dl->radius = dl->baseradius = 200.0 + (rand () & 31);
 				dl->die = cl.time + 0.001;
 				dl->dark = true;
@@ -720,7 +720,7 @@ void CL_RelinkEntities (void)
 			if (cl_prettylights.value)
 			{
 				dl = CL_AllocDlight (i);
-				VectorCopy (ent->origin,  dl->origin);
+				VectorCopy (ent->origin, dl->origin);
 				dl->radius = dl->baseradius = 200;
 				dl->die = cl.time + 0.001;
 			}

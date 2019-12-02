@@ -33,8 +33,7 @@ BRUSH MODELS
 // in memory representation
 //
 // !!! if this is changed, it must be changed in asm_draw.h too !!!
-typedef struct mvertex_s
-{
+typedef struct mvertex_s {
 	vec3_t		position;
 } mvertex_t;
 
@@ -45,8 +44,7 @@ typedef struct mvertex_s
 
 // plane_t structure
 // !!! if this is changed, it must be changed in asm_i386.h too !!!
-typedef struct mplane_s
-{
+typedef struct mplane_s {
 	vec3_t	normal;
 	float	dist;
 	byte	type;			// for texture axis selection and fast side tests
@@ -54,8 +52,7 @@ typedef struct mplane_s
 	byte	pad[2];
 } mplane_t;
 
-typedef struct texture_s
-{
+typedef struct texture_s {
 	char		name[16];
 	unsigned	width, height;
 	int	texnum;
@@ -77,22 +74,19 @@ typedef struct texture_s
 #define SURF_DRAWBLACK		0x200
 
 // !!! if this is changed, it must be changed in asm_draw.h too !!!
-typedef struct medge_s
-{
+typedef struct medge_s {
 	unsigned short	v[2];
 	unsigned int	cachededgeoffset;
 } medge_t;
 
-typedef struct mtexinfo_s
-{
+typedef struct mtexinfo_s {
 	float		vecs[2][4];
 	float		mipadjust;
 	texture_t	*texture;
 	int			flags;
 } mtexinfo_t;
 
-typedef struct msurface_s
-{
+typedef struct msurface_s {
 	int			order;			// order in the BSP file for sorting
 	int			visframe;		// should be drawn when node is crossed
 
@@ -125,8 +119,7 @@ typedef struct msurface_s
 } msurface_t;
 
 
-typedef struct mnode_s
-{
+typedef struct mnode_s {
 	// common with leaf
 	int			contents;		// 0, to differentiate from leafs
 	int			visframe;		// node needs to be traversed if current
@@ -146,8 +139,7 @@ typedef struct mnode_s
 
 
 
-typedef struct mleaf_s
-{
+typedef struct mleaf_s {
 	// common with node
 	int			contents;		// wil be a negative contents number
 	int			visframe;		// node needs to be traversed if current
@@ -168,8 +160,7 @@ typedef struct mleaf_s
 } mleaf_t;
 
 // !!! if this is changed, it must be changed in asm_i386.h too !!!
-typedef struct hull_s
-{
+typedef struct hull_s {
 	dclipnode_t	*clipnodes;
 	mplane_t	*planes;
 	int			firstclipnode;
@@ -188,8 +179,7 @@ SPRITE MODELS
 
 
 // FIXME: shorten these?
-typedef struct mspriteframe_s
-{
+typedef struct mspriteframe_s {
 	short	width;
 	short	height;
 	float	up, down, left, right;
@@ -197,21 +187,18 @@ typedef struct mspriteframe_s
 	int texnum;
 } mspriteframe_t;
 
-typedef struct mspritegroup_s
-{
+typedef struct mspritegroup_s {
 	short			numframes;
 	float			*intervals;
 	mspriteframe_t	*frames[1];
 } mspritegroup_t;
 
-typedef struct mspriteframedesc_s
-{
+typedef struct mspriteframedesc_s {
 	spriteframetype_t	type;
 	mspriteframe_t		*frameptr;
 } mspriteframedesc_t;
 
-typedef struct msprite_s
-{
+typedef struct msprite_s {
 	short				type;
 	short				maxwidth;
 	short				maxheight;
@@ -231,8 +218,7 @@ Alias models are position independent, so the cache manager can move them.
 ==============================================================================
 */
 
-typedef struct maliasframedesc_s
-{
+typedef struct maliasframedesc_s {
 	int					firstpose;
 	int					numposes;
 	float				interval;
@@ -242,23 +228,20 @@ typedef struct maliasframedesc_s
 	char				name[16];
 } maliasframedesc_t;
 
-typedef struct maliasgroupframedesc_s
-{
+typedef struct maliasgroupframedesc_s {
 	trivertx_t			bboxmin;
 	trivertx_t			bboxmax;
 	int					frame;
 } maliasgroupframedesc_t;
 
-typedef struct maliasgroup_s
-{
+typedef struct maliasgroup_s {
 	int						numframes;
 	int						intervals;
 	maliasgroupframedesc_t	frames[1];
 } maliasgroup_t;
 
 //this is only the GL version
-typedef struct mtriangle_s
-{
+typedef struct mtriangle_s {
 	int					facesfront;
 	unsigned short		vertindex[3];
 	unsigned short		stindex[3];
@@ -266,8 +249,7 @@ typedef struct mtriangle_s
 
 
 #define	MAX_SKINS	32
-typedef struct aliashdr_s
-{
+typedef struct aliashdr_s {
 	int			ident;
 	int			version;
 	vec3_t		scale;
@@ -299,7 +281,7 @@ typedef struct aliashdr_s
 // Whole model
 //
 
-typedef enum {mod_brush, mod_sprite, mod_alias} modtype_t;
+typedef enum { mod_brush, mod_sprite, mod_alias } modtype_t;
 
 // EF_ changes must also be made in model.h
 
@@ -330,8 +312,7 @@ typedef enum {mod_brush, mod_sprite, mod_alias} modtype_t;
 
 #define  EF_MIP_MAP_FAR	  0x1000000	// Set per frame, this model will use the far mip map
 
-typedef struct model_s
-{
+typedef struct model_s {
 	char		name[MAX_QPATH];
 	qboolean	needload;
 
@@ -400,8 +381,7 @@ typedef struct model_s
 
 	// additional model data
 	// to do: add brushhdr
-	union
-	{
+	union {
 		aliashdr_t	*aliashdr;
 		msprite_t	*spritehdr;
 	};

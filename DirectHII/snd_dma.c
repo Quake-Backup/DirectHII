@@ -449,23 +449,23 @@ void SND_Spatialize (channel_t *ch)
 	TO DO
 	if (ch->entnum > 0 && cls.state == ca_connected)
 	{
-		entity_t *ent = CL_EntityNum (ch->entnum);
+	entity_t *ent = CL_EntityNum (ch->entnum);
 
-		if (ent && ent->model)
-		{
-			// update sound origin
-			// brush model entities have their origins at 0|0|0 and move relative to that; other models are positioned correctly
-			if (ent->model->type == mod_brush)
-			{
-				// transform the bbox fully here because a sound may be started by an entity that is now no longer in the PVS
-				R_SetupEntityLocalTransform (ent);
+	if (ent && ent->model)
+	{
+	// update sound origin
+	// brush model entities have their origins at 0|0|0 and move relative to that; other models are positioned correctly
+	if (ent->model->type == mod_brush)
+	{
+	// transform the bbox fully here because a sound may be started by an entity that is now no longer in the PVS
+	R_SetupEntityLocalTransform (ent);
 
-				sound_origin[0] = ent->bbmins[0] + (ent->bbmaxs[0] - ent->bbmins[0]) * 0.5f;
-				sound_origin[1] = ent->bbmins[1] + (ent->bbmaxs[1] - ent->bbmins[1]) * 0.5f;
-				sound_origin[2] = ent->bbmins[2] + (ent->bbmaxs[2] - ent->bbmins[2]) * 0.5f;
-			}
-			else Vector3Copy (sound_origin, ent->origin);
-		}
+	sound_origin[0] = ent->bbmins[0] + (ent->bbmaxs[0] - ent->bbmins[0]) * 0.5f;
+	sound_origin[1] = ent->bbmins[1] + (ent->bbmaxs[1] - ent->bbmins[1]) * 0.5f;
+	sound_origin[2] = ent->bbmins[2] + (ent->bbmaxs[2] - ent->bbmins[2]) * 0.5f;
+	}
+	else Vector3Copy (sound_origin, ent->origin);
+	}
 	}
 	*/
 
@@ -1003,7 +1003,7 @@ void S_SoundList (void)
 		else
 			Con_Printf (PRINT_NORMAL, " ");
 
-		Con_Printf (PRINT_NORMAL, va ("(%2db) %6i : %s\n", sc->width * 8,  size, sfx->name));
+		Con_Printf (PRINT_NORMAL, va ("(%2db) %6i : %s\n", sc->width * 8, size, sfx->name));
 	}
 
 	Con_Printf (PRINT_NORMAL, va ("Total resident: %i\n", total));

@@ -969,7 +969,7 @@ void R_RocketTrail (vec3_t start, vec3_t end, int type)
 
 			p->org[2] = start[2] + ((rand () % 48) - 24);
 
-			p->vel[2] = - ((rand () & 15) + 8);
+			p->vel[2] = -((rand () & 15) + 8);
 			break;
 
 		case rt_boneshard: // bone shard
@@ -981,7 +981,7 @@ void R_RocketTrail (vec3_t start, vec3_t end, int type)
 
 			p->org[2] = start[2] + ((rand () % 48) - 24);
 
-			p->vel[2] = - ((rand () & 15) + 8);
+			p->vel[2] = -((rand () & 15) + 8);
 			break;
 
 		case rt_scarab: // scarab staff
@@ -991,7 +991,7 @@ void R_RocketTrail (vec3_t start, vec3_t end, int type)
 			for (j = 0; j < 3; j++)
 				p->org[j] = start[j] + (rand () & 7);
 
-			p->vel[2] = - (rand () & 7);
+			p->vel[2] = -(rand () & 7);
 			break;
 		}
 
@@ -1017,7 +1017,7 @@ void R_RainEffect (vec3_t org, vec3_t e_size, int x_dir, int y_dir, int color, i
 
 		p->vel[0] = x_dir;  //X and Y motion
 		p->vel[1] = y_dir;
-		p->vel[2] = - ((rand () % 956)) ;
+		p->vel[2] = -((rand () % 956));
 
 		if (p->vel[2] > -256)
 			p->vel[2] += -256;

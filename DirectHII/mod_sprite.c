@@ -55,7 +55,7 @@ void *Mod_LoadSpriteFrame (model_t *mod, void *pin, mspriteframe_t **ppframe, in
 
 	sprintf (name, "%s_%i", loadmodel->name, framenum);
 
-	pspriteframe->texnum = D_LoadTexture (name, width, height, width, (byte *) (pinframe + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_ALPHA);
+	pspriteframe->texnum = D_LoadTexture (name, width, height, width, (byte *) (pinframe + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_ALPHA | TEX_UPSCALE);
 
 	return (void *) ((byte *) pinframe + sizeof (dspriteframe_t) + size);
 }
@@ -135,7 +135,7 @@ void Mod_LoadSpriteModel (model_t *mod, void *buffer)
 
 	numframes = LittleLong (pin->numframes);
 
-	size = sizeof (msprite_t) +	(numframes - 1) * sizeof (psprite->frames);
+	size = sizeof (msprite_t) + (numframes - 1) * sizeof (psprite->frames);
 
 	psprite = Hunk_Alloc (MAP_HUNK, size);
 

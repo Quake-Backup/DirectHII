@@ -14,12 +14,12 @@
 extern int m_multiplayer_cursor;
 extern int m_net_cursor;
 extern qboolean	m_return_onerror;
-extern char		m_return_reason [32];
+extern char		m_return_reason[32];
 extern m_state_t m_return_state;
 
 
 int		lanConfig_cursor = -1;
-int		lanConfig_cursor_table [] = {100, 120, 140, 172};
+int		lanConfig_cursor_table[] = {100, 120, 140, 172};
 #define NUM_LANCONFIG_CMDS	4
 
 int 	lanConfig_port;
@@ -107,13 +107,13 @@ void M_LanConfig_Draw (void)
 		M_Print (basex + 8, lanConfig_cursor_table[1], "OK");
 	}
 
-	M_DrawCharacter (basex - 8, lanConfig_cursor_table [lanConfig_cursor], 12 + ((int) (realtime * 4) & 1));
+	M_DrawCharacter (basex - 8, lanConfig_cursor_table[lanConfig_cursor], 12 + ((int) (realtime * 4) & 1));
 
 	if (lanConfig_cursor == 0)
-		M_DrawCharacter (basex + 9 * 8 + 8 * strlen (lanConfig_portname), lanConfig_cursor_table [0], 10 + ((int) (realtime * 4) & 1));
+		M_DrawCharacter (basex + 9 * 8 + 8 * strlen (lanConfig_portname), lanConfig_cursor_table[0], 10 + ((int) (realtime * 4) & 1));
 
 	if (lanConfig_cursor == 3)
-		M_DrawCharacter (basex + 8 + 8 * strlen (lanConfig_joinname), lanConfig_cursor_table [3], 10 + ((int) (realtime * 4) & 1));
+		M_DrawCharacter (basex + 8 + 8 * strlen (lanConfig_joinname), lanConfig_cursor_table[3], 10 + ((int) (realtime * 4) & 1));
 
 	if (*m_return_reason)
 		M_PrintWhite (basex, 192, m_return_reason);
@@ -159,7 +159,7 @@ void M_LanConfig_Key (int key)
 	case K_ENTER:
 
 		if ((JoiningGame && lanConfig_cursor <= 1) ||
-				(!JoiningGame && lanConfig_cursor == 0))
+			(!JoiningGame && lanConfig_cursor == 0))
 			break;
 
 		m_soundlevel = m_sound_menu2;
@@ -170,7 +170,7 @@ void M_LanConfig_Key (int key)
 		M_ConfigureNetSubsystem ();
 
 		if ((JoiningGame && lanConfig_cursor == 2) ||
-				(!JoiningGame && lanConfig_cursor == 1))
+			(!JoiningGame && lanConfig_cursor == 1))
 		{
 			if (StartingGame)
 			{
@@ -199,13 +199,13 @@ void M_LanConfig_Key (int key)
 		if (lanConfig_cursor == 0)
 		{
 			if (strlen (lanConfig_portname))
-				lanConfig_portname[strlen (lanConfig_portname)-1] = 0;
+				lanConfig_portname[strlen (lanConfig_portname) - 1] = 0;
 		}
 
 		if (lanConfig_cursor == 3)
 		{
 			if (strlen (lanConfig_joinname))
-				lanConfig_joinname[strlen (lanConfig_joinname)-1] = 0;
+				lanConfig_joinname[strlen (lanConfig_joinname) - 1] = 0;
 		}
 
 		break;
@@ -247,7 +247,7 @@ void M_LanConfig_Key (int key)
 
 			if (l < 29)
 			{
-				lanConfig_joinname[l+1] = 0;
+				lanConfig_joinname[l + 1] = 0;
 				lanConfig_joinname[l] = key;
 			}
 		}
@@ -261,7 +261,7 @@ void M_LanConfig_Key (int key)
 
 			if (l < 5)
 			{
-				lanConfig_portname[l+1] = 0;
+				lanConfig_portname[l + 1] = 0;
 				lanConfig_portname[l] = key;
 			}
 		}
@@ -273,7 +273,7 @@ void M_LanConfig_Key (int key)
 		else
 			lanConfig_cursor = 0;
 
-	l =  atoi (lanConfig_portname);
+	l = atoi (lanConfig_portname);
 
 	if (l > 65535)
 		l = lanConfig_port;

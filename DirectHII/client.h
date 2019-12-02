@@ -1,7 +1,6 @@
 // client.h
 
-typedef struct usercmd_s
-{
+typedef struct usercmd_s {
 	vec3_t	viewangles;
 
 	// intended velocities
@@ -13,24 +12,21 @@ typedef struct usercmd_s
 #endif
 } usercmd_t;
 
-typedef struct lightstyle_s
-{
+typedef struct lightstyle_s {
 	int		length;
 	char	map[MAX_STYLESTRING];
 } lightstyle_t;
 
-typedef struct scoreboard_s
-{
+typedef struct scoreboard_s {
 	char	name[MAX_SCOREBOARDNAME];
 	float	entertime;
 	int		frags;
 	int		colors;			// two 4 bit fields
-	byte	translations[VID_GRADES*256];
+	byte	translations[VID_GRADES * 256];
 	float	playerclass;
 } scoreboard_t;
 
-typedef struct cshift_s
-{
+typedef struct cshift_s {
 	float	destcolor[3];
 	float	percent;		// 0-256
 	float	initialpercent;
@@ -63,8 +59,7 @@ typedef struct cshift_s
 
 #define	MAX_DLIGHTS		32
 
-typedef struct dlight_s
-{
+typedef struct dlight_s {
 	vec3_t	origin;
 	vec3_t	transformed;
 
@@ -91,8 +86,7 @@ typedef struct dlight_s
 #define	MAX_DEMOS		8
 #define	MAX_DEMONAME	16
 
-typedef enum
-{
+typedef enum {
 	ca_dedicated, 		// a dedicated server with no ability to start a client
 	ca_disconnected, 	// full screen console with no connection
 	ca_connected		// valid netcon, talking to a server
@@ -102,8 +96,7 @@ typedef enum
 // the client_static_t structure is persistant through an arbitrary number
 // of server connections
 //
-typedef struct client_static_s
-{
+typedef struct client_static_s {
 	cactive_t	state;
 
 	// personalization data sent to server
@@ -140,8 +133,7 @@ extern client_static_t	cls;
 // the client_state_t structure is wiped completely at every
 // server signon
 //
-typedef struct client_state_s
-{
+typedef struct client_state_s {
 	int			movemessages;	// since connecting to this server
 	// throw out the first couple, so the player
 	// doesn't accidentally do something the
@@ -309,8 +301,7 @@ extern	entity_t		*cl_visedicts[MAX_VISEDICTS];
 //
 // cl_input
 //
-typedef struct kbutton_s
-{
+typedef struct kbutton_s {
 	int		down[2];		// key nums holding it down
 	int		state;			// low bit is down state
 } kbutton_t;

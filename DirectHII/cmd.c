@@ -10,8 +10,7 @@ void ListCommands (char *prefix);
 
 #define	MAX_ALIAS_NAME	32
 
-typedef struct cmdalias_s
-{
+typedef struct cmdalias_s {
 	struct cmdalias_s	*next;
 	char	name[MAX_ALIAS_NAME];
 	char	*value;
@@ -44,7 +43,7 @@ void Cmd_Wait_f (void)
 /*
 =============================================================================
 
-						COMMAND BUFFER
+COMMAND BUFFER
 
 =============================================================================
 */
@@ -146,7 +145,7 @@ void Cbuf_Execute (void)
 			if (text[i] == '"')
 				quotes++;
 
-			if (!(quotes & 1) &&  text[i] == ';')
+			if (!(quotes & 1) && text[i] == ';')
 				break;	// don't break if inside a quoted string
 
 			if (text[i] == '\n')
@@ -186,7 +185,7 @@ void Cbuf_Execute (void)
 /*
 ==============================================================================
 
-						SCRIPT COMMANDS
+SCRIPT COMMANDS
 
 ==============================================================================
 */
@@ -412,13 +411,12 @@ void Cmd_Alias_f (void)
 /*
 =============================================================================
 
-					COMMAND EXECUTION
+COMMAND EXECUTION
 
 =============================================================================
 */
 
-typedef struct cmd_function_s
-{
+typedef struct cmd_function_s {
 	struct cmd_function_s	*next;
 	char					*name;
 	xcommand_t				function;
@@ -558,7 +556,7 @@ void	Cmd_AddCommand (char *cmd_name, xcommand_t function)
 		Sys_Error ("Cmd_AddCommand after host_initialized");
 
 	// fail if the command is a variable name
-	if (Cvar_VariableString (cmd_name) [0])
+	if (Cvar_VariableString (cmd_name)[0])
 	{
 		Con_Printf (PRINT_NORMAL, va ("Cmd_AddCommand: %s already defined as a var\n", cmd_name));
 		return;

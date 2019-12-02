@@ -1,6 +1,8 @@
 
 #include "precompiled.h"
 
+#pragma warning(disable : 4115) // named type definition in parentheses
+
 #include "d_local.h"
 #include "resource.h"
 
@@ -11,8 +13,7 @@
 HINSTANCE hInstCompiler = NULL;
 pD3DCompile QD3DCompile = NULL;
 
-typedef struct shaderbundle_s
-{
+typedef struct shaderbundle_s {
 	ID3D11InputLayout *InputLayout;
 	ID3D11VertexShader *VertexShader;
 	ID3D11GeometryShader *GeometryShader;

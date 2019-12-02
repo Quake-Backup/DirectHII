@@ -1,13 +1,11 @@
 // world.h
 
-typedef struct plane_s
-{
+typedef struct plane_s {
 	vec3_t	normal;
 	float	dist;
 } plane_t;
 
-typedef struct trace_s
-{
+typedef struct trace_s {
 	qboolean	allsolid;	// if true, plane is not valid
 	qboolean	startsolid;	// if true, the initial point was in a solid area
 	qboolean	inopen, inwater;

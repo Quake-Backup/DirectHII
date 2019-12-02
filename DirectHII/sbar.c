@@ -91,9 +91,9 @@ static float BarTargetHeight;
 static float BarOldHeight;
 static double BarBeginTime;
 
-cvar_t BarSpeed = { "barspeed", "5" };
-cvar_t sbtemp = { "sbtemp", "5" };
-cvar_t DMMode = { "dm_mode", "1", true };
+cvar_t BarSpeed = {"barspeed", "5"};
+cvar_t sbtemp = {"sbtemp", "5"};
+cvar_t DMMode = {"dm_mode", "1", true};
 
 static qpic_t *sb_nums[11];
 static qpic_t *sb_colon, *sb_slash;
@@ -503,7 +503,7 @@ static void DrawLowerBar (void)
 	//Sbar_DrawSmallString(10, 114, cl.levelname);
 
 	// Stats
-	Sbar_DrawSmallString (11, 48, ClassNames[playerClass-1]);
+	Sbar_DrawSmallString (11, 48, ClassNames[playerClass - 1]);
 
 	Sbar_DrawSmallString (11, 58, "int");
 	sprintf (tempStr, "%02d", (int) cl.v.intelligence);
@@ -538,13 +538,13 @@ static void DrawLowerBar (void)
 		if (((int) cl.v.flags) &FL_SPECIAL_ABILITY1)
 		{
 			Sbar_DrawSmallString (8, 89,
-								  &pr_global_strings[pr_string_index[i]]);
+				&pr_global_strings[pr_string_index[i]]);
 		}
 
 		if (((int) cl.v.flags) &FL_SPECIAL_ABILITY2)
 		{
 			Sbar_DrawSmallString (8, 96,
-								  &pr_global_strings[pr_string_index[i+1]]);
+				&pr_global_strings[pr_string_index[i + 1]]);
 		}
 	}
 
@@ -658,7 +658,7 @@ static int CalcAC (void)
 	int playerClass;
 
 	//playerClass = cl.v.playerclass;
-	playerClass = cl_playerclass.value - 1 ;
+	playerClass = cl_playerclass.value - 1;
 
 	if (playerClass < 0 || playerClass >= NUM_CLASSES)
 	{
@@ -733,8 +733,7 @@ static int Sbar_itoa (int num, char *buf)
 		dig = num / pow10;
 		*str++ = '0' + dig;
 		num -= dig * pow10;
-	}
-	while (pow10 != 1);
+	} while (pow10 != 1);
 
 	*str = 0;
 
@@ -807,11 +806,11 @@ static void Sbar_SortFrags (void)
 
 	for (i = 0; i < scoreboardlines; i++)
 		for (j = 0; j < scoreboardlines - 1 - i; j++)
-			if (cl.scores[fragsort[j]].frags < cl.scores[fragsort[j+1]].frags)
+			if (cl.scores[fragsort[j]].frags < cl.scores[fragsort[j + 1]].frags)
 			{
 				k = fragsort[j];
-				fragsort[j] = fragsort[j+1];
-				fragsort[j+1] = k;
+				fragsort[j] = fragsort[j + 1];
+				fragsort[j + 1] = k;
 			}
 }
 
@@ -1008,11 +1007,11 @@ void Sbar_DeathmatchOverlay (void)
 		sprintf (num, "%3i", f);
 
 		if (k == sv_kingofhill)
-			Draw_Character (x - 12 , y - 1, 130);
+			Draw_Character (x - 12, y - 1, 130);
 
-		Draw_Character (x + 8 , y - 1, num[0]);
-		Draw_Character (x + 16 , y - 1, num[1]);
-		Draw_Character (x + 24 , y - 1, num[2]);
+		Draw_Character (x + 8, y - 1, num[0]);
+		Draw_Character (x + 16, y - 1, num[1]);
+		Draw_Character (x + 24, y - 1, num[2]);
 
 		if (k == cl.viewentity - 1)
 			Draw_Character (x - 8, y - 1, 12);
@@ -1053,7 +1052,7 @@ void FindName (char *which, char *name)
 			return;
 
 		strncpy (test, pos, p2 - pos);
-		test[p2-pos] = 0;
+		test[p2 - pos] = 0;
 
 		if (strcmpi (which, test) == 0)
 		{
@@ -1064,7 +1063,7 @@ void FindName (char *which, char *name)
 			if (p2)
 			{
 				strncpy (name, pos, p2 - pos);
-				name[p2-pos] = 0;
+				name[p2 - pos] = 0;
 				return;
 			}
 
@@ -1189,21 +1188,21 @@ void Sbar_SmallDeathmatchOverlay (void)
 
 		if (k != cl.viewentity - 1)
 		{
-			Draw_Character (x + 2 , y - 1, num[0]);
-			Draw_Character (x + 10 , y - 1, num[1]);
-			Draw_Character (x + 18 , y - 1, num[2]);
+			Draw_Character (x + 2, y - 1, num[0]);
+			Draw_Character (x + 10, y - 1, num[1]);
+			Draw_Character (x + 18, y - 1, num[2]);
 
 			if (k == sv_kingofhill)
-				Draw_Character (x + 30 , y - 1, 130);
+				Draw_Character (x + 30, y - 1, 130);
 		}
 		else
 		{
-			Draw_Character (x + 2 , y - 1, num[0] + 256);
-			Draw_Character (x + 10 , y - 1, num[1] + 256);
-			Draw_Character (x + 18 , y - 1, num[2] + 256);
+			Draw_Character (x + 2, y - 1, num[0] + 256);
+			Draw_Character (x + 10, y - 1, num[1] + 256);
+			Draw_Character (x + 18, y - 1, num[2] + 256);
 
 			if (k == sv_kingofhill)
-				Draw_Character (x + 30 , y - 1, 130);
+				Draw_Character (x + 30, y - 1, 130);
 		}
 
 		y += 10;
@@ -1242,12 +1241,12 @@ static void DrawActiveRings (void)
 
 	/*	if(flag&RING_REGENERATION)
 		{
-			frame = 1+((int)(cl.time*16)&15);
-			sprintf(tempStr, "gfx/rngreg%d.lmp", frame);
-			Draw_TransPic(vid.width2d - 50, ring_row, Draw_CachePic(tempStr));
-			ring_row += 33;
+		frame = 1+((int)(cl.time*16)&15);
+		sprintf(tempStr, "gfx/rngreg%d.lmp", frame);
+		Draw_TransPic(vid.width2d - 50, ring_row, Draw_CachePic(tempStr));
+		ring_row += 33;
 		}
-	*/
+		*/
 
 	if (flag & RING_WATER)
 	{
@@ -1353,10 +1352,10 @@ static void DrawBarArtifactIcon (int x, int y, int artifact)
 		return;
 
 	Sbar_DrawTransPic (x, y, Draw_CachePic (va ("gfx/arti%02d.lmp",
-											artifact)));
+		artifact)));
 
 	//	if((count = (int)(&cl.v.cnt_torch)[artifact]) > 1)
-	if ((count = (int) (&cl.v.cnt_torch) [artifact]) > 0)
+	if ((count = (int) (&cl.v.cnt_torch)[artifact]) > 0)
 	{
 		DrawBarArtifactNumber (x + 20, y + 21, count);
 	}
@@ -1414,7 +1413,7 @@ static void DrawArtifactInventory (void)
 			Sbar_DrawTransPic (x + 9, y - 12, Draw_CachePic ("gfx/artisel.lmp"));
 		}
 
-		DrawBarArtifactIcon (x, y, cl.inv_order[cl.inv_startpos+i]);
+		DrawBarArtifactIcon (x, y, cl.inv_order[cl.inv_startpos + i]);
 	}
 
 	//Inv_DrawArrows (x, y);
@@ -1422,9 +1421,9 @@ static void DrawArtifactInventory (void)
 	/*	if (cl.inv_startpos)  // Left arrow showing there are icons to the left
 			Draw_Fill ( x , y - 5, 3, 1, 30);
 
-		if (cl.inv_startpos + INV_MAX_ICON < cl.inv_count) // Right arrow showing there are icons to the right
+			if (cl.inv_startpos + INV_MAX_ICON < cl.inv_count) // Right arrow showing there are icons to the right
 			Draw_Fill ( x + 200, y - 5 , 3, 1, 30);
-	*/
+			*/
 }
 
 //==========================================================================
@@ -1622,14 +1621,14 @@ void SB_InvChanged (void)
 	memset (examined, 0, sizeof (examined)); // examined[x] = false
 
 	if (cl.inv_selected >= 0 &&
-			(&cl.v.cnt_torch) [cl.inv_order[cl.inv_selected]] == 0)
+		(&cl.v.cnt_torch)[cl.inv_order[cl.inv_selected]] == 0)
 		ForceUpdate = true;
 
 	// removed items we no longer have from the order
 	for (counter = position = 0; counter < cl.inv_count; counter++)
 	{
 		//if (Inv_GetCount(cl.inv_order[counter]) >= 0)
-		if ((&cl.v.cnt_torch) [cl.inv_order[counter]] > 0)
+		if ((&cl.v.cnt_torch)[cl.inv_order[counter]] > 0)
 		{
 			cl.inv_order[position] = cl.inv_order[counter];
 			examined[cl.inv_order[position]] = true;
@@ -1643,7 +1642,7 @@ void SB_InvChanged (void)
 		if (!examined[counter])
 		{
 			//if (Inv_GetCount(counter) > 0)
-			if ((&cl.v.cnt_torch) [counter] > 0)
+			if ((&cl.v.cnt_torch)[counter] > 0)
 			{
 				cl.inv_order[position] = counter;
 				position++;
@@ -1724,7 +1723,7 @@ void SB_ViewSizeChanged (void)
 static void Sbar_DrawPic (int x, int y, qpic_t *pic)
 {
 	Draw_PicCropped (x + ((vid.width2d - 320) >> 1),
-					 y + (vid.height2d - (int) BarHeight), pic);
+		y + (vid.height2d - (int) BarHeight), pic);
 }
 
 //==========================================================================
@@ -1738,7 +1737,7 @@ static void Sbar_DrawPic (int x, int y, qpic_t *pic)
 static void Sbar_DrawTransPic (int x, int y, qpic_t *pic)
 {
 	Draw_TransPicCropped (x + ((vid.width2d - 320) >> 1),
-						  y + (vid.height2d - (int) BarHeight), pic);
+		y + (vid.height2d - (int) BarHeight), pic);
 }
 
 
@@ -1762,7 +1761,7 @@ static void Sbar_DrawString (int x, int y, char *str)
 static void Sbar_DrawSmallString (int x, int y, char *str)
 {
 	Draw_SmallString (x + ((vid.width2d - 320) >> 1),
-					  y + vid.height2d - (int) BarHeight, str);
+		y + vid.height2d - (int) BarHeight, str);
 }
 
 //==========================================================================

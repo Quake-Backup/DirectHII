@@ -70,13 +70,13 @@ void M_Setup_Draw (void)
 
 	M_DrawTransPicTranslate (220, 72, p, setup_class - 1, (setup_top << 4) | setup_bottom);
 
-	M_DrawCharacter (56, setup_cursor_table [setup_cursor], 12 + ((int) (realtime * 4) & 1));
+	M_DrawCharacter (56, setup_cursor_table[setup_cursor], 12 + ((int) (realtime * 4) & 1));
 
 	if (setup_cursor == 0)
-		M_DrawCharacter (168 + 8 * strlen (setup_hostname), setup_cursor_table [setup_cursor], 10 + ((int) (realtime * 4) & 1));
+		M_DrawCharacter (168 + 8 * strlen (setup_hostname), setup_cursor_table[setup_cursor], 10 + ((int) (realtime * 4) & 1));
 
 	if (setup_cursor == 1)
-		M_DrawCharacter (168 + 8 * strlen (setup_myname), setup_cursor_table [setup_cursor], 10 + ((int) (realtime * 4) & 1));
+		M_DrawCharacter (168 + 8 * strlen (setup_myname), setup_cursor_table[setup_cursor], 10 + ((int) (realtime * 4) & 1));
 }
 
 

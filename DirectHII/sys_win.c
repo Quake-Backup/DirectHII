@@ -546,15 +546,15 @@ LONG WINAPI MainWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		D3D9_REMOVED
 		if ((int) wParam == 13)
 		{
-			D_HandleAltEnter (hWnd, WindowStyle, ExWindowStyle);
-			vid.width = D_GetDisplayWidth ();
-			vid.height = D_GetDisplayHeight ();
-			return 0;
+		D_HandleAltEnter (hWnd, WindowStyle, ExWindowStyle);
+		vid.width = D_GetDisplayWidth ();
+		vid.height = D_GetDisplayHeight ();
+		return 0;
 		}
 		else if (IN_MapKey (lParam) == K_F4)
 		{
-			// trap and prevent alt-f4 which otherwise would just close the window/kill the app
-			return 0;
+		// trap and prevent alt-f4 which otherwise would just close the window/kill the app
+		return 0;
 		}
 		*/
 
@@ -611,15 +611,15 @@ void Sys_RegisterWindowClass (void)
 	WNDCLASS		wc;
 
 	// Register the frame class
-	wc.style         = CS_HREDRAW | CS_VREDRAW;
-	wc.lpfnWndProc   = (WNDPROC) MainWndProc;
-	wc.cbClsExtra    = 0;
-	wc.cbWndExtra    = 0;
-	wc.hInstance     = GetModuleHandle (NULL);
-	wc.hIcon         = 0;
-	wc.hCursor       = LoadCursor (NULL, IDC_ARROW);
+	wc.style = CS_HREDRAW | CS_VREDRAW;
+	wc.lpfnWndProc = (WNDPROC) MainWndProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = GetModuleHandle (NULL);
+	wc.hIcon = 0;
+	wc.hCursor = LoadCursor (NULL, IDC_ARROW);
 	wc.hbrBackground = NULL;
-	wc.lpszMenuName  = 0;
+	wc.lpszMenuName = 0;
 	wc.lpszClassName = "DirectHII";
 
 	if (!RegisterClass (&wc))
@@ -630,7 +630,7 @@ void Sys_RegisterWindowClass (void)
 /*
 ==============================================================================
 
- WINDOWS CRAP
+WINDOWS CRAP
 
 ==============================================================================
 */
@@ -789,8 +789,8 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	if (!GetCurrentDirectory (sizeof (cwd), cwd))
 		Sys_Error ("Couldn't determine current directory");
 
-	if (cwd[strlen (cwd)-1] == '/')
-		cwd[strlen (cwd)-1] = 0;
+	if (cwd[strlen (cwd) - 1] == '/')
+		cwd[strlen (cwd) - 1] = 0;
 
 	parms.basedir = cwd;
 	parms.cachedir = NULL;

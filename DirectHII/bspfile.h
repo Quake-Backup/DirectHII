@@ -38,8 +38,7 @@
 #define BSPVERSION	29
 #define	TOOLVERSION	2
 
-typedef struct lump_s
-{
+typedef struct lump_s {
 	int		fileofs, filelen;
 } lump_t;
 
@@ -61,8 +60,7 @@ typedef struct lump_s
 
 #define	HEADER_LUMPS	15
 
-typedef struct dmodel_s
-{
+typedef struct dmodel_s {
 	float		mins[3], maxs[3];
 	float		origin[3];
 	int			headnode[MAX_MAP_HULLS];
@@ -70,30 +68,26 @@ typedef struct dmodel_s
 	int			firstface, numfaces;
 } dmodel_t;
 
-typedef struct dheader_s
-{
+typedef struct dheader_s {
 	int			version;
 	lump_t		lumps[HEADER_LUMPS];
 } dheader_t;
 
-typedef struct dmiptexlump_s
-{
+typedef struct dmiptexlump_s {
 	int			nummiptex;
 	int			dataofs[4];		// [nummiptex]
 } dmiptexlump_t;
 
 #define	MIPLEVELS	4
 
-typedef struct miptex_s
-{
+typedef struct miptex_s {
 	char		name[16];
 	unsigned	width, height;
 	unsigned	mipoffset[MIPLEVELS];		// four mip maps stored
 } miptex_t;
 
 
-typedef struct dvertex_s
-{
+typedef struct dvertex_s {
 	float	point[3];
 } dvertex_t;
 
@@ -108,8 +102,7 @@ typedef struct dvertex_s
 #define	PLANE_ANYY		4
 #define	PLANE_ANYZ		5
 
-typedef struct dplane_s
-{
+typedef struct dplane_s {
 	float	normal[3];
 	float	dist;
 	int		type;		// PLANE_X - PLANE_ANYZ ?remove? trivial to regenerate
@@ -135,8 +128,7 @@ typedef struct dplane_s
 
 
 // !!! if this is changed, it must be changed in asm_i386.h too !!!
-typedef struct dnode_s
-{
+typedef struct dnode_s {
 	int			planenum;
 	short		children[2];	// negative numbers are -(leafs+1), not nodes
 	short		mins[3];		// for sphere culling
@@ -145,15 +137,13 @@ typedef struct dnode_s
 	unsigned short	numfaces;	// counting both sides
 } dnode_t;
 
-typedef struct dclipnode_s
-{
+typedef struct dclipnode_s {
 	int			planenum;
 	short		children[2];	// negative numbers are contents
 } dclipnode_t;
 
 
-typedef struct texinfo_s
-{
+typedef struct texinfo_s {
 	float		vecs[2][4];		// [s/t][xyz offset]
 	int			miptex;
 	int			flags;
@@ -162,15 +152,13 @@ typedef struct texinfo_s
 
 // note that edge 0 is never used, because negative edge nums are used for
 // counterclockwise use of the edge in a face
-typedef struct dedge_s
-{
+typedef struct dedge_s {
 	unsigned short	v[2];		// vertex numbers
 } dedge_t;
 
 #define	MAXLIGHTMAPS	4
 
-typedef struct dface_s
-{
+typedef struct dface_s {
 	short		planenum;
 	short		side;
 
@@ -194,8 +182,7 @@ typedef struct dface_s
 
 // leaf 0 is the generic CONTENTS_SOLID leaf, used for all solid areas
 // all other leafs need visibility info
-typedef struct dleaf_s
-{
+typedef struct dleaf_s {
 	int			contents;
 	int			visofs;				// -1 = no visibility info
 

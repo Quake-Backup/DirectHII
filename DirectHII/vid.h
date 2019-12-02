@@ -3,8 +3,7 @@
 #define VID_CBITS	6
 #define VID_GRADES	(1 << VID_CBITS)
 
-typedef struct viddef_s
-{
+typedef struct viddef_s {
 	// main window
 	HWND			hWnd;
 

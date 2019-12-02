@@ -98,7 +98,7 @@ int WIPX_Init (void)
 	((struct sockaddr_ipx *) &broadcastaddr)->sa_socket = htons ((unsigned short) net_hostport);
 
 	WIPX_GetSocketAddr (net_controlsocket, &addr);
-	strcpy (my_ipx_address,  WIPX_AddrToString (&addr));
+	strcpy (my_ipx_address, WIPX_AddrToString (&addr));
 	p = strrchr (my_ipx_address, ':');
 
 	if (p)
@@ -198,7 +198,7 @@ ErrorReturn:;
 int WIPX_CloseSocket (int handle)
 {
 	int socket = ipxsocket[handle];
-	int ret =  closesocket (socket);
+	int ret = closesocket (socket);
 	ipxsocket[handle] = 0;
 	return ret;
 }
@@ -278,7 +278,7 @@ int WIPX_Write (int handle, byte *buf, int len, struct qsockaddr *addr)
 	int ret;
 
 	// build packet with sequence number
-	* (int *) (&netpacketBuffer[0]) = sequence[handle];
+	*(int *) (&netpacketBuffer[0]) = sequence[handle];
 	sequence[handle]++;
 	memcpy (&netpacketBuffer[4], buf, len);
 	len += 4;
@@ -299,18 +299,18 @@ char *WIPX_AddrToString (struct qsockaddr *addr)
 	static char buf[28];
 
 	sprintf (buf, "%02x%02x%02x%02x:%02x%02x%02x%02x%02x%02x:%u",
-			 ((struct sockaddr_ipx *) addr)->sa_netnum[0] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_netnum[1] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_netnum[2] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_netnum[3] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_nodenum[0] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_nodenum[1] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_nodenum[2] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_nodenum[3] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_nodenum[4] & 0xff,
-			 ((struct sockaddr_ipx *) addr)->sa_nodenum[5] & 0xff,
-			 ntohs (((struct sockaddr_ipx *) addr)->sa_socket)
-			);
+		((struct sockaddr_ipx *) addr)->sa_netnum[0] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_netnum[1] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_netnum[2] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_netnum[3] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_nodenum[0] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_nodenum[1] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_nodenum[2] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_nodenum[3] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_nodenum[4] & 0xff,
+		((struct sockaddr_ipx *) addr)->sa_nodenum[5] & 0xff,
+		ntohs (((struct sockaddr_ipx *) addr)->sa_socket)
+		);
 	return buf;
 }
 
@@ -405,7 +405,7 @@ int WIPX_AddrCompare (struct qsockaddr *addr1, struct qsockaddr *addr2)
 	if (addr1->sa_family != addr2->sa_family)
 		return -1;
 
-	if (* ((struct sockaddr_ipx *) addr1)->sa_netnum && * ((struct sockaddr_ipx *) addr2)->sa_netnum)
+	if (*((struct sockaddr_ipx *) addr1)->sa_netnum && * ((struct sockaddr_ipx *) addr2)->sa_netnum)
 		if (memcmp (((struct sockaddr_ipx *) addr1)->sa_netnum, ((struct sockaddr_ipx *) addr2)->sa_netnum, 4) != 0)
 			return -1;
 

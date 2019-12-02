@@ -13,7 +13,7 @@
 extern int m_multiplayer_cursor;
 extern int m_net_cursor;
 extern qboolean	m_return_onerror;
-extern char		m_return_reason [32];
+extern char		m_return_reason[32];
 extern m_state_t m_return_state;
 
 
@@ -21,12 +21,12 @@ int		serialConfig_cursor;
 int		serialConfig_cursor_table[] = {48, 64, 80, 96, 112, 132};
 #define	NUM_SERIALCONFIG_CMDS	6
 
-static int ISA_uarts[]	= {0x3f8, 0x2f8, 0x3e8, 0x2e8};
-static int ISA_IRQs[]	= {4, 3, 4, 3};
+static int ISA_uarts[] = {0x3f8, 0x2f8, 0x3e8, 0x2e8};
+static int ISA_IRQs[] = {4, 3, 4, 3};
 int serialConfig_baudrate[] = {9600, 14400, 19200, 28800, 38400, 57600};
 
 int		serialConfig_comport;
-int		serialConfig_irq ;
+int		serialConfig_irq;
 int		serialConfig_baud;
 char	serialConfig_phone[16];
 
@@ -136,10 +136,10 @@ void M_SerialConfig_Draw (void)
 		M_Print (basex + 8, serialConfig_cursor_table[5], "OK");
 	}
 
-	M_DrawCharacter (basex - 8, serialConfig_cursor_table [serialConfig_cursor], 12 + ((int) (realtime * 4) & 1));
+	M_DrawCharacter (basex - 8, serialConfig_cursor_table[serialConfig_cursor], 12 + ((int) (realtime * 4) & 1));
 
 	if (serialConfig_cursor == 4)
-		M_DrawCharacter (168 + 8 * strlen (serialConfig_phone), serialConfig_cursor_table [serialConfig_cursor], 10 + ((int) (realtime * 4) & 1));
+		M_DrawCharacter (168 + 8 * strlen (serialConfig_phone), serialConfig_cursor_table[serialConfig_cursor], 10 + ((int) (realtime * 4) & 1));
 
 	if (*m_return_reason)
 		M_PrintWhite (basex, 148, m_return_reason);
@@ -188,7 +188,7 @@ void M_SerialConfig_Key (int key)
 			if (serialConfig_comport == 0)
 				serialConfig_comport = 4;
 
-			serialConfig_irq = ISA_IRQs[serialConfig_comport-1];
+			serialConfig_irq = ISA_IRQs[serialConfig_comport - 1];
 		}
 
 		if (serialConfig_cursor == 1)
@@ -227,7 +227,7 @@ forward:
 			if (serialConfig_comport > 4)
 				serialConfig_comport = 1;
 
-			serialConfig_irq = ISA_IRQs[serialConfig_comport-1];
+			serialConfig_irq = ISA_IRQs[serialConfig_comport - 1];
 		}
 
 		if (serialConfig_cursor == 1)
@@ -260,7 +260,7 @@ forward:
 
 		if (serialConfig_cursor == 3)
 		{
-			(*SetComPortConfig) (0, ISA_uarts[serialConfig_comport-1], serialConfig_irq, serialConfig_baudrate[serialConfig_baud], SerialConfig);
+			(*SetComPortConfig) (0, ISA_uarts[serialConfig_comport - 1], serialConfig_irq, serialConfig_baudrate[serialConfig_baud], SerialConfig);
 
 			M_Menu_ModemConfig_f ();
 			break;
@@ -273,7 +273,7 @@ forward:
 		}
 
 		// serialConfig_cursor == 5 (OK/CONNECT)
-		(*SetComPortConfig) (0, ISA_uarts[serialConfig_comport-1], serialConfig_irq, serialConfig_baudrate[serialConfig_baud], SerialConfig);
+		(*SetComPortConfig) (0, ISA_uarts[serialConfig_comport - 1], serialConfig_irq, serialConfig_baudrate[serialConfig_baud], SerialConfig);
 
 		M_ConfigureNetSubsystem ();
 
@@ -300,7 +300,7 @@ forward:
 		if (serialConfig_cursor == 4)
 		{
 			if (strlen (serialConfig_phone))
-				serialConfig_phone[strlen (serialConfig_phone)-1] = 0;
+				serialConfig_phone[strlen (serialConfig_phone) - 1] = 0;
 		}
 
 		break;
@@ -316,7 +316,7 @@ forward:
 
 			if (l < 15)
 			{
-				serialConfig_phone[l+1] = 0;
+				serialConfig_phone[l + 1] = 0;
 				serialConfig_phone[l] = key;
 			}
 		}

@@ -11,6 +11,7 @@
 #pragma warning(disable : 4201) // nonstandard extension used : nameless struct/union
 #pragma warning(disable : 4706) // assignment within conditional expression
 #pragma warning(disable : 4204) // nonstandard extension used : non-constant aggregate initializer
+#pragma warning(disable : 4996) // deprecated API
 
 #include <windows.h>
 #include <stddef.h>

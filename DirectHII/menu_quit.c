@@ -454,8 +454,8 @@ void M_Quit_Draw (void)
 
 	y = 12;
 	M_DrawTextBox (0, 0, 38, 23);
-	M_PrintWhite (16, y,  "        Hexen II version 1.12       ");	y += 8;
-	M_PrintWhite (16, y,  "         by Raven Software          ");	y += 16;
+	M_PrintWhite (16, y, "        Hexen II version 1.12       ");	y += 8;
+	M_PrintWhite (16, y, "         by Raven Software          ");	y += 16;
 
 	if (LinePos > 55 && !SoundPlayed && LineText == Credit2Text)
 	{
@@ -475,10 +475,10 @@ void M_Quit_Draw (void)
 		if (i + place < QUIT_SIZE)
 			continue;
 
-		if (LineText[i+place-QUIT_SIZE][0] == ' ')
-			M_PrintWhite (24, y, LineText[i+place-QUIT_SIZE]);
+		if (LineText[i + place - QUIT_SIZE][0] == ' ')
+			M_PrintWhite (24, y, LineText[i + place - QUIT_SIZE]);
 		else
-			M_Print (24, y, LineText[i+place-QUIT_SIZE]);
+			M_Print (24, y, LineText[i + place - QUIT_SIZE]);
 	}
 
 	p = Draw_CachePic ("gfx/box_mm2.lmp");
@@ -492,5 +492,5 @@ void M_Quit_Draw (void)
 	}
 
 	y += (QUIT_SIZE * 8) + 8;
-	M_PrintWhite (16, y,  "          Press y to exit           ");
+	M_PrintWhite (16, y, "          Press y to exit           ");
 }

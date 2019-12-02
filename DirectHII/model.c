@@ -82,7 +82,7 @@ Mod_DecompressVis
 */
 byte *Mod_DecompressVis (byte *in, model_t *model)
 {
-	static byte	decompressed[MAX_MAP_LEAFS/8];
+	static byte	decompressed[MAX_MAP_LEAFS / 8];
 	int		c;
 	byte	*out;
 	int		row;
@@ -145,7 +145,7 @@ void Mod_ClearAll (void)
 	int		i;
 	model_t	*mod;
 
-	for (i = 0 , mod = mod_known; i < mod_numknown; i++, mod++)
+	for (i = 0, mod = mod_known; i < mod_numknown; i++, mod++)
 		mod->needload = true;
 }
 
@@ -165,7 +165,7 @@ model_t *Mod_FindName (char *name)
 		Sys_Error ("Mod_ForName: NULL name");
 
 	// search the currently loaded models
-	for (i = 0 , mod = mod_known; i < mod_numknown; i++, mod++)
+	for (i = 0, mod = mod_known; i < mod_numknown; i++, mod++)
 		if (!strcmp (mod->name, name))
 			return mod;
 

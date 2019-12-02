@@ -144,9 +144,9 @@ void D_DrawEnd2D (int width, int height, float s, float t)
 	D_BeginQuadBatch ();
 
 	D_QuadVertexPosition2fColorTexCoord2f (-1, -1, 0xffffffff, 0, t);
-	D_QuadVertexPosition2fColorTexCoord2f ( 1, -1, 0xffffffff, s, t);
-	D_QuadVertexPosition2fColorTexCoord2f ( 1,  1, 0xffffffff, s, 0);
-	D_QuadVertexPosition2fColorTexCoord2f (-1,  1, 0xffffffff, 0, 0);
+	D_QuadVertexPosition2fColorTexCoord2f (1, -1, 0xffffffff, s, t);
+	D_QuadVertexPosition2fColorTexCoord2f (1, 1, 0xffffffff, s, 0);
+	D_QuadVertexPosition2fColorTexCoord2f (-1, 1, 0xffffffff, 0, 0);
 
 	D_EndQuadBatch ();
 }

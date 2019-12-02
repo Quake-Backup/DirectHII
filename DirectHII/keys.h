@@ -95,7 +95,7 @@
 #define K_MWHEELDOWN	240
 
 
-typedef enum {key_game, key_console, key_message, key_menu} keydest_t;
+typedef enum { key_game, key_console, key_message, key_menu } keydest_t;
 
 extern keydest_t	key_dest;
 extern char *keybindings[256];

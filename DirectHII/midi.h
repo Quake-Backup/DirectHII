@@ -55,8 +55,7 @@
  * level conversion routines internal to the MSTRCONV module.  See that source
  * file for specific details.
  */
-typedef struct _ConvertInfo
-{
+typedef struct _ConvertInfo {
 	MIDIHDR mhBuffer;       // Standard Windows stream buffer header
 	DWORD   dwStartOffset;      // Start offset from mhStreamBuffer.lpStart
 	DWORD   dwMaxLength;        // Max length to convert on this pass

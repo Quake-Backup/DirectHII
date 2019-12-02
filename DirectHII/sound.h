@@ -7,15 +7,13 @@
 #define DEFAULT_SOUND_PACKET_ATTENUATION 1.0
 
 // !!! if this is changed, it much be changed in asm_i386.h too !!!
-typedef struct portable_samplepair_s
-{
+typedef struct portable_samplepair_s {
 	int left;
 	int right;
 } portable_samplepair_t;
 
 // !!! if this is changed, it much be changed in asm_i386.h too !!!
-typedef struct sfxcache_s
-{
+typedef struct sfxcache_s {
 	int 	length;
 	int 	loopstart;
 	int 	speed;
@@ -24,15 +22,13 @@ typedef struct sfxcache_s
 	byte	data[1];		// variable sized
 } sfxcache_t;
 
-typedef struct sfx_s
-{
+typedef struct sfx_s {
 	char 	name[MAX_QPATH];
 	int registration_sequence;
 	sfxcache_t		*sndcache;
 } sfx_t;
 
-typedef struct dma_s
-{
+typedef struct dma_s {
 	qboolean		gamealive;
 	qboolean		soundalive;
 	qboolean		splitbuffer;
@@ -46,8 +42,7 @@ typedef struct dma_s
 } dma_t;
 
 // !!! if this is changed, it much be changed in asm_i386.h too !!!
-typedef struct channel_s
-{
+typedef struct channel_s {
 	sfx_t	*sfx;			// sfx number
 	int		leftvol;		// 0-255 volume
 	int		rightvol;		// 0-255 volume
@@ -61,8 +56,7 @@ typedef struct channel_s
 	float	master_vol;		// 0-255 master volume
 } channel_t;
 
-typedef struct wavinfo_s
-{
+typedef struct wavinfo_s {
 	int		rate;
 	int		width;
 	int		channels;
@@ -74,7 +68,7 @@ typedef struct wavinfo_s
 void S_Init (void);
 void S_Startup (void);
 void S_Shutdown (void);
-void S_StartSound (int entnum, int entchannel, sfx_t *sfx, vec3_t origin, float fvol,  float attenuation);
+void S_StartSound (int entnum, int entchannel, sfx_t *sfx, vec3_t origin, float fvol, float attenuation);
 void S_StaticSound (sfx_t *sfx, vec3_t origin, float vol, float attenuation);
 void S_StopSound (int entnum, int entchannel);
 void S_UpdateSoundPos (int entnum, int entchannel, vec3_t origin);

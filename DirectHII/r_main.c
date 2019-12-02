@@ -115,7 +115,7 @@ mspriteframe_t *R_GetSpriteFrame (entity_t *e, msprite_t *psprite)
 		pspritegroup = (mspritegroup_t *) psprite->frames[frame].frameptr;
 		pintervals = pspritegroup->intervals;
 		numframes = pspritegroup->numframes;
-		fullinterval = pintervals[numframes-1];
+		fullinterval = pintervals[numframes - 1];
 
 		time = cl.time + e->syncbase;
 
@@ -323,7 +323,7 @@ int		d_lightstylevalue[256];	// 8.8 fraction of base light value
 void R_MarkLeaves (void);
 void R_DrawWaterSurfaces (void);
 
-cvar_t	r_clearcolor = {"r_clearcolor","0"};
+cvar_t	r_clearcolor = {"r_clearcolor", "0"};
 cvar_t	r_norefresh = {"r_norefresh", "0"};
 cvar_t	r_drawentities = {"r_drawentities", "1"};
 cvar_t	r_drawviewmodel = {"r_drawviewmodel", "1"};
@@ -342,8 +342,7 @@ void R_DrawSpriteModel (entity_t *e);
 
 //==================================================================================
 
-typedef struct sortedent_s
-{
+typedef struct sortedent_s {
 	entity_t *ent;
 	vec_t len;
 } sortedent_t;
@@ -416,7 +415,7 @@ void R_DrawEntitiesOnList (void)
 }
 
 
-int transCompare (sortedent_t *a1, sortedent_t *a2) {return (a2->len - a1->len);}
+int transCompare (sortedent_t *a1, sortedent_t *a2) { return (a2->len - a1->len); }
 
 
 void R_DrawTransEntitiesOnList (qboolean inwater)
@@ -586,9 +585,9 @@ void R_RenderScene (int width, int height)
 	R_ExtractFrustum (frustum, &r_mvp_matrix);
 
 	// take these from the view matrix
-	Vector3Set (vpn,   -r_view_matrix.m4x4[0][2], -r_view_matrix.m4x4[1][2], -r_view_matrix.m4x4[2][2]);
-	Vector3Set (vup,    r_view_matrix.m4x4[0][1],  r_view_matrix.m4x4[1][1],  r_view_matrix.m4x4[2][1]);
-	Vector3Set (vright, r_view_matrix.m4x4[0][0],  r_view_matrix.m4x4[1][0],  r_view_matrix.m4x4[2][0]);
+	Vector3Set (vpn, -r_view_matrix.m4x4[0][2], -r_view_matrix.m4x4[1][2], -r_view_matrix.m4x4[2][2]);
+	Vector3Set (vup, r_view_matrix.m4x4[0][1], r_view_matrix.m4x4[1][1], r_view_matrix.m4x4[2][1]);
+	Vector3Set (vright, r_view_matrix.m4x4[0][0], r_view_matrix.m4x4[1][0], r_view_matrix.m4x4[2][0]);
 
 	// setup the shader constants that are going to remain unchanged for the frame; time-based animations, etc
 	D_UpdateMainConstants (&r_mvp_matrix, r_refdef.vieworigin, vpn, vright, vup, v_blend, cl.time);

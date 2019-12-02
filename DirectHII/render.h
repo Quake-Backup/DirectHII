@@ -8,8 +8,7 @@
 
 //=============================================================================
 
-typedef struct efrag_s
-{
+typedef struct efrag_s {
 	struct mleaf_s		*leaf;
 	struct efrag_s		*leafnext;
 	struct entity_s		*entity;
@@ -25,8 +24,7 @@ typedef struct efrag_s
 
 #define LERP_RESETALL	(LERP_RESETANIM | LERP_RESETANIM2 | LERP_RESETMOVE)
 
-typedef struct entity_s
-{
+typedef struct entity_s {
 	qboolean				forcelink;		// model changed
 
 	int						update_type;
@@ -56,8 +54,8 @@ typedef struct entity_s
 	// FIXME: could turn these into a union
 	int						trivial_accept;
 	struct mnode_s			*topnode;		// for bmodels, first world node
-											//  that splits bmodel, or NULL if
-											//  not split
+	//  that splits bmodel, or NULL if
+	//  not split
 
 	// lerping info
 	byte					lerpflags;		// lerping
@@ -75,8 +73,7 @@ typedef struct entity_s
 
 
 // !!! if this is changed, it must be changed in asm_draw.h too !!!
-typedef struct refdef_s
-{
+typedef struct refdef_s {
 	vec3_t		vieworigin;
 	vec3_t		viewangles;
 

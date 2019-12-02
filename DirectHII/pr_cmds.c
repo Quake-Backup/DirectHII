@@ -21,7 +21,7 @@ extern int	 pr_info_string_count;
 /*
 ===============================================================================
 
-						BUILT-IN FUNCTIONS
+BUILT-IN FUNCTIONS
 
 ===============================================================================
 */
@@ -341,7 +341,7 @@ void PF_sprint (void)
 		return;
 	}
 
-	client = &svs.clients[entnum-1];
+	client = &svs.clients[entnum - 1];
 
 	MSG_WriteChar (&client->message, svc_print);
 	MSG_WriteString (&client->message, s);
@@ -372,7 +372,7 @@ void PF_centerprint (void)
 		return;
 	}
 
-	client = &svs.clients[entnum-1];
+	client = &svs.clients[entnum - 1];
 
 	MSG_WriteChar (&client->message, svc_centerprint);
 	MSG_WriteString (&client->message, s);
@@ -677,7 +677,7 @@ void PF_ambientsound (void)
 /*
 =================
 PF_StopSound
-	stop ent's sound on this chan
+stop ent's sound on this chan
 =================
 */
 void PF_StopSound (void)
@@ -697,7 +697,7 @@ void PF_StopSound (void)
 /*
 =================
 PF_UpdateSoundPos
-	sends cur pos to client to update this ent/chan pair
+sends cur pos to client to update this ent/chan pair
 =================
 */
 void PF_UpdateSoundPos (void)
@@ -814,7 +814,7 @@ void PF_traceline (void)
 	pr_global_struct->trace_inopen = trace.inopen;
 	VectorCopy (trace.endpos, pr_global_struct->trace_endpos);
 	VectorCopy (trace.plane.normal, pr_global_struct->trace_plane_normal);
-	pr_global_struct->trace_plane_dist =  trace.plane.dist;
+	pr_global_struct->trace_plane_dist = trace.plane.dist;
 
 	if (trace.ent)
 		pr_global_struct->trace_ent = EDICT_TO_PROG (trace.ent);
@@ -890,7 +890,7 @@ void PF_tracearea (void)
 	pr_global_struct->trace_inopen = trace.inopen;
 	VectorCopy (trace.endpos, pr_global_struct->trace_endpos);
 	VectorCopy (trace.plane.normal, pr_global_struct->trace_plane_normal);
-	pr_global_struct->trace_plane_dist =  trace.plane.dist;
+	pr_global_struct->trace_plane_dist = trace.plane.dist;
 
 	if (trace.ent)
 		pr_global_struct->trace_ent = EDICT_TO_PROG (trace.ent);
@@ -900,8 +900,7 @@ void PF_tracearea (void)
 
 
 
-struct PointInfo_t
-{
+struct PointInfo_t {
 	char Found, NumFound, MarkedWhen;
 	struct PointInfo_t *FromPos, *Next;
 };
@@ -939,7 +938,7 @@ void PF_checkpos (void)
 
 //============================================================================
 
-byte	checkpvs[MAX_MAP_LEAFS/8];
+byte	checkpvs[MAX_MAP_LEAFS / 8];
 
 int PF_newcheckclient (int check)
 {
@@ -1040,7 +1039,7 @@ void PF_checkclient (void)
 	leaf = Mod_PointInLeaf (view, sv.worldmodel);
 	l = (leaf - sv.worldmodel->leafs) - 1;
 
-	if ((l < 0) || !(checkpvs[l>>3] & (1 << (l & 7))))
+	if ((l < 0) || !(checkpvs[l >> 3] & (1 << (l & 7))))
 	{
 		c_notvis++;
 		RETURN_EDICT (sv.edicts);
@@ -1078,7 +1077,7 @@ void PF_stuffcmd (void)
 	str = G_STRING (OFS_PARM1);
 
 	old = host_client;
-	host_client = &svs.clients[entnum-1];
+	host_client = &svs.clients[entnum - 1];
 	Host_ClientCommands ("%s", str);
 	host_client = old;
 }
@@ -1208,7 +1207,7 @@ void PF_dprintv (void)
 {
 	char temp[256];
 
-	sprintf (temp, "'%5.1f %5.1f %5.1f'", G_VECTOR (OFS_PARM1) [0], G_VECTOR (OFS_PARM1) [1], G_VECTOR (OFS_PARM1) [2]);
+	sprintf (temp, "'%5.1f %5.1f %5.1f'", G_VECTOR (OFS_PARM1)[0], G_VECTOR (OFS_PARM1)[1], G_VECTOR (OFS_PARM1)[2]);
 
 	Con_Printf (PRINT_DEVELOPER, va (G_STRING (OFS_PARM0), temp));
 }
@@ -1237,7 +1236,7 @@ void PF_fabs (void)
 
 void PF_vtos (void)
 {
-	sprintf (pr_string_temp, "'%5.1f %5.1f %5.1f'", G_VECTOR (OFS_PARM0) [0], G_VECTOR (OFS_PARM0) [1], G_VECTOR (OFS_PARM0) [2]);
+	sprintf (pr_string_temp, "'%5.1f %5.1f %5.1f'", G_VECTOR (OFS_PARM0)[0], G_VECTOR (OFS_PARM0)[1], G_VECTOR (OFS_PARM0)[2]);
 	G_INT (OFS_RETURN) = pr_string_temp - pr_strings;
 }
 
@@ -1277,7 +1276,7 @@ void PF_Remove (void)
 	if (ed == sv.edicts)
 	{
 		Con_Printf (PRINT_DEVELOPER, va ("Tried to remove the world at %s in %s!\n",
-					 pr_xfunction->s_name + pr_strings, pr_xfunction->s_file + pr_strings));
+			pr_xfunction->s_name + pr_strings, pr_xfunction->s_file + pr_strings));
 		return;
 	}
 
@@ -1286,7 +1285,7 @@ void PF_Remove (void)
 	if (i <= svs.maxclients)
 	{
 		Con_Printf (PRINT_DEVELOPER, va ("Tried to remove a client at %s in %s!\n",
-					 pr_xfunction->s_name + pr_strings, pr_xfunction->s_file + pr_strings));
+			pr_xfunction->s_name + pr_strings, pr_xfunction->s_file + pr_strings));
 		return;
 	}
 
@@ -1901,7 +1900,7 @@ void PF_aim (void)
 	ent->v.hull = save_hull;
 
 	if (tr.ent && tr.ent->v.takedamage == DAMAGE_YES
-			&& (!teamplay.value || ent->v.team <= 0 || ent->v.team != tr.ent->v.team))
+		&& (!teamplay.value || ent->v.team <= 0 || ent->v.team != tr.ent->v.team))
 	{
 		VectorCopy (pr_global_struct->v_forward, G_VECTOR (OFS_RETURN));
 		return;
@@ -1928,7 +1927,7 @@ void PF_aim (void)
 
 		for (j = 0; j < 3; j++)
 			end[j] = check->v.origin[j]
-					 + 0.5 * (check->v.mins[j] + check->v.maxs[j]);
+			+ 0.5 * (check->v.mins[j] + check->v.maxs[j]);
 
 		VectorSubtract (end, start, dir);
 		Vector3Normalize (dir);
@@ -2103,7 +2102,7 @@ sizebuf_t *WriteDest (void)
 		if (entnum < 1 || entnum > svs.maxclients)
 			PR_RunError ("WriteDest: not a client");
 
-		return &svs.clients[entnum-1].message;
+		return &svs.clients[entnum - 1].message;
 
 	case MSG_ALL:
 		return &sv.reliable_datagram;
@@ -2215,7 +2214,7 @@ void PF_setspawnparms (void)
 	client = svs.clients + (i - 1);
 
 	for (i = 0; i < NUM_SPAWN_PARMS; i++)
-		(&pr_global_struct->parm1) [i] = client->spawn_parms[i];
+		(&pr_global_struct->parm1)[i] = client->spawn_parms[i];
 }
 
 /*
@@ -2280,9 +2279,9 @@ void PF_rain_go (void)
 
 	min_org = G_VECTOR (OFS_PARM0);
 	max_org = G_VECTOR (OFS_PARM1);
-	e_size  = G_VECTOR (OFS_PARM2);
-	dir		= G_VECTOR (OFS_PARM3);
-	color	= G_FLOAT (OFS_PARM4);
+	e_size = G_VECTOR (OFS_PARM2);
+	dir = G_VECTOR (OFS_PARM3);
+	color = G_FLOAT (OFS_PARM4);
 	count = G_FLOAT (OFS_PARM5);
 
 	org[0] = min_org[0];
@@ -2366,153 +2365,153 @@ void PF_movestep (void)
 
 int PaladinExp[MAX_LEVELS+1] =
 {
-	0,				// Level 1
-	500,        // Level 2
-	1000,       // Level 3
-	1500,       // Level 4
-	2000,       // Level 5
-	2500,       // Level 6
-	3000,       // Level 7
-	3500,       // Level 8
-	4000,       // Level 9
-	4500,       // Level 10
-	1000        // Required amount for each level afterwards
+0,				// Level 1
+500,        // Level 2
+1000,       // Level 3
+1500,       // Level 4
+2000,       // Level 5
+2500,       // Level 6
+3000,       // Level 7
+3500,       // Level 8
+4000,       // Level 9
+4500,       // Level 10
+1000        // Required amount for each level afterwards
 };
 
 int ClericExp[MAX_LEVELS+1] =
 {
-	0,				// Level 1
-	500,        // Level 2
-	1000,       // Level 3
-	1500,       // Level 4
-	2000,       // Level 5
-	2500,       // Level 6
-	3000,       // Level 7
-	3500,       // Level 8
-	4000,       // Level 9
-	4500,       // Level 10
-	1000        // Required amount for each level afterwards
+0,				// Level 1
+500,        // Level 2
+1000,       // Level 3
+1500,       // Level 4
+2000,       // Level 5
+2500,       // Level 6
+3000,       // Level 7
+3500,       // Level 8
+4000,       // Level 9
+4500,       // Level 10
+1000        // Required amount for each level afterwards
 };
 
 int NecroExp[MAX_LEVELS+1] =
 {
-	0,				// Level 1
-	500,        // Level 2
-	1000,       // Level 3
-	1500,       // Level 4
-	2000,       // Level 5
-	2500,       // Level 6
-	3000,       // Level 7
-	3500,       // Level 8
-	4000,       // Level 9
-	4500,       // Level 10
-	1000        // Required amount for each level afterwards
+0,				// Level 1
+500,        // Level 2
+1000,       // Level 3
+1500,       // Level 4
+2000,       // Level 5
+2500,       // Level 6
+3000,       // Level 7
+3500,       // Level 8
+4000,       // Level 9
+4500,       // Level 10
+1000        // Required amount for each level afterwards
 };
 
 int TheifExp[MAX_LEVELS+1] =
 {
-	0,				// Level 1
-	500,        // Level 2
-	1000,       // Level 3
-	1500,       // Level 4
-	2000,       // Level 5
-	2500,       // Level 6
-	3000,       // Level 7
-	3500,       // Level 8
-	4000,       // Level 9
-	4500,       // Level 10
-	1000        // Required amount for each level afterwards
+0,				// Level 1
+500,        // Level 2
+1000,       // Level 3
+1500,       // Level 4
+2000,       // Level 5
+2500,       // Level 6
+3000,       // Level 7
+3500,       // Level 8
+4000,       // Level 9
+4500,       // Level 10
+1000        // Required amount for each level afterwards
 };
 
 int FindLevel(edict_t *WhichPlayer)
 {
-	int *Chart;
-	int Amount,counter,Level;
+int *Chart;
+int Amount,counter,Level;
 
-	switch((int)WhichPlayer->v.playerclass)
-	{
-		case CLASS_PALADIN:
-			Chart = PaladinExp;
-			break;
-		case CLASS_CLERIC:
-			Chart = ClericExp;
-			break;
-		case CLASS_NECROMANCER:
-			Chart = NecroExp;
-			break;
-		case CLASS_THEIF:
-			Chart = TheifExp;
-			break;
-	}
+switch((int)WhichPlayer->v.playerclass)
+{
+case CLASS_PALADIN:
+Chart = PaladinExp;
+break;
+case CLASS_CLERIC:
+Chart = ClericExp;
+break;
+case CLASS_NECROMANCER:
+Chart = NecroExp;
+break;
+case CLASS_THEIF:
+Chart = TheifExp;
+break;
+}
 
-	Level = 0;
-	for(counter=0;counter<MAX_LEVELS;counter++)
-	{
-		if (WhichPlayer->v.experience <= Chart[counter])
-		{
-			Level = counter+1;
-			break;
-		}
-	}
+Level = 0;
+for(counter=0;counter<MAX_LEVELS;counter++)
+{
+if (WhichPlayer->v.experience <= Chart[counter])
+{
+Level = counter+1;
+break;
+}
+}
 
-	if (!Level)
-	{
-		Amount = WhichPlayer->v.experience - Chart[MAX_LEVELS-1];
-		Level = (Amount % Chart[MAX_LEVELS]) + MAX_LEVELS;
-	}
+if (!Level)
+{
+Amount = WhichPlayer->v.experience - Chart[MAX_LEVELS-1];
+Level = (Amount % Chart[MAX_LEVELS]) + MAX_LEVELS;
+}
 
-	return Level;
+return Level;
 }
 
 void PF_AwardExperience(void)
 {
-	edict_t	*ToEnt, *FromEnt;
-	float Amount;
-	int AfterLevel;
-	qboolean IsPlayer;
+edict_t	*ToEnt, *FromEnt;
+float Amount;
+int AfterLevel;
+qboolean IsPlayer;
 //	client_t	*client;
-	int			entnum;
+int			entnum;
 //	char temp[200];
-	globalvars_t	pr_save;
+globalvars_t	pr_save;
 
-	ToEnt = G_EDICT(OFS_PARM0);
-	FromEnt = G_EDICT(OFS_PARM1);
-	Amount = G_FLOAT(OFS_PARM2);
+ToEnt = G_EDICT(OFS_PARM0);
+FromEnt = G_EDICT(OFS_PARM1);
+Amount = G_FLOAT(OFS_PARM2);
 
-	if (!Amount) return;
+if (!Amount) return;
 
-	IsPlayer = (strcmpi(ToEnt->v.classname + pr_strings, "player") == 0);
+IsPlayer = (strcmpi(ToEnt->v.classname + pr_strings, "player") == 0);
 
-	if (FromEnt && Amount == 0.0)
-	{
-		Amount = FromEnt->v.experience_value;
-	}
+if (FromEnt && Amount == 0.0)
+{
+Amount = FromEnt->v.experience_value;
+}
 
-	ToEnt->v.experience += Amount;
+ToEnt->v.experience += Amount;
 
-	if (IsPlayer)
-	{
-		AfterLevel = FindLevel(ToEnt);
+if (IsPlayer)
+{
+AfterLevel = FindLevel(ToEnt);
 
-		Con_Printf("Total Experience: %d\n",(int)ToEnt->v.experience);
+Con_Printf("Total Experience: %d\n",(int)ToEnt->v.experience);
 
-		if (ToEnt->v.level != AfterLevel)
-		{
-			ToEnt->v.level = AfterLevel;
-			entnum = NUM_FOR_EDICT(ToEnt);
+if (ToEnt->v.level != AfterLevel)
+{
+ToEnt->v.level = AfterLevel;
+entnum = NUM_FOR_EDICT(ToEnt);
 
-			if (entnum >= 1 && entnum <= svs.maxclients)
-			{
-				pr_save = *pr_global_struct;
-				pr_global_struct->time = sv.time;
-				pr_global_struct->self = EDICT_TO_PROG(ToEnt);
-				PR_ExecuteProgram (pr_global_struct->PlayerAdvanceLevel);
+if (entnum >= 1 && entnum <= svs.maxclients)
+{
+pr_save = *pr_global_struct;
+pr_global_struct->time = sv.time;
+pr_global_struct->self = EDICT_TO_PROG(ToEnt);
+PR_ExecuteProgram (pr_global_struct->PlayerAdvanceLevel);
 
-				*pr_global_struct = pr_save;
+*pr_global_struct = pr_save;
 
-			}
-		}
-	}
+}
+}
+}
 }
 
 */
@@ -2523,7 +2522,7 @@ void PF_AwardExperience(void)
 
 				MSG_WriteChar (&client->message,svc_print);
 				MSG_WriteString (&client->message, temp );
-*/
+				*/
 
 void PF_Cos (void)
 {
@@ -2629,7 +2628,7 @@ void PF_advanceweaponframe (void)
 	endframe = G_FLOAT (OFS_PARM1);
 
 	if ((endframe > startframe && (ent->v.weaponframe > endframe || ent->v.weaponframe < startframe)) ||
-			(endframe < startframe && (ent->v.weaponframe < endframe || ent->v.weaponframe > startframe)))
+		(endframe < startframe && (ent->v.weaponframe < endframe || ent->v.weaponframe > startframe)))
 	{
 		ent->v.weaponframe = startframe;
 		state = WF_CYCLE_STARTED;
@@ -2672,7 +2671,7 @@ void PF_setclass (void)
 		return;
 	}
 
-	client = &svs.clients[entnum-1];
+	client = &svs.clients[entnum - 1];
 
 	old = host_client;
 	host_client = client;
@@ -2812,16 +2811,16 @@ void PF_v_factor (void)
 	range = G_VECTOR (OFS_PARM0);
 
 	result[0] = (pr_global_struct->v_right[0] * range[0]) +
-				(pr_global_struct->v_forward[0] * range[1]) +
-				(pr_global_struct->v_up[0] * range[2]);
+		(pr_global_struct->v_forward[0] * range[1]) +
+		(pr_global_struct->v_up[0] * range[2]);
 
 	result[1] = (pr_global_struct->v_right[1] * range[0]) +
-				(pr_global_struct->v_forward[1] * range[1]) +
-				(pr_global_struct->v_up[1] * range[2]);
+		(pr_global_struct->v_forward[1] * range[1]) +
+		(pr_global_struct->v_up[1] * range[2]);
 
 	result[2] = (pr_global_struct->v_right[2] * range[0]) +
-				(pr_global_struct->v_forward[2] * range[1]) +
-				(pr_global_struct->v_up[2] * range[2]);
+		(pr_global_struct->v_forward[2] * range[1]) +
+		(pr_global_struct->v_up[2] * range[2]);
 
 	VectorCopy (result, G_VECTOR (OFS_RETURN));
 }
@@ -2843,16 +2842,16 @@ void PF_v_factorrange (void)
 	result[2] = ((maxv[2] - minv[2]) * num) + minv[2];
 
 	r2[0] = (pr_global_struct->v_right[0] * result[0]) +
-			(pr_global_struct->v_forward[0] * result[1]) +
-			(pr_global_struct->v_up[0] * result[2]);
+		(pr_global_struct->v_forward[0] * result[1]) +
+		(pr_global_struct->v_up[0] * result[2]);
 
 	r2[1] = (pr_global_struct->v_right[1] * result[0]) +
-			(pr_global_struct->v_forward[1] * result[1]) +
-			(pr_global_struct->v_up[1] * result[2]);
+		(pr_global_struct->v_forward[1] * result[1]) +
+		(pr_global_struct->v_up[1] * result[2]);
 
 	r2[2] = (pr_global_struct->v_right[2] * result[0]) +
-			(pr_global_struct->v_forward[2] * result[1]) +
-			(pr_global_struct->v_up[2] * result[2]);
+		(pr_global_struct->v_forward[2] * result[1]) +
+		(pr_global_struct->v_up[2] * result[2]);
 
 	VectorCopy (r2, G_VECTOR (OFS_RETURN));
 }
@@ -2860,7 +2859,7 @@ void PF_v_factorrange (void)
 void PF_matchAngleToSlope (void)
 {
 	edict_t	*actor;
-	vec3_t v_forward, old_forward, old_right, new_angles2 = { 0, 0, 0 };
+	vec3_t v_forward, old_forward, old_right, new_angles2 = {0, 0, 0};
 	float pitch, mod, dot;
 
 	// OFS_PARM0 is used by PF_vectoangles below

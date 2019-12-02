@@ -21,7 +21,7 @@ extern char	loadname[32];	// for hunk tags
 /*
 ===============================================================================
 
-					BRUSHMODEL LOADING
+BRUSHMODEL LOADING
 
 ===============================================================================
 */
@@ -76,7 +76,7 @@ void Mod_LoadTextures (lump_t *l)
 
 		if (!strncmp (mt->name, "sky", 3))
 			D_LoadSkyTextures ((byte *) (mt + 1), d_8to24table_char);
-		else tx->texnum = D_LoadTexture (mt->name, tx->width, tx->height, tx->width, (byte *) (mt + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_DISPOSABLE);
+		else tx->texnum = D_LoadTexture (mt->name, tx->width, tx->height, tx->width, (byte *) (mt + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_DISPOSABLE | TEX_UPSCALE);
 
 		loadmodel->textures[i] = tx;
 	}
@@ -167,7 +167,7 @@ void Mod_LoadTextures (lump_t *l)
 			tx2->anim_total = max * ANIM_CYCLE;
 			tx2->anim_min = j * ANIM_CYCLE;
 			tx2->anim_max = (j + 1) * ANIM_CYCLE;
-			tx2->anim_next = anims[(j+1) %max ];
+			tx2->anim_next = anims[(j + 1) % max];
 
 			if (altmax)
 				tx2->alternate_anims = altanims[0];
@@ -183,7 +183,7 @@ void Mod_LoadTextures (lump_t *l)
 			tx2->anim_total = altmax * ANIM_CYCLE;
 			tx2->anim_min = j * ANIM_CYCLE;
 			tx2->anim_max = (j + 1) * ANIM_CYCLE;
-			tx2->anim_next = altanims[(j+1) %altmax ];
+			tx2->anim_next = altanims[(j + 1) % altmax];
 
 			if (max)
 				tx2->alternate_anims = anims[0];
@@ -438,7 +438,7 @@ void CalcSurfaceExtents (msurface_t *surf)
 
 	for (i = 0; i < surf->numedges; i++)
 	{
-		e = loadmodel->surfedges[surf->firstedge+i];
+		e = loadmodel->surfedges[surf->firstedge + i];
 
 		if (e >= 0)
 			v = loadmodel->vertexes[loadmodel->edges[e].v[0]].position;
@@ -935,7 +935,7 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 	mod_base = (byte *) header;
 
 	for (i = 0; i < sizeof (dheader_t) / 4; i++)
-		((int *) header) [i] = LittleLong (((int *) header) [i]);
+		((int *) header)[i] = LittleLong (((int *) header)[i]);
 
 	// load into heap
 

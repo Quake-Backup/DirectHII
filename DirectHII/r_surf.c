@@ -54,7 +54,7 @@ texture_t *R_TextureAnimation (texture_t *base, int frame)
 /*
 =============================================================
 
-	BRUSH MODELS
+BRUSH MODELS
 
 =============================================================
 */
@@ -364,7 +364,7 @@ void R_DrawBrushModel (entity_t *e, qboolean Translucent)
 /*
 =============================================================
 
-	WORLD MODEL
+WORLD MODEL
 
 =============================================================
 */

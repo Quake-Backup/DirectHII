@@ -20,27 +20,23 @@
 // must match definition in spritegn.h
 #ifndef SYNCTYPE_T
 #define SYNCTYPE_T
-typedef enum
-{
+typedef enum {
 	ST_SYNC = 0,
 	ST_RAND
 } synctype_t;
 #endif
 
-typedef enum
-{
+typedef enum {
 	ALIAS_SINGLE = 0,
 	ALIAS_GROUP
 } aliasframetype_t;
 
-typedef enum
-{
+typedef enum {
 	ALIAS_SKIN_SINGLE = 0,
 	ALIAS_SKIN_GROUP
 } aliasskintype_t;
 
-typedef struct mdl_s
-{
+typedef struct mdl_s {
 	int ident;
 	int version;
 	vec3_t scale;
@@ -58,8 +54,7 @@ typedef struct mdl_s
 	float size;
 } mdl_t;
 
-typedef struct newmdl_s
-{
+typedef struct newmdl_s {
 	int			ident;
 	int			version;
 	vec3_t		scale;
@@ -78,22 +73,19 @@ typedef struct newmdl_s
 	int			num_st_verts;
 } newmdl_t;
 
-typedef struct stvert_s
-{
+typedef struct stvert_s {
 	// TODO: could be shorts
 	int onseam;
 	int s;
 	int t;
 } stvert_t;
 
-typedef struct dtriangle_s
-{
+typedef struct dtriangle_s {
 	int facesfront;
 	int vertindex[3];
 } dtriangle_t;
 
-typedef struct dnewtriangle_s
-{
+typedef struct dnewtriangle_s {
 	int facesfront;
 	unsigned short vertindex[3];
 	unsigned short stindex[3];
@@ -101,48 +93,40 @@ typedef struct dnewtriangle_s
 
 #define DT_FACES_FRONT 0x0010
 
-typedef struct trivertx_s
-{
+typedef struct trivertx_s {
 	byte v[3];
 	byte lightnormalindex;
 } trivertx_t;
 
-typedef struct daliasframe_s
-{
+typedef struct daliasframe_s {
 	trivertx_t bboxmin; // lightnormal isn't used
 	trivertx_t bboxmax; // lightnormal isn't used
 	char name[16]; // frame name from grabbing
 } daliasframe_t;
 
-typedef struct daliasgroup_s
-{
+typedef struct daliasgroup_s {
 	int numframes;
 	trivertx_t bboxmin; // lightnormal isn't used
 	trivertx_t bboxmax; // lightnormal isn't used
 } daliasgroup_t;
 
-typedef struct daliasskingroup_s
-{
+typedef struct daliasskingroup_s {
 	int numskins;
 } daliasskingroup_t;
 
-typedef struct daliasinterval_s
-{
+typedef struct daliasinterval_s {
 	float interval;
 } daliasinterval_t;
 
-typedef struct daliasskininterval_s
-{
+typedef struct daliasskininterval_s {
 	float interval;
 } daliasskininterval_t;
 
-typedef struct daliasframetype_s
-{
+typedef struct daliasframetype_s {
 	aliasframetype_t type;
 } daliasframetype_t;
 
-typedef struct daliasskintype_s
-{
+typedef struct daliasskintype_s {
 	aliasskintype_t type;
 } daliasskintype_t;
 

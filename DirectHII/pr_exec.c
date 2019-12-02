@@ -28,8 +28,7 @@
 
 // TYPES -------------------------------------------------------------------
 
-typedef struct prstack_s
-{
+typedef struct prstack_s {
 	int s;
 	dfunction_t *f;
 } prstack_t;
@@ -70,7 +69,7 @@ static int localstack_used;
 static char *pr_opnames[] =
 {
 	"DONE",
-	"MUL_F", "MUL_V",  "MUL_FV", "MUL_VF",
+	"MUL_F", "MUL_V", "MUL_FV", "MUL_VF",
 	"DIV",
 	"ADD_F", "ADD_V",
 	"SUB_F", "SUB_V",
@@ -106,9 +105,9 @@ static char *pr_opnames[] =
 
 	"OP_THINKTIME",
 
-	"OP_BITSET", "OP_BITSETP", "OP_BITCLR",	"OP_BITCLRP",
+	"OP_BITSET", "OP_BITSETP", "OP_BITCLR", "OP_BITCLRP",
 
-	"OP_RAND0", "OP_RAND1",	"OP_RAND2",	"OP_RANDV0", "OP_RANDV1", "OP_RANDV2",
+	"OP_RAND0", "OP_RAND1", "OP_RAND2", "OP_RANDV0", "OP_RANDV1", "OP_RANDV2",
 
 	"OP_SWITCH_F", "OP_SWITCH_V", "OP_SWITCH_S", "OP_SWITCH_E", "OP_SWITCH_FNC",
 
@@ -126,7 +125,7 @@ static char *pr_opnames[] =
 //==========================================================================
 
 //switch types
-enum {SWITCH_F, SWITCH_V, SWITCH_S, SWITCH_E, SWITCH_FNC};
+enum { SWITCH_F, SWITCH_V, SWITCH_S, SWITCH_E, SWITCH_FNC };
 
 void PR_ExecuteProgram (func_t fnum)
 {
@@ -217,8 +216,8 @@ void PR_ExecuteProgram (func_t fnum)
 			break;
 		case OP_MUL_V:
 			c->_float = a->vector[0] * b->vector[0]
-						+ a->vector[1] * b->vector[1]
-						+ a->vector[2] * b->vector[2];
+				+ a->vector[1] * b->vector[1]
+				+ a->vector[2] * b->vector[2];
 			break;
 		case OP_MUL_FV:
 			c->vector[0] = a->_float * b->vector[0];
@@ -283,8 +282,8 @@ void PR_ExecuteProgram (func_t fnum)
 			break;
 		case OP_EQ_V:
 			c->_float = (a->vector[0] == b->vector[0])
-						&& (a->vector[1] == b->vector[1])
-						&& (a->vector[2] == b->vector[2]);
+				&& (a->vector[1] == b->vector[1])
+				&& (a->vector[2] == b->vector[2]);
 			break;
 		case OP_EQ_S:
 			c->_float = !strcmp (pr_strings + a->string, pr_strings + b->string);
@@ -301,8 +300,8 @@ void PR_ExecuteProgram (func_t fnum)
 			break;
 		case OP_NE_V:
 			c->_float = (a->vector[0] != b->vector[0])
-						|| (a->vector[1] != b->vector[1])
-						|| (a->vector[2] != b->vector[2]);
+				|| (a->vector[1] != b->vector[1])
+				|| (a->vector[2] != b->vector[2]);
 			break;
 		case OP_NE_S:
 			c->_float = strcmp (pr_strings + a->string, pr_strings + b->string);
@@ -468,7 +467,7 @@ void PR_ExecuteProgram (func_t fnum)
 			}
 
 			a = (eval_t *) &pr_globals[(unsigned short) st->a
-										+ ((int) b->_float) *3];
+				+ ((int) b->_float) * 3];
 			c->vector[0] = a->vector[0];
 			c->vector[1] = a->vector[1];
 			c->vector[2] = a->vector[2];
@@ -540,8 +539,8 @@ void PR_ExecuteProgram (func_t fnum)
 		case OP_DONE:
 		case OP_RETURN:
 			pr_globals[OFS_RETURN] = pr_globals[(unsigned short) st->a];
-			pr_globals[OFS_RETURN+1] = pr_globals[(unsigned short) st->a+1];
-			pr_globals[OFS_RETURN+2] = pr_globals[(unsigned short) st->a+2];
+			pr_globals[OFS_RETURN + 1] = pr_globals[(unsigned short) st->a + 1];
+			pr_globals[OFS_RETURN + 2] = pr_globals[(unsigned short) st->a + 2];
 #ifdef TIMESNAP_ACTIVE
 			pr_xfunction->profile += ProgsTimer ();
 #endif
@@ -560,10 +559,10 @@ void PR_ExecuteProgram (func_t fnum)
 			/* Id 1.07 changes
 			#ifdef FPS_20
 					ed->v.nextthink = pr_global_struct->time + HX_FRAME_TIME;
-			#else
+					#else
 					ed->v.nextthink = pr_global_struct->time + 0.1;
-			#endif
-			*/
+					#endif
+					*/
 			ed->v.nextthink = pr_global_struct->time + HX_FRAME_TIME;
 
 			if (a->_float != ed->v.frame)
@@ -631,7 +630,7 @@ void PR_ExecuteProgram (func_t fnum)
 			{
 				// Increment
 				if (ed->v.weaponframe < startFrame
-						|| ed->v.weaponframe > endFrame)
+					|| ed->v.weaponframe > endFrame)
 				{
 					ed->v.weaponframe = startFrame;
 					break;
@@ -650,7 +649,7 @@ void PR_ExecuteProgram (func_t fnum)
 
 			// Decrement
 			if (ed->v.weaponframe > startFrame
-					|| ed->v.weaponframe < endFrame)
+				|| ed->v.weaponframe < endFrame)
 			{
 				ed->v.weaponframe = startFrame;
 				break;
@@ -688,11 +687,11 @@ void PR_ExecuteProgram (func_t fnum)
 			ptr->_float = (int) ptr->_float | (int) a->_float;
 			break;
 		case OP_BITCLR: // f (-) f
-			b->_float = (int) b->_float & ~ ((int) a->_float);
+			b->_float = (int) b->_float & ~((int) a->_float);
 			break;
 		case OP_BITCLRP: // e.f (-) f
 			ptr = (eval_t *) ((byte *) sv.edicts + b->_int);
-			ptr->_float = (int) ptr->_float & ~ ((int) a->_float);
+			ptr->_float = (int) ptr->_float & ~((int) a->_float);
 			break;
 
 		case OP_RAND0:
@@ -708,12 +707,12 @@ void PR_ExecuteProgram (func_t fnum)
 			if (a->_float < b->_float)
 			{
 				val = a->_float + (rand () * (1.0 / RAND_MAX)
-								   * (b->_float - a->_float));
+					* (b->_float - a->_float));
 			}
 			else
 			{
 				val = b->_float + (rand () * (1.0 / RAND_MAX)
-								   * (a->_float - b->_float));
+					* (a->_float - b->_float));
 			}
 
 			G_FLOAT (OFS_RETURN) = val;
@@ -741,12 +740,12 @@ void PR_ExecuteProgram (func_t fnum)
 				if (a->vector[i] < b->vector[i])
 				{
 					val = a->vector[i] + (rand () * (1.0 / RAND_MAX)
-										  * (b->vector[i] - a->vector[i]));
+						* (b->vector[i] - a->vector[i]));
 				}
 				else
 				{
 					val = b->vector[i] + (rand () * (1.0 / RAND_MAX)
-										  * (a->vector[i] - b->vector[i]));
+						* (a->vector[i] - b->vector[i]));
 				}
 
 				G_FLOAT (OFS_RETURN + i) = val;
@@ -843,7 +842,7 @@ static int EnterFunction (dfunction_t *f)
 
 	for (i = 0; i < c; i++)
 	{
-		localstack[localstack_used+i] = ((int *) pr_globals) [f->parm_start + i];
+		localstack[localstack_used + i] = ((int *) pr_globals)[f->parm_start + i];
 	}
 
 	localstack_used += c;
@@ -855,7 +854,7 @@ static int EnterFunction (dfunction_t *f)
 	{
 		for (j = 0; j < f->parm_size[i]; j++)
 		{
-			((int *) pr_globals) [o] = ((int *) pr_globals) [OFS_PARM0+i*3+j];
+			((int *) pr_globals)[o] = ((int *) pr_globals)[OFS_PARM0 + i * 3 + j];
 			o++;
 		}
 	}
@@ -890,8 +889,8 @@ static int LeaveFunction (void)
 
 	for (i = 0; i < c; i++)
 	{
-		((int *) pr_globals) [pr_xfunction->parm_start+i] =
-			localstack[localstack_used+i];
+		((int *) pr_globals)[pr_xfunction->parm_start + i] =
+			localstack[localstack_used + i];
 	}
 
 	// up stack
@@ -1117,22 +1116,21 @@ void PR_Profile_f (void)
 					if (*saveName)
 					{
 						fprintf (saveFile, "%05.2f %s\n",
-								 ((float) bestFunc->profile / (float) total) * 100.0,
-								 pr_strings + bestFunc->s_name);
+							((float) bestFunc->profile / (float) total) * 100.0,
+							pr_strings + bestFunc->s_name);
 					}
 					else
 					{
 						Con_Printf (PRINT_NORMAL, va ("%05.2f %s\n",
-									((float) bestFunc->profile / (float) total) * 100.0,
-									pr_strings + bestFunc->s_name));
+							((float) bestFunc->profile / (float) total) * 100.0,
+							pr_strings + bestFunc->s_name));
 					}
 				}
 
 				j++;
 				bestFunc->profile = 0;
 			}
-		}
-		while (bestFunc);
+		} while (bestFunc);
 
 		if (*saveName)
 		{
@@ -1152,7 +1150,7 @@ void PR_Profile_f (void)
 		for (i = 0; i < progs->numfunctions; i++)
 		{
 			if (pr_functions[i].s_file > currentFile
-					&& pr_functions[i].s_file < bestFile)
+				&& pr_functions[i].s_file < bestFile)
 			{
 				bestFile = pr_functions[i].s_file;
 				tally = pr_functions[i].profile;
@@ -1203,27 +1201,25 @@ void PR_Profile_f (void)
 						if (*saveName)
 						{
 							fprintf (saveFile, "   %05.2f %s\n",
-									 ((float) bestFunc->profile
-									   / (float) total) * 100.0,
-									 pr_strings + bestFunc->s_name);
+								((float) bestFunc->profile
+								/ (float) total) * 100.0,
+								pr_strings + bestFunc->s_name);
 						}
 						else
 						{
 							Con_Printf (PRINT_NORMAL, va ("   %05.2f %s\n",
-										((float) bestFunc->profile
-										  / (float) total) * 100.0,
-										pr_strings + bestFunc->s_name));
+								((float) bestFunc->profile
+								/ (float) total) * 100.0,
+								pr_strings + bestFunc->s_name));
 						}
 					}
 
 					j++;
 					bestFunc->profile = 0;
 				}
-			}
-			while (bestFunc);
+			} while (bestFunc);
 		}
-	}
-	while (currentFile != Q_MAXINT);
+	} while (currentFile != Q_MAXINT);
 
 	if (*saveName)
 	{

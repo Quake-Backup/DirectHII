@@ -14,7 +14,7 @@
 extern int m_multiplayer_cursor;
 extern int m_net_cursor;
 extern qboolean	m_return_onerror;
-extern char		m_return_reason [32];
+extern char		m_return_reason[32];
 extern m_state_t m_return_state;
 
 
@@ -36,7 +36,7 @@ void M_Menu_ServerList_f (void)
 void M_ServerList_Draw (void)
 {
 	int		n;
-	char	string [64], *name;
+	char	string[64], *name;
 
 	if (!slist_sorted)
 	{

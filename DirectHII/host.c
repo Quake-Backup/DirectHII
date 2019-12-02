@@ -159,7 +159,7 @@ void	Host_FindMaxClients (void)
 
 		if (i != (com_argc - 1))
 		{
-			svs.maxclients = atoi (com_argv[i+1]);
+			svs.maxclients = atoi (com_argv[i + 1]);
 		}
 		else
 			svs.maxclients = 8;
@@ -175,7 +175,7 @@ void	Host_FindMaxClients (void)
 			Sys_Error ("Only one of -dedicated or -listen can be specified");
 
 		if (i != (com_argc - 1))
-			svs.maxclients = atoi (com_argv[i+1]);
+			svs.maxclients = atoi (com_argv[i + 1]);
 		else
 			svs.maxclients = 8;
 	}
@@ -468,8 +468,7 @@ void Host_ShutdownServer (qboolean crash)
 
 		if ((Sys_DoubleTime () - start) > 3.0)
 			break;
-	}
-	while (count);
+	} while (count);
 
 	// make sure all the clients know we're disconnecting
 	buf.data = message;
@@ -771,7 +770,7 @@ void Host_Frame (float time)
 			c++;
 	}
 
-	Con_Printf (PRINT_NORMAL, va ("serverprofile: %2i clients %2i msec\n",  c,  m));
+	Con_Printf (PRINT_NORMAL, va ("serverprofile: %2i clients %2i msec\n", c, m));
 }
 
 //============================================================================
@@ -810,7 +809,7 @@ void Host_InitVCR (quakeparms_t *parms)
 			Sys_FileRead (vcrFile, &len, sizeof (int));
 			p = malloc (len);
 			Sys_FileRead (vcrFile, p, len);
-			com_argv[i+1] = p;
+			com_argv[i + 1] = p;
 		}
 
 		com_argc++; /* add one for arg[0] */

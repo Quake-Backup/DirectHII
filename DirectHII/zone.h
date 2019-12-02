@@ -13,8 +13,7 @@ void *Zone_Alloc (int size);
 // ============================================================================
 // Hunk Memory
 
-typedef enum _hunktype
-{
+typedef enum _hunktype {
 	GAME_HUNK,
 	MAP_HUNK,
 	LOAD_HUNK,

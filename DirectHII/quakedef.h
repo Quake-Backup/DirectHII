@@ -179,8 +179,7 @@
 //#define BASE_ENT_ON		1
 //#define BASE_ENT_SENT	2
 
-typedef struct entity_state_s
-{
+typedef struct entity_state_s {
 	vec3_t	origin;
 	vec3_t	angles;
 	short	modelindex;
@@ -197,8 +196,7 @@ typedef struct entity_state_s
 #endif
 } entity_state_t;
 
-typedef struct entity_state2_s
-{
+typedef struct entity_state2_s {
 	byte	flags;
 	short	index;
 
@@ -214,8 +212,7 @@ typedef struct entity_state2_s
 	byte	abslight;
 } entity_state2_t;
 
-typedef struct entity_state3_s
-{
+typedef struct entity_state3_s {
 	byte	flags;
 
 	vec3_t	origin;
@@ -238,23 +235,20 @@ typedef struct entity_state3_s
 #define ENT_STATE_ON		1
 #define ENT_CLEARED			2
 
-typedef struct client_frames_s
-{
+typedef struct client_frames_s {
 	entity_state2_t states[MAX_CLIENT_STATES];
 	//	unsigned long frame;
 	//	unsigned long flags;
 	int count;
 } client_frames_t;
 
-typedef struct client_frames2_s
-{
-	entity_state2_t states[MAX_CLIENT_STATES*2];
+typedef struct client_frames2_s {
+	entity_state2_t states[MAX_CLIENT_STATES * 2];
 	int count;
 } client_frames2_t;
 
-typedef struct client_state2_s
-{
-	client_frames_t frames[MAX_FRAMES+2]; // 0 = base, 1-max = proposed, max+1 = too late
+typedef struct client_state2_s {
+	client_frames_t frames[MAX_FRAMES + 2]; // 0 = base, 1-max = proposed, max+1 = too late
 } client_state2_t;
 
 
@@ -290,8 +284,7 @@ typedef struct client_state2_s
 // command line parms passed to the program, and the amount of memory
 // available for the program to use
 
-typedef struct quakeparms_s
-{
+typedef struct quakeparms_s {
 	char	*basedir;
 	char	*cachedir;		// for development over ISDN lines
 	int		argc;

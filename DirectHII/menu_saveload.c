@@ -13,7 +13,7 @@
 int		load_cursor;		// 0 < load_cursor < MAX_SAVEGAMES
 
 #define	MAX_SAVEGAMES		12
-char	m_filenames[MAX_SAVEGAMES][SAVEGAME_COMMENT_LENGTH+1];
+char	m_filenames[MAX_SAVEGAMES][SAVEGAME_COMMENT_LENGTH + 1];
 int		loadable[MAX_SAVEGAMES];
 
 void M_ScanSaves (void)

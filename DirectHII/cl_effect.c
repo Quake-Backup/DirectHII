@@ -501,7 +501,7 @@ void SV_ParseEffect (sizebuf_t *sb)
 
 	for (index = 0; index < MAX_EFFECTS; index++)
 		if (!sv.Effects[index].type ||
-				(sv.Effects[index].expire_time && sv.Effects[index].expire_time <= sv.time))
+			(sv.Effects[index].expire_time && sv.Effects[index].expire_time <= sv.time))
 			break;
 
 	if (index >= MAX_EFFECTS)
@@ -1284,9 +1284,9 @@ void CL_ParseEffect (void)
 		cl.Effects[index].Fountain.color = MSG_ReadShort ();
 		cl.Effects[index].Fountain.cnt = MSG_ReadByte ();
 		AngleVectors (cl.Effects[index].Fountain.angle,
-					  cl.Effects[index].Fountain.vforward,
-					  cl.Effects[index].Fountain.vright,
-					  cl.Effects[index].Fountain.vup);
+			cl.Effects[index].Fountain.vforward,
+			cl.Effects[index].Fountain.vright,
+			cl.Effects[index].Fountain.vup);
 		break;
 
 	case CE_QUAKE:
@@ -1327,7 +1327,7 @@ void CL_ParseEffect (void)
 			VectorCopy (cl.Effects[index].Smoke.origin, ent->origin);
 
 			if ((cl.Effects[index].type == CE_WHITE_SMOKE) ||
-					(cl.Effects[index].type == CE_SLOW_WHITE_SMOKE))
+				(cl.Effects[index].type == CE_SLOW_WHITE_SMOKE))
 				ent->model = Mod_ForName ("models/whtsmk1.spr", true);
 			else if (cl.Effects[index].type == CE_GREEN_SMOKE)
 				ent->model = Mod_ForName ("models/grnsmk1.spr", true);
@@ -1702,7 +1702,7 @@ void CL_ParseEffect (void)
 				final = (rand () % 100) * .01;
 
 				if ((cl.Effects[index].Chunk.type == THINGTYPE_GLASS) || (cl.Effects[index].Chunk.type == THINGTYPE_REDGLASS) ||
-						(cl.Effects[index].Chunk.type == THINGTYPE_CLEARGLASS) || (cl.Effects[index].Chunk.type == THINGTYPE_WEBS))
+					(cl.Effects[index].Chunk.type == THINGTYPE_CLEARGLASS) || (cl.Effects[index].Chunk.type == THINGTYPE_WEBS))
 				{
 					if (final < 0.20)
 						ent->model = Mod_ForName ("models/shard1.mdl", true);
@@ -2076,33 +2076,33 @@ void CL_UpdateEffects (void)
 
 		case CE_FOUNTAIN:
 			mymin[0] = (-3 * cl.Effects[index].Fountain.vright[0] * cl.Effects[index].Fountain.movedir[0]) +
-					   (-3 * cl.Effects[index].Fountain.vforward[0] * cl.Effects[index].Fountain.movedir[1]) +
-					   (2 * cl.Effects[index].Fountain.vup[0] * cl.Effects[index].Fountain.movedir[2]);
+				(-3 * cl.Effects[index].Fountain.vforward[0] * cl.Effects[index].Fountain.movedir[1]) +
+				(2 * cl.Effects[index].Fountain.vup[0] * cl.Effects[index].Fountain.movedir[2]);
 			mymin[1] = (-3 * cl.Effects[index].Fountain.vright[1] * cl.Effects[index].Fountain.movedir[0]) +
-					   (-3 * cl.Effects[index].Fountain.vforward[1] * cl.Effects[index].Fountain.movedir[1]) +
-					   (2 * cl.Effects[index].Fountain.vup[1] * cl.Effects[index].Fountain.movedir[2]);
+				(-3 * cl.Effects[index].Fountain.vforward[1] * cl.Effects[index].Fountain.movedir[1]) +
+				(2 * cl.Effects[index].Fountain.vup[1] * cl.Effects[index].Fountain.movedir[2]);
 			mymin[2] = (-3 * cl.Effects[index].Fountain.vright[2] * cl.Effects[index].Fountain.movedir[0]) +
-					   (-3 * cl.Effects[index].Fountain.vforward[2] * cl.Effects[index].Fountain.movedir[1]) +
-					   (2 * cl.Effects[index].Fountain.vup[2] * cl.Effects[index].Fountain.movedir[2]);
+				(-3 * cl.Effects[index].Fountain.vforward[2] * cl.Effects[index].Fountain.movedir[1]) +
+				(2 * cl.Effects[index].Fountain.vup[2] * cl.Effects[index].Fountain.movedir[2]);
 			mymin[0] *= 15;
 			mymin[1] *= 15;
 			mymin[2] *= 15;
 
 			mymax[0] = (3 * cl.Effects[index].Fountain.vright[0] * cl.Effects[index].Fountain.movedir[0]) +
-					   (3 * cl.Effects[index].Fountain.vforward[0] * cl.Effects[index].Fountain.movedir[1]) +
-					   (10 * cl.Effects[index].Fountain.vup[0] * cl.Effects[index].Fountain.movedir[2]);
+				(3 * cl.Effects[index].Fountain.vforward[0] * cl.Effects[index].Fountain.movedir[1]) +
+				(10 * cl.Effects[index].Fountain.vup[0] * cl.Effects[index].Fountain.movedir[2]);
 			mymax[1] = (3 * cl.Effects[index].Fountain.vright[1] * cl.Effects[index].Fountain.movedir[0]) +
-					   (3 * cl.Effects[index].Fountain.vforward[1] * cl.Effects[index].Fountain.movedir[1]) +
-					   (10 * cl.Effects[index].Fountain.vup[1] * cl.Effects[index].Fountain.movedir[2]);
+				(3 * cl.Effects[index].Fountain.vforward[1] * cl.Effects[index].Fountain.movedir[1]) +
+				(10 * cl.Effects[index].Fountain.vup[1] * cl.Effects[index].Fountain.movedir[2]);
 			mymax[2] = (3 * cl.Effects[index].Fountain.vright[2] * cl.Effects[index].Fountain.movedir[0]) +
-					   (3 * cl.Effects[index].Fountain.vforward[2] * cl.Effects[index].Fountain.movedir[1]) +
-					   (10 * cl.Effects[index].Fountain.vup[2] * cl.Effects[index].Fountain.movedir[2]);
+				(3 * cl.Effects[index].Fountain.vforward[2] * cl.Effects[index].Fountain.movedir[1]) +
+				(10 * cl.Effects[index].Fountain.vup[2] * cl.Effects[index].Fountain.movedir[2]);
 			mymax[0] *= 15;
 			mymax[1] *= 15;
 			mymax[2] *= 15;
 
 			R_RunParticleEffect2 (cl.Effects[index].Fountain.pos, mymin, mymax,
-								  cl.Effects[index].Fountain.color, 2, cl.Effects[index].Fountain.cnt);
+				cl.Effects[index].Fountain.color, 2, cl.Effects[index].Fountain.cnt);
 
 			/*				memset(&test,0,sizeof(test));
 							trace = SV_Move (cl.Effects[index].Fountain.pos, mymin, mymax, mymin, false, &test);
@@ -2449,9 +2449,9 @@ void CL_UpdateEffects (void)
 					}
 					else
 					{
-						ent->angles[0] += frametime * cl.Effects[index].Chunk.avel[i%3][0];
-						ent->angles[1] += frametime * cl.Effects[index].Chunk.avel[i%3][1];
-						ent->angles[2] += frametime * cl.Effects[index].Chunk.avel[i%3][2];
+						ent->angles[0] += frametime * cl.Effects[index].Chunk.avel[i % 3][0];
+						ent->angles[1] += frametime * cl.Effects[index].Chunk.avel[i % 3][1];
+						ent->angles[2] += frametime * cl.Effects[index].Chunk.avel[i % 3][2];
 					}
 
 					if (cl.Effects[index].Chunk.time_amount < frametime * 3)

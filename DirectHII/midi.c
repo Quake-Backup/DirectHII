@@ -556,7 +556,7 @@ void CALLBACK MidiProc (HMIDIIN hMidi, UINT uMsg, DWORD dwInstance, DWORD dwPara
 				break;
 
 			// Mask off the channel number and cache the volume data byte
-			dwVolCache[ MIDIEVENT_CHANNEL (pme->dwEvent)] = MIDIEVENT_VOLUME (pme->dwEvent);
+			dwVolCache[MIDIEVENT_CHANNEL (pme->dwEvent)] = MIDIEVENT_VOLUME (pme->dwEvent);
 			// Post a message so that the main program knows to counteract
 			// the effects of the volume event in the stream with its own
 			// generated event which reflects the proper trackbar position.
@@ -586,7 +586,7 @@ void SetAllChannelVolumes (DWORD dwVolumePercent)
 	MMRESULT mmrRetVal;
 
 	/*   if(!bPlaying)
-	      return;*/
+		  return;*/
 
 	for (idx = 0, dwStatus = MIDI_CTRLCHANGE; idx < NUM_CHANNELS; idx++, dwStatus++)
 	{

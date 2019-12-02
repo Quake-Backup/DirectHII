@@ -46,11 +46,11 @@ void InitConProc (HANDLE hFile, HANDLE heventParent, HANDLE heventChild)
 	}
 
 	if (!CreateThread (NULL,
-					   0,
-					   (LPTHREAD_START_ROUTINE) RequestProc,
-					   0,
-					   0,
-					   &dwID))
+		0,
+		(LPTHREAD_START_ROUTINE) RequestProc,
+		0,
+		0,
+		&dwID))
 	{
 		CloseHandle (heventDone);
 		Con_Printf (PRINT_SAFE, "Couldn't create QHOST thread\n");
@@ -113,7 +113,7 @@ DWORD RequestProc (DWORD dwNichts)
 			iBeginLine = pBuffer[1];
 			iEndLine = pBuffer[2];
 			pBuffer[0] = ReadText ((LPTSTR) (pBuffer + 1), iBeginLine,
-									iEndLine);
+				iEndLine);
 			break;
 
 		case CCOM_GET_SCR_LINES:
@@ -140,7 +140,7 @@ LPVOID GetMappedBuffer (HANDLE hfileBuffer)
 	LPVOID pBuffer;
 
 	pBuffer = MapViewOfFile (hfileBuffer,
-							 FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, 0);
+		FILE_MAP_READ | FILE_MAP_WRITE, 0, 0, 0);
 
 	return pBuffer;
 }
@@ -183,11 +183,11 @@ BOOL ReadText (LPTSTR pszText, int iBeginLine, int iEndLine)
 	coord.Y = iBeginLine;
 
 	bRet = ReadConsoleOutputCharacter (
-			   hStdout,
-			   pszText,
-			   80 * (iEndLine - iBeginLine + 1),
-			   coord,
-			   &dwRead);
+		hStdout,
+		pszText,
+		80 * (iEndLine - iBeginLine + 1),
+		coord,
+		&dwRead);
 
 	// Make sure it's null terminated.
 	if (bRet)

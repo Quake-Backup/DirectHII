@@ -52,8 +52,7 @@ typedef void (*xcommand_t) (void);
 // make qsort calls easier on the eye...
 typedef int (*sortfunc_t) (const void *, const void *);
 
-typedef enum
-{
+typedef enum {
 	src_client,		// came in over a net connection as a clc_stringcmd
 	// host_client will be valid during this state.
 	src_command		// from the command buffer

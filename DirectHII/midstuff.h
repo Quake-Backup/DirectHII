@@ -73,15 +73,13 @@
 
 // Chunk header. dwTag is either MTrk or MThd.
 //
-typedef struct _MIDICHUNK
-{
+typedef struct _MIDICHUNK {
 	DWORD   dwTag;          // Type
 	DWORD   dwChunkLength;      // Length (hi-lo)
 } MIDICHUNK;
 
 // Contents of MThd chunk.
-typedef struct _MIDIFILEHDR
-{
+typedef struct _MIDIFILEHDR {
 	WORD    wFormat;        // Format (hi-lo)
 	WORD    wTrackCount;        // # tracks (hi-lo)
 	WORD    wTimeDivision;      // Time division (hi-lo)
@@ -93,8 +91,7 @@ typedef struct _MIDIFILEHDR
 // Temporary event structure which stores event data until we're ready to
 // dump it into a stream buffer
 //
-typedef struct _TEMPEVENT
-{
+typedef struct _TEMPEVENT {
 	DWORD   tkEvent;    // Absolute time of event
 	BYTE    byShortData[4]; // Event type and parameters if channel msg
 	DWORD   dwEventLength;  // Length of data which follows if meta or sysex
@@ -105,8 +102,7 @@ typedef struct _TEMPEVENT
 
 // Description of a track open for read
 //
-typedef struct _INTRACKSTATE
-{
+typedef struct _INTRACKSTATE {
 	DWORD   fdwTrack;   // Track status
 	DWORD   dwTrackLength;  // Total bytes in track
 	DWORD   dwLeftInBuffer; // Bytes left unread in track buffer
@@ -125,8 +121,7 @@ typedef struct _INTRACKSTATE
 
 // Description of the input MIDI file
 //
-typedef struct _INFILESTATE
-{
+typedef struct _INFILESTATE {
 	DWORD   cbFileLength;       // Total bytes in file
 	DWORD   dwTimeDivision;     // Original time division
 	DWORD   dwFormat;       // Original format

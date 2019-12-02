@@ -28,8 +28,8 @@ void M_SinglePlayer_Draw (void)
 
 	ScrollTitle ("gfx/menu/title1.lmp");
 
-	M_DrawBigString (72,  60, "NEW MISSION");
-	M_DrawBigString (72,  80, "LOAD");
+	M_DrawBigString (72, 60, "NEW MISSION");
+	M_DrawBigString (72, 80, "LOAD");
 	M_DrawBigString (72, 100, "SAVE");
 
 	f = (int) (realtime * 10) % 8;

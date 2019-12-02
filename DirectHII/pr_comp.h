@@ -4,8 +4,7 @@
 typedef int	func_t;
 typedef int	string_t;
 
-typedef enum
-{
+typedef enum {
 	ev_void,
 	ev_string,
 	ev_float,
@@ -28,8 +27,7 @@ typedef enum
 #define	OFS_PARM7		25
 #define	RESERVED_OFS	28
 
-enum
-{
+enum {
 	OP_DONE,
 	OP_MUL_F,
 	OP_MUL_V,
@@ -157,14 +155,12 @@ enum
 	OP_CASERANGE
 };
 
-typedef struct statement_s
-{
+typedef struct statement_s {
 	unsigned short	op;
 	short	a, b, c;
 } dstatement_t;
 
-typedef struct ddef_s
-{
+typedef struct ddef_s {
 	unsigned short	type;		// if DEF_SAVEGLOBAL bit is set
 	// the variable needs to be saved in savegames
 	unsigned short	ofs;
@@ -175,8 +171,7 @@ typedef struct ddef_s
 
 #define	MAX_PARMS	8
 
-typedef struct dfunction_s
-{
+typedef struct dfunction_s {
 	int		first_statement;	// negative numbers are builtins
 	int		parm_start;
 	int		locals;				// total ints of parms + locals
@@ -193,8 +188,7 @@ typedef struct dfunction_s
 
 #define	PROG_VERSION	6
 
-typedef struct dprograms_s
-{
+typedef struct dprograms_s {
 	int		version;
 	int		crc;			// check of header file
 

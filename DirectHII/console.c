@@ -171,7 +171,7 @@ void Con_CheckResize (void)
 			{
 				con_text[(con_totallines - 1 - i) * con_linewidth + j] =
 					tbuf[((con_current - i + oldtotallines) %
-							oldtotallines) * oldwidth + j];
+					oldtotallines) * oldwidth + j];
 			}
 		}
 
@@ -191,7 +191,7 @@ Con_Init
 void Con_Init (void)
 {
 #define MAXGAMEDIRLEN	1000
-	char	temp[MAXGAMEDIRLEN+1];
+	char	temp[MAXGAMEDIRLEN + 1];
 	char	*t2 = "/qconsole.log";
 
 	con_debuglog = COM_CheckParm ("-condebug");
@@ -240,7 +240,7 @@ void Con_Linefeed (void)
 	j = (con_current % con_totallines) * con_linewidth;
 
 	for (i = 0; i < con_linewidth; i++)
-		con_text[i+j] = ' ';
+		con_text[i + j] = ' ';
 }
 
 /*
@@ -319,7 +319,7 @@ void Con_Print (char *txt)
 
 		default:	// display character and advance
 			y = con_current % con_totallines;
-			con_text[y *con_linewidth+con_x] = c | mask;
+			con_text[y *con_linewidth + con_x] = c | mask;
 			con_x++;
 
 			if (con_x >= con_linewidth)
@@ -383,8 +383,8 @@ void Con_Printf (int mode, char *msg)
 	// update the screen if the console is displayed
 	if (cls.signon != SIGNONS && !scr.DisabledForLoading && mode != PRINT_SAFE)
 	{
-		// SCR_UpdateScreen now has built-in recursion protection so we don't need to do it ourselves here
-		SCR_UpdateScreen ();
+	// SCR_UpdateScreen now has built-in recursion protection so we don't need to do it ourselves here
+	SCR_UpdateScreen ();
 	}
 	*/
 }

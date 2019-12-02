@@ -33,14 +33,14 @@ VID_GetModePtr
 D3D9_REMOVED
 vmode_t *VID_GetModePtr (int modenum)
 {
-	if ((modenum >= 0) && (modenum < nummodes))
-		return &modelist[modenum];
-	else
-	{
-		strcpy (badmode.modedesc, "Bad mode");
-		return &badmode;
-	}
-	return NULL;
+if ((modenum >= 0) && (modenum < nummodes))
+return &modelist[modenum];
+else
+{
+strcpy (badmode.modedesc, "Bad mode");
+return &badmode;
+}
+return NULL;
 }
 */
 
@@ -56,7 +56,7 @@ char *VID_GetExtModeDescription (int mode)
 	vmode_t		*pv;
 
 	if ((mode < 0) || (mode >= nummodes))
-		return NULL;
+	return NULL;
 
 
 	return pinfo;
@@ -89,10 +89,10 @@ void VID_NumModes_f (void)
 	/*
 	D3D9_REMOVED
 	if (nummodes == 1)
-		Con_Printf (PRINT_NORMAL, va ("%d video mode is available\n", nummodes));
+	Con_Printf (PRINT_NORMAL, va ("%d video mode is available\n", nummodes));
 	else
-		Con_Printf (PRINT_NORMAL, va ("%d video modes are available\n", nummodes));
-		*/
+	Con_Printf (PRINT_NORMAL, va ("%d video modes are available\n", nummodes));
+	*/
 }
 
 

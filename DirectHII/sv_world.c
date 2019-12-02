@@ -15,8 +15,7 @@ line of sight checks trace->crosscontent, but bullets don't
 
 cvar_t	sys_quake2 = {"sys_quake2", "1", true};
 
-typedef struct moveclip_s
-{
+typedef struct moveclip_s {
 	vec3_t		boxmins, boxmaxs;// enclose the test object along entire move
 	float		*mins, *maxs;	// size of the moving object
 	vec3_t		mins2, maxs2;	// size when clipping against mosnters
@@ -70,12 +69,12 @@ void SV_InitBoxHull (void)
 		box_clipnodes[i].children[side] = CONTENTS_EMPTY;
 
 		if (i != 5)
-			box_clipnodes[i].children[side^1] = i + 1;
+			box_clipnodes[i].children[side ^ 1] = i + 1;
 		else
-			box_clipnodes[i].children[side^1] = CONTENTS_SOLID;
+			box_clipnodes[i].children[side ^ 1] = CONTENTS_SOLID;
 
 		box_planes[i].type = i >> 1;
-		box_planes[i].normal[i>>1] = 1;
+		box_planes[i].normal[i >> 1] = 1;
 	}
 
 }
@@ -128,7 +127,7 @@ hull_t *SV_HullForEntity (edict_t *ent, vec3_t mins, vec3_t maxs, vec3_t offset,
 		if (ent->v.movetype != MOVETYPE_PUSH)
 			Sys_Error ("SOLID_BSP without MOVETYPE_PUSH");
 
-		model = sv.models[(int) ent->v.modelindex ];
+		model = sv.models[(int) ent->v.modelindex];
 
 		if (!model || model->type != mod_brush)
 			Sys_Error ("MOVETYPE_PUSH with a non bsp model");
@@ -207,8 +206,7 @@ ENTITY AREA CHECKING
 ===============================================================================
 */
 
-typedef struct areanode_s
-{
+typedef struct areanode_s {
 	int		axis;		// -1 = leaf node
 	float	dist;
 	struct areanode_s	*children[2];
@@ -330,11 +328,11 @@ void SV_TouchLinks (edict_t *ent, areanode_t *node)
 			continue;
 
 		if (ent->v.absmin[0] > touch->v.absmax[0]
-				|| ent->v.absmin[1] > touch->v.absmax[1]
-				|| ent->v.absmin[2] > touch->v.absmax[2]
-				|| ent->v.absmax[0] < touch->v.absmin[0]
-				|| ent->v.absmax[1] < touch->v.absmin[1]
-				|| ent->v.absmax[2] < touch->v.absmin[2])
+			|| ent->v.absmin[1] > touch->v.absmax[1]
+			|| ent->v.absmin[2] > touch->v.absmax[2]
+			|| ent->v.absmax[0] < touch->v.absmin[0]
+			|| ent->v.absmax[1] < touch->v.absmin[1]
+			|| ent->v.absmax[2] < touch->v.absmin[2])
 			continue;
 
 		old_self = pr_global_struct->self;
@@ -427,7 +425,7 @@ void SV_LinkEdict (edict_t *ent, qboolean touch_triggers)
 #ifdef QUAKE2RJ
 
 	if (ent->v.solid == SOLID_BSP &&
-			(ent->v.angles[0] || ent->v.angles[1] || ent->v.angles[2]))
+		(ent->v.angles[0] || ent->v.angles[1] || ent->v.angles[2]))
 	{
 		// expand for rotation
 		float		max, v;
@@ -732,13 +730,13 @@ qboolean SV_RecursiveHullCheck (hull_t *hull, int num, float p1f, float p2f, vec
 	if (!SV_RecursiveHullCheck (hull, node->children[side], p1f, midf, p1, mid, trace))
 		return false;
 
-	contents = SV_HullPointContents (hull, node->children[side^1], mid);
+	contents = SV_HullPointContents (hull, node->children[side ^ 1], mid);
 
 	//	if (contents != CONTENTS_SOLID &&
 	//		(contents == CONTENTS_WATER || move_type != MOVE_WATER))
 	if (contents != CONTENTS_SOLID)
 		// go past the node
-		return SV_RecursiveHullCheck (hull, node->children[side^1], midf, p2f, mid, p2, trace);
+		return SV_RecursiveHullCheck (hull, node->children[side ^ 1], midf, p2f, mid, p2, trace);
 
 	if (trace->allsolid)
 		return false;		// never got out of the solid area
@@ -923,15 +921,15 @@ void SV_ClipToLinks (areanode_t *node, moveclip_t *clip)
 			Sys_Error ("Trigger in clipping list (%s)", touch->v.classname + pr_strings);
 
 		if ((clip->type == MOVE_NOMONSTERS ||
-				clip->type == MOVE_PHASE) && touch->v.solid != SOLID_BSP)
+			clip->type == MOVE_PHASE) && touch->v.solid != SOLID_BSP)
 			continue;
 
 		if (clip->boxmins[0] > touch->v.absmax[0]
-				|| clip->boxmins[1] > touch->v.absmax[1]
-				|| clip->boxmins[2] > touch->v.absmax[2]
-				|| clip->boxmaxs[0] < touch->v.absmin[0]
-				|| clip->boxmaxs[1] < touch->v.absmin[1]
-				|| clip->boxmaxs[2] < touch->v.absmin[2])
+			|| clip->boxmins[1] > touch->v.absmax[1]
+			|| clip->boxmins[2] > touch->v.absmax[2]
+			|| clip->boxmaxs[0] < touch->v.absmin[0]
+			|| clip->boxmaxs[1] < touch->v.absmin[1]
+			|| clip->boxmaxs[2] < touch->v.absmin[2])
 			continue;
 
 		if (clip->passedict && clip->passedict->v.size[0] && !touch->v.size[0])
@@ -956,7 +954,7 @@ void SV_ClipToLinks (areanode_t *node, moveclip_t *clip)
 			trace = SV_ClipMoveToEntity (touch, clip->start, clip->mins, clip->maxs, clip->end, touch);
 
 		if (trace.allsolid || trace.startsolid ||
-				trace.fraction < clip->trace.fraction)
+			trace.fraction < clip->trace.fraction)
 		{
 			trace.ent = touch;
 

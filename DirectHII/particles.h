@@ -11,8 +11,7 @@
 
 
 // Changes to ptype_t must also be made in d_iface.h
-typedef enum _ptype_t
-{
+typedef enum _ptype_t {
 	pt_static,
 	pt_grav,
 	pt_fastgrav,
@@ -45,8 +44,7 @@ typedef enum _ptype_t
 } ptype_t;
 
 // Changes to rtype_t must also be made in glquake.h
-typedef enum _rt_type_t
-{
+typedef enum _rt_type_t {
 	rt_rocket_trail = 0,
 	rt_smoke,
 	rt_blood,
@@ -68,8 +66,7 @@ typedef enum _rt_type_t
 } rt_type_t;
 
 // !!! if this is changed, it must be changed in d_iface.h too !!!
-typedef struct particle_s
-{
+typedef struct particle_s {
 	// driver-usable fields
 	vec3_t		org;
 	float		color;

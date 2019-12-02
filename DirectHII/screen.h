@@ -1,7 +1,6 @@
 // screen.h
 
-typedef struct scrdef_s
-{
+typedef struct scrdef_s {
 	float ConLines;
 	float ConCurrent;
 	qboolean timeRefresh;

@@ -10,13 +10,13 @@
 /* MODEM CONFIG MENU */
 
 int		modemConfig_cursor;
-int		modemConfig_cursor_table [] = {40, 56, 88, 120, 156};
+int		modemConfig_cursor_table[] = {40, 56, 88, 120, 156};
 #define NUM_MODEMCONFIG_CMDS	5
 
 char	modemConfig_dialing;
-char	modemConfig_clear [16];
-char	modemConfig_init [32];
-char	modemConfig_hangup [16];
+char	modemConfig_clear[16];
+char	modemConfig_init[32];
+char	modemConfig_hangup[16];
 
 void M_Menu_ModemConfig_f (void)
 {
@@ -66,7 +66,7 @@ void M_ModemConfig_Draw (void)
 	M_DrawTextBox (basex, modemConfig_cursor_table[4] - 8, 2, 1);
 	M_Print (basex + 8, modemConfig_cursor_table[4], "OK");
 
-	M_DrawCharacter (basex - 8, modemConfig_cursor_table [modemConfig_cursor], 12 + ((int) (realtime * 4) & 1));
+	M_DrawCharacter (basex - 8, modemConfig_cursor_table[modemConfig_cursor], 12 + ((int) (realtime * 4) & 1));
 }
 
 
@@ -139,19 +139,19 @@ void M_ModemConfig_Key (int key)
 		if (modemConfig_cursor == 1)
 		{
 			if (strlen (modemConfig_clear))
-				modemConfig_clear[strlen (modemConfig_clear)-1] = 0;
+				modemConfig_clear[strlen (modemConfig_clear) - 1] = 0;
 		}
 
 		if (modemConfig_cursor == 2)
 		{
 			if (strlen (modemConfig_init))
-				modemConfig_init[strlen (modemConfig_init)-1] = 0;
+				modemConfig_init[strlen (modemConfig_init) - 1] = 0;
 		}
 
 		if (modemConfig_cursor == 3)
 		{
 			if (strlen (modemConfig_hangup))
-				modemConfig_hangup[strlen (modemConfig_hangup)-1] = 0;
+				modemConfig_hangup[strlen (modemConfig_hangup) - 1] = 0;
 		}
 
 		break;
@@ -167,7 +167,7 @@ void M_ModemConfig_Key (int key)
 
 			if (l < 15)
 			{
-				modemConfig_clear[l+1] = 0;
+				modemConfig_clear[l + 1] = 0;
 				modemConfig_clear[l] = key;
 			}
 		}
@@ -178,7 +178,7 @@ void M_ModemConfig_Key (int key)
 
 			if (l < 29)
 			{
-				modemConfig_init[l+1] = 0;
+				modemConfig_init[l + 1] = 0;
 				modemConfig_init[l] = key;
 			}
 		}
@@ -189,7 +189,7 @@ void M_ModemConfig_Key (int key)
 
 			if (l < 15)
 			{
-				modemConfig_hangup[l+1] = 0;
+				modemConfig_hangup[l + 1] = 0;
 				modemConfig_hangup[l] = key;
 			}
 		}

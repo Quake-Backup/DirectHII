@@ -13,7 +13,7 @@
 #define	WAV_BUFFER_SIZE			0x0400
 #define SECONDARY_BUFFER_SIZE	0x10000
 
-typedef enum {SIS_SUCCESS, SIS_FAILURE, SIS_NOTAVAIL} sndinitstat;
+typedef enum { SIS_SUCCESS, SIS_FAILURE, SIS_NOTAVAIL } sndinitstat;
 
 static qboolean	wavonly;
 static qboolean	dsound_init;
@@ -396,13 +396,13 @@ qboolean SNDDMA_InitWav (void)
 		}
 
 		if (MessageBox (NULL,
-						"The sound hardware is in use by another app.\n\n"
-						"Select Retry to try to start sound again or Cancel to run Hexen II with no sound.",
-						"Sound not available",
-						MB_RETRYCANCEL | MB_SETFOREGROUND | MB_ICONEXCLAMATION) != IDRETRY)
+			"The sound hardware is in use by another app.\n\n"
+			"Select Retry to try to start sound again or Cancel to run Hexen II with no sound.",
+			"Sound not available",
+			MB_RETRYCANCEL | MB_SETFOREGROUND | MB_ICONEXCLAMATION) != IDRETRY)
 		{
 			Con_Printf (PRINT_SAFE, "waveOutOpen failure;\n"
-							"  hardware already in use\n");
+				"  hardware already in use\n");
 			return false;
 		}
 	}
@@ -412,7 +412,7 @@ qboolean SNDDMA_InitWav (void)
 	 * for waveform data must be globally allocated with
 	 * GMEM_MOVEABLE and GMEM_SHARE flags.
 
-	*/
+	 */
 	ds_SndBufSize = WAV_BUFFERS * WAV_BUFFER_SIZE;
 	hData = GlobalAlloc (GMEM_MOVEABLE | GMEM_SHARE, ds_SndBufSize);
 
@@ -440,7 +440,7 @@ qboolean SNDDMA_InitWav (void)
 	 * GMEM_SHARE flags.
 	 */
 	hWaveHdr = GlobalAlloc (GMEM_MOVEABLE | GMEM_SHARE,
-							(DWORD) sizeof (WAVEHDR) * WAV_BUFFERS);
+		(DWORD) sizeof (WAVEHDR) * WAV_BUFFERS);
 
 	if (hWaveHdr == NULL)
 	{
@@ -467,7 +467,7 @@ qboolean SNDDMA_InitWav (void)
 		lpWaveHdr[i].lpData = lpData + i * WAV_BUFFER_SIZE;
 
 		if (waveOutPrepareHeader (hWaveOut, lpWaveHdr + i, sizeof (WAVEHDR)) !=
-				MMSYSERR_NOERROR)
+			MMSYSERR_NOERROR)
 		{
 			Con_Printf (PRINT_SAFE, "Sound: failed to prepare wave headers\n");
 			FreeSound ();

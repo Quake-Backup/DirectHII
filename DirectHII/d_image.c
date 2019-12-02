@@ -139,7 +139,7 @@ unsigned *Image_Resample (unsigned *in, int inwidth, int inheight)
 			((byte *) &outrow[j])[0] = AverageMipGC (pix1[0], pix2[0], pix3[0], pix4[0]);
 			((byte *) &outrow[j])[1] = AverageMipGC (pix1[1], pix2[1], pix3[1], pix4[1]);
 			((byte *) &outrow[j])[2] = AverageMipGC (pix1[2], pix2[2], pix3[2], pix4[2]);
-			((byte *) &outrow[j])[3] = AverageMip   (pix1[3], pix2[3], pix3[3], pix4[3]);
+			((byte *) &outrow[j])[3] = AverageMip (pix1[3], pix2[3], pix3[3], pix4[3]);
 		}
 	}
 
@@ -169,7 +169,7 @@ unsigned *Image_Mipmap (unsigned *data, int width, int height)
 			out[0] = AverageMipGC (in[0], in[4], in[width + 0], in[width + 4]);
 			out[1] = AverageMipGC (in[1], in[5], in[width + 1], in[width + 5]);
 			out[2] = AverageMipGC (in[2], in[6], in[width + 2], in[width + 6]);
-			out[3] = AverageMip   (in[3], in[7], in[width + 3], in[width + 7]);
+			out[3] = AverageMip (in[3], in[7], in[width + 3], in[width + 7]);
 		}
 	}
 
@@ -243,6 +243,48 @@ unsigned *Image_8to32 (byte *data, int width, int height, int stride, unsigned *
 	// and now fix alpha edges
 	if (flags & TEX_ANYALPHA)
 		Image_AlphaEdgeFix (out, width, height);
+
+	return out;
+}
+
+
+byte *Image_Upscale8 (byte *in, int inwidth, int inheight)
+{
+	byte *out = (byte *) Hunk_Alloc (LOAD_HUNK, inwidth * inheight * 4);
+	int outwidth = inwidth << 1;
+	int outheight = inheight << 1;
+	int outx, outy, inx, iny;
+
+	for (outy = 0; outy < outheight; outy++)
+	{
+		for (outx = 0; outx < outwidth; outx++)
+		{
+			iny = outy >> 1;
+			inx = outx >> 1;
+			out[outy * outwidth + outx] = in[iny * inwidth + inx];
+		}
+	}
+
+	return out;
+}
+
+
+unsigned *Image_Upscale32 (unsigned *in, int inwidth, int inheight)
+{
+	unsigned *out = (unsigned *) Hunk_Alloc (LOAD_HUNK, inwidth * inheight * 4 * sizeof (unsigned));
+	int outwidth = inwidth << 1;
+	int outheight = inheight << 1;
+	int outx, outy, inx, iny;
+
+	for (outy = 0; outy < outheight; outy++)
+	{
+		for (outx = 0; outx < outwidth; outx++)
+		{
+			iny = outy >> 1;
+			inx = outx >> 1;
+			out[outy * outwidth + outx] = in[iny * inwidth + inx];
+		}
+	}
 
 	return out;
 }

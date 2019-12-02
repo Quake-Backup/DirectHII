@@ -7,8 +7,7 @@ void VID_EndRendering (void);
 #define MAX_EXTRA_TEXTURES 156   // 255-100+1
 extern int gl_extra_textures[MAX_EXTRA_TEXTURES];   // generic textures for models
 
-typedef struct glpic_s
-{
+typedef struct glpic_s {
 	int texnum;
 	float	sl, tl, sh, th;
 } glpic_t;

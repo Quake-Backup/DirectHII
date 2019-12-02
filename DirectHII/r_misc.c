@@ -14,8 +14,7 @@ void R_ClearParticles (void);
 
 byte *playerTranslation;
 
-typedef struct playertexture_s
-{
+typedef struct playertexture_s {
 	int classnum;
 	int color;
 	int texnum;
@@ -276,7 +275,7 @@ void R_TimeRefresh_f (void)
 	SCR_CalcRefdef ();
 
 	// do a 360 in 1.8 seconds
-	for (i = 0; ; i++)
+	for (i = 0;; i++)
 	{
 		if (VID_BeginRendering ())
 		{

@@ -1,8 +1,7 @@
 
 // server.h
 
-typedef struct server_static_s
-{
+typedef struct server_static_s {
 	int			maxclients;
 	int			maxclientslimit;
 	struct client_s	*clients;		// [maxclients]
@@ -12,10 +11,9 @@ typedef struct server_static_s
 
 //=============================================================================
 
-typedef enum {ss_loading, ss_active} server_state_t;
+typedef enum { ss_loading, ss_active } server_state_t;
 
-typedef struct server_s
-{
+typedef struct server_s {
 	qboolean	active;				// false if only a net client
 
 	int			Protocol;
@@ -65,8 +63,7 @@ typedef struct server_s
 #define	NUM_PING_TIMES		16
 #define	NUM_SPAWN_PARMS		16
 
-typedef struct client_s
-{
+typedef struct client_s {
 	qboolean		active;				// false = client is free
 	qboolean		spawned;			// false = don't send datagrams
 	qboolean		dropasap;			// has been told to go to another level
@@ -274,7 +271,7 @@ void SV_StartParticle2 (vec3_t org, vec3_t dmin, vec3_t dmax, int color, int eff
 void SV_StartParticle3 (vec3_t org, vec3_t box, int color, int effect, int count);
 void SV_StartParticle4 (vec3_t org, float radius, int color, int effect, int count);
 void SV_StartSound (edict_t *entity, int channel, char *sample, int volume,
-					float attenuation);
+	float attenuation);
 
 void SV_DropClient (qboolean crash);
 
@@ -297,7 +294,7 @@ void SV_Physics (double frametime);
 
 qboolean SV_CheckBottom (edict_t *ent);
 qboolean SV_movestep (edict_t *ent, vec3_t move, qboolean relink, qboolean noenemy,
-					  qboolean set_trace);
+	qboolean set_trace);
 
 void SV_WriteClientdataToMessage (client_t *client, edict_t *ent, sizebuf_t *msg);
 

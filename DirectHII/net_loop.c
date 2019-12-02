@@ -112,7 +112,7 @@ qsocket_t *Loop_CheckNewConnections (void)
 
 static int IntAlign (int value)
 {
-	return (value + (sizeof (int) - 1)) & (~ (sizeof (int) - 1));
+	return (value + (sizeof (int) - 1)) & (~(sizeof (int) - 1));
 }
 
 
@@ -151,7 +151,7 @@ int Loop_SendMessage (qsocket_t *sock, sizebuf_t *data)
 	if (!sock->driverdata)
 		return -1;
 
-	bufferLength = & ((qsocket_t *) sock->driverdata)->receiveMessageLength;
+	bufferLength = &((qsocket_t *) sock->driverdata)->receiveMessageLength;
 
 	if ((*bufferLength + data->cursize + 4) > NET_MAXMESSAGE)
 		Sys_Error ("Loop_SendMessage: overflow\n");
@@ -185,7 +185,7 @@ int Loop_SendUnreliableMessage (qsocket_t *sock, sizebuf_t *data)
 	if (!sock->driverdata)
 		return -1;
 
-	bufferLength = & ((qsocket_t *) sock->driverdata)->receiveMessageLength;
+	bufferLength = &((qsocket_t *) sock->driverdata)->receiveMessageLength;
 
 	if ((*bufferLength + data->cursize + sizeof (byte) + sizeof (short)) > NET_MAXMESSAGE)
 		return 0;

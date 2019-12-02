@@ -36,8 +36,7 @@ interface from being ambiguous.
 
 typedef void (*CvarCallback_t) (void);
 
-typedef struct cvar_s
-{
+typedef struct cvar_s {
 	char	*name;
 	char	*string;
 	qboolean archive;		// set to true to cause it to be saved to vars.rc

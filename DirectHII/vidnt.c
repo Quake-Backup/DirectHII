@@ -70,7 +70,7 @@ void VID_GetRenderDimensions (void)
 
 	GetClientRect (vid.hWnd, &cr);
 
-	vid.width =  cr.right - cr.left;
+	vid.width = cr.right - cr.left;
 	vid.height = cr.bottom - cr.top;
 }
 
@@ -91,7 +91,7 @@ void VID_CenterWindow (HWND hWndCenter)
 		0,
 		0,
 		SWP_NOSIZE | SWP_NOZORDER | SWP_SHOWWINDOW | SWP_DRAWFRAME
-	);
+		);
 }
 
 
@@ -125,7 +125,7 @@ qboolean VID_CreateWindow (int modenum, qboolean fullscreen)
 		NULL,
 		global_hInstance,
 		NULL
-	);
+		);
 
 	if (!vid.hWnd)
 		Sys_Error ("Couldn't create window");
@@ -206,8 +206,8 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	Sleep (100);
 
 	SetWindowPos (vid.hWnd, HWND_TOP, 0, 0, 0, 0,
-				  SWP_DRAWFRAME | SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW |
-				  SWP_NOCOPYBITS);
+		SWP_DRAWFRAME | SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW |
+		SWP_NOCOPYBITS);
 
 	SetForegroundWindow (vid.hWnd);
 

@@ -203,8 +203,7 @@ void CL_KeepaliveMessage (void)
 
 			break;
 		}
-	}
-	while (ret);
+	} while (ret);
 
 	net_message = old;
 	memcpy (net_message.data, olddata, net_message.cursize);
@@ -450,10 +449,10 @@ void CL_ParseUpdate (int bits)
 
 	/*	if (num == 2)
 		{
-			FH = fopen("c.txt","r+");
-			fseek(FH,0,SEEK_END);
+		FH = fopen("c.txt","r+");
+		fseek(FH,0,SEEK_END);
 		}
-	*/
+		*/
 	ref_ent = NULL;
 
 	for (i = 0; i < cl.frames[0].count; i++)
@@ -557,7 +556,7 @@ void CL_ParseUpdate (int bits)
 		i = ref_ent->colormap;
 
 	if (num && num <= cl.maxclients)
-		ent->colormap = ent->sourcecolormap = cl.scores[num-1].translations;
+		ent->colormap = ent->sourcecolormap = cl.scores[num - 1].translations;
 	else ent->sourcecolormap = vid.colormap;
 
 	if (!i)
@@ -814,7 +813,7 @@ void CL_ParseClientdata (int bits)
 
 	/*	if (bits & SU_ITEMS)
 			i = MSG_ReadLong ();
-	*/
+			*/
 
 	if (cl.items != i)
 	{
@@ -856,125 +855,125 @@ void CL_ParseClientdata (int bits)
 	/*	sc1 = sc2 = 0;
 
 		if (bits & SU_SC1)
-			sc1 = MSG_ReadLong ();
+		sc1 = MSG_ReadLong ();
 		if (bits & SU_SC2)
-			sc2 = MSG_ReadLong ();
+		sc2 = MSG_ReadLong ();
 
 		if (sc1 & SC1_HEALTH)
-			cl.v.health = MSG_ReadShort ();
+		cl.v.health = MSG_ReadShort ();
 		if (sc1 & SC1_LEVEL)
-			cl.v.level = MSG_ReadByte ();
+		cl.v.level = MSG_ReadByte ();
 		if (sc1 & SC1_INTELLIGENCE)
-			cl.v.intelligence = MSG_ReadByte ();
+		cl.v.intelligence = MSG_ReadByte ();
 		if (sc1 & SC1_WISDOM)
-			cl.v.wisdom = MSG_ReadByte ();
+		cl.v.wisdom = MSG_ReadByte ();
 		if (sc1 & SC1_STRENGTH)
-			cl.v.strength = MSG_ReadByte ();
+		cl.v.strength = MSG_ReadByte ();
 		if (sc1 & SC1_DEXTERITY)
-			cl.v.dexterity = MSG_ReadByte ();
+		cl.v.dexterity = MSG_ReadByte ();
 		if (sc1 & SC1_WEAPON)
-			cl.v.weapon = MSG_ReadByte ();
+		cl.v.weapon = MSG_ReadByte ();
 		if (sc1 & SC1_BLUEMANA)
-			cl.v.bluemana = MSG_ReadByte ();
+		cl.v.bluemana = MSG_ReadByte ();
 		if (sc1 & SC1_GREENMANA)
-			cl.v.greenmana = MSG_ReadByte ();
+		cl.v.greenmana = MSG_ReadByte ();
 		if (sc1 & SC1_EXPERIENCE)
-			cl.v.experience = MSG_ReadLong ();
+		cl.v.experience = MSG_ReadLong ();
 		if (sc1 & SC1_CNT_TORCH)
-			cl.v.cnt_torch = MSG_ReadByte ();
+		cl.v.cnt_torch = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_H_BOOST)
-			cl.v.cnt_h_boost = MSG_ReadByte ();
+		cl.v.cnt_h_boost = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_SH_BOOST)
-			cl.v.cnt_sh_boost = MSG_ReadByte ();
+		cl.v.cnt_sh_boost = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_MANA_BOOST)
-			cl.v.cnt_mana_boost = MSG_ReadByte ();
+		cl.v.cnt_mana_boost = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_TELEPORT)
-			cl.v.cnt_teleport = MSG_ReadByte ();
+		cl.v.cnt_teleport = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_TOME)
-			cl.v.cnt_tome = MSG_ReadByte ();
+		cl.v.cnt_tome = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_SUMMON)
-			cl.v.cnt_summon = MSG_ReadByte ();
+		cl.v.cnt_summon = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_INVISIBILITY)
-			cl.v.cnt_invisibility = MSG_ReadByte ();
+		cl.v.cnt_invisibility = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_GLYPH)
-			cl.v.cnt_glyph = MSG_ReadByte ();
+		cl.v.cnt_glyph = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_HASTE)
-			cl.v.cnt_haste = MSG_ReadByte ();
+		cl.v.cnt_haste = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_BLAST)
-			cl.v.cnt_blast = MSG_ReadByte ();
+		cl.v.cnt_blast = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_POLYMORPH)
-			cl.v.cnt_polymorph = MSG_ReadByte ();
+		cl.v.cnt_polymorph = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_FLIGHT)
-			cl.v.cnt_flight = MSG_ReadByte ();
+		cl.v.cnt_flight = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_CUBEOFFORCE)
-			cl.v.cnt_cubeofforce = MSG_ReadByte ();
+		cl.v.cnt_cubeofforce = MSG_ReadByte ();
 		if (sc1 & SC1_CNT_INVINCIBILITY)
-			cl.v.cnt_invincibility = MSG_ReadByte ();
+		cl.v.cnt_invincibility = MSG_ReadByte ();
 		if (sc1 & SC1_ARTIFACT_ACTIVE)
-			cl.v.artifact_active = MSG_ReadFloat ();
+		cl.v.artifact_active = MSG_ReadFloat ();
 		if (sc1 & SC1_ARTIFACT_LOW)
-			cl.v.artifact_low = MSG_ReadFloat ();
+		cl.v.artifact_low = MSG_ReadFloat ();
 		if (sc1 & SC1_MOVETYPE)
-			cl.v.movetype = MSG_ReadByte ();
+		cl.v.movetype = MSG_ReadByte ();
 		if (sc1 & SC1_CAMERAMODE)
-			cl.v.cameramode = MSG_ReadByte ();
+		cl.v.cameramode = MSG_ReadByte ();
 		if (sc1 & SC1_HASTED)
-			cl.v.hasted = MSG_ReadFloat ();
+		cl.v.hasted = MSG_ReadFloat ();
 		if (sc1 & SC1_INVENTORY)
-			cl.v.inventory = MSG_ReadByte ();
+		cl.v.inventory = MSG_ReadByte ();
 		if (sc1 & SC1_RINGS_ACTIVE)
-			cl.v.rings_active = MSG_ReadFloat ();
+		cl.v.rings_active = MSG_ReadFloat ();
 
 		if (sc2 & SC2_RINGS_LOW)
-			cl.v.rings_low = MSG_ReadFloat ();
+		cl.v.rings_low = MSG_ReadFloat ();
 		if (sc2 & SC2_AMULET)
-			cl.v.armor_amulet = MSG_ReadByte ();
+		cl.v.armor_amulet = MSG_ReadByte ();
 		if (sc2 & SC2_BRACER)
-			cl.v.armor_bracer = MSG_ReadByte ();
+		cl.v.armor_bracer = MSG_ReadByte ();
 		if (sc2 & SC2_BREASTPLATE)
-			cl.v.armor_breastplate = MSG_ReadByte ();
+		cl.v.armor_breastplate = MSG_ReadByte ();
 		if (sc2 & SC2_HELMET)
-			cl.v.armor_helmet = MSG_ReadByte ();
+		cl.v.armor_helmet = MSG_ReadByte ();
 		if (sc2 & SC2_FLIGHT_T)
-			cl.v.ring_flight = MSG_ReadByte ();
+		cl.v.ring_flight = MSG_ReadByte ();
 		if (sc2 & SC2_WATER_T)
-			cl.v.ring_water = MSG_ReadByte ();
+		cl.v.ring_water = MSG_ReadByte ();
 		if (sc2 & SC2_TURNING_T)
-			cl.v.ring_turning = MSG_ReadByte ();
+		cl.v.ring_turning = MSG_ReadByte ();
 		if (sc2 & SC2_REGEN_T)
-			cl.v.ring_regeneration = MSG_ReadByte ();
+		cl.v.ring_regeneration = MSG_ReadByte ();
 		if (sc2 & SC2_HASTE_T)
-			cl.v.haste_time = MSG_ReadFloat ();
+		cl.v.haste_time = MSG_ReadFloat ();
 		if (sc2 & SC2_TOME_T)
-			cl.v.tome_time = MSG_ReadFloat ();
+		cl.v.tome_time = MSG_ReadFloat ();
 		if (sc2 & SC2_PUZZLE1)
-			sprintf(cl.puzzle_pieces[0], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[0], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_PUZZLE2)
-			sprintf(cl.puzzle_pieces[1], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[1], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_PUZZLE3)
-			sprintf(cl.puzzle_pieces[2], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[2], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_PUZZLE4)
-			sprintf(cl.puzzle_pieces[3], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[3], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_PUZZLE5)
-			sprintf(cl.puzzle_pieces[4], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[4], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_PUZZLE6)
-			sprintf(cl.puzzle_pieces[5], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[5], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_PUZZLE7)
-			sprintf(cl.puzzle_pieces[6], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[6], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_PUZZLE8)
-			sprintf(cl.puzzle_pieces[7], "%.9s", MSG_ReadString ());
+		sprintf(cl.puzzle_pieces[7], "%.9s", MSG_ReadString ());
 		if (sc2 & SC2_MAXHEALTH)
-			cl.v.max_health = MSG_ReadShort ();
+		cl.v.max_health = MSG_ReadShort ();
 		if (sc2 & SC2_MAXMANA)
-			cl.v.max_mana = MSG_ReadByte ();
+		cl.v.max_mana = MSG_ReadByte ();
 		if (sc2 & SC2_FLAGS)
-			cl.v.flags = MSG_ReadFloat ();
+		cl.v.flags = MSG_ReadFloat ();
 
 		if ((sc1 & SC1_STAT_BAR) || (sc2 & SC2_STAT_BAR))
-			SB_Changed ();
+		SB_Changed ();
 
 		if ((sc1 & SC1_INV) || (sc2 & SC2_INV))
-			SB_InvChanged ();*/
+		SB_InvChanged ();*/
 }
 
 int color_offsets[NUM_CLASSES] =
@@ -1045,7 +1044,7 @@ void CL_Plaque (void)
 	index = MSG_ReadShort ();
 
 	if (index > 0 && index <= pr_string_count)
-		plaquemessage = &pr_global_strings[pr_string_index[index-1]];
+		plaquemessage = &pr_global_strings[pr_string_index[index - 1]];
 	else
 		plaquemessage = "";
 }
@@ -1284,7 +1283,7 @@ void CL_ParseServerMessage (void)
 			if (i >= MAX_LIGHTSTYLES)
 				Sys_Error ("svc_lightstyle > MAX_LIGHTSTYLES");
 
-			strcpy (cl_lightstyle[i].map,  MSG_ReadString ());
+			strcpy (cl_lightstyle[i].map, MSG_ReadString ());
 			cl_lightstyle[i].length = strlen (cl_lightstyle[i].map);
 			break;
 
@@ -1457,7 +1456,7 @@ void CL_ParseServerMessage (void)
 					CDAudio_Play ((byte) cl.cdtrack, true);
 			}
 			else
-				CDAudio_Stop();
+				CDAudio_Stop ();
 
 			break;
 
@@ -1534,14 +1533,14 @@ void CL_ParseServerMessage (void)
 						if (RemovePlace >= cl.NumToRemove || cl.RemoveList[RemovePlace] != i)
 						{
 							if (NewPlace < cl.frames[1].count &&
-									cl.frames[1].states[NewPlace].index == i)
+								cl.frames[1].states[NewPlace].index == i)
 							{
 								cl.frames[2].states[AddedIndex] = cl.frames[1].states[NewPlace];
 								AddedIndex++;
 								cl.frames[2].count++;
 							}
 							else if (OrigPlace < cl.frames[0].count &&
-									 cl.frames[0].states[OrigPlace].index == i)
+								cl.frames[0].states[OrigPlace].index == i)
 							{
 								cl.frames[2].states[AddedIndex] = cl.frames[0].states[OrigPlace];
 								AddedIndex++;

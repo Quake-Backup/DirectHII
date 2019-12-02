@@ -10,8 +10,7 @@
 //=============================================================================
 /* GAME OPTIONS MENU */
 
-typedef struct level_s
-{
+typedef struct level_s {
 	char	*name;
 	char	*description;
 } level_t;
@@ -85,26 +84,25 @@ level_t		levels[] =
 	{"rider1a", "Famine's Domain"},						// 54
 
 	//Mission Pack
-	{"keep1",	"Eidolon's Lair"},						// 55
-	{"keep2",	"Village of Turnabel"},					// 56
-	{"keep3",	"Duke's Keep"},							// 57
-	{"keep4",	"The Catacombs"},						// 58
-	{"keep5",	"Hall of the Dead"},					// 59
+	{"keep1", "Eidolon's Lair"},						// 55
+	{"keep2", "Village of Turnabel"},					// 56
+	{"keep3", "Duke's Keep"},							// 57
+	{"keep4", "The Catacombs"},						// 58
+	{"keep5", "Hall of the Dead"},					// 59
 
-	{"tibet1",	"Tulku"},								// 60
-	{"tibet2",	"Ice Caverns"},							// 61
-	{"tibet3",	"The False Temple"},					// 62
-	{"tibet4",	"Courtyards of Tsok"},					// 63
-	{"tibet5",	"Temple of Kalachakra"},				// 64
-	{"tibet6",	"Temple of Bardo"},						// 65
-	{"tibet7",	"Temple of Phurbu"},					// 66
-	{"tibet8",	"Palace of Emperor Egg Chen"},			// 67
-	{"tibet9",	"Palace Inner Chambers"},				// 68
-	{"tibet10",	"The Inner Sanctum of Praevus"},		// 69
+	{"tibet1", "Tulku"},								// 60
+	{"tibet2", "Ice Caverns"},							// 61
+	{"tibet3", "The False Temple"},					// 62
+	{"tibet4", "Courtyards of Tsok"},					// 63
+	{"tibet5", "Temple of Kalachakra"},				// 64
+	{"tibet6", "Temple of Bardo"},						// 65
+	{"tibet7", "Temple of Phurbu"},					// 66
+	{"tibet8", "Palace of Emperor Egg Chen"},			// 67
+	{"tibet9", "Palace Inner Chambers"},				// 68
+	{"tibet10", "The Inner Sanctum of Praevus"},		// 69
 };
 
-typedef struct episode_s
-{
+typedef struct episode_s {
 	char	*description;
 	int		firstLevel;
 	int		levels;
@@ -202,22 +200,22 @@ void M_GameOptions_Draw (void)
 	M_Print (0 + 8, 100, "        Teamplay");
 	/*	if (rogue)
 		{
-			char *msg;
+		char *msg;
 
-			switch((int)teamplay.value)
-			{
-				case 1: msg = "No Friendly Fire"; break;
-				case 2: msg = "Friendly Fire"; break;
-				case 3: msg = "Tag"; break;
-				case 4: msg = "Capture the Flag"; break;
-				case 5: msg = "One Flag CTF"; break;
-				case 6: msg = "Three Team CTF"; break;
-				default: msg = "Off"; break;
-			}
-			M_Print (160+8, 100, msg);
+		switch((int)teamplay.value)
+		{
+		case 1: msg = "No Friendly Fire"; break;
+		case 2: msg = "Friendly Fire"; break;
+		case 3: msg = "Tag"; break;
+		case 4: msg = "Capture the Flag"; break;
+		case 5: msg = "One Flag CTF"; break;
+		case 6: msg = "Three Team CTF"; break;
+		default: msg = "Off"; break;
+		}
+		M_Print (160+8, 100, msg);
 		}
 		else
-	*/
+		*/
 	{
 		char *msg;
 
@@ -272,20 +270,20 @@ void M_GameOptions_Draw (void)
 	/*	rjr
 		if (m_serverInfoMessage)
 		{
-			if ((realtime - m_serverInfoMessageTime) < 5.0)
-			{
-				x = (320-26*8)/2;
-				M_DrawTextBox (x, 138, 24, 4);
-				x += 8;
-				M_Print (x, 146, "  More than 4 players   ");
-				M_Print (x, 154, " requires using command ");
-				M_Print (x, 162, "line parameters; please ");
-				M_Print (x, 170, "   see techinfo.txt.    ");
-			}
-			else
-			{
-				m_serverInfoMessage = false;
-			}
+		if ((realtime - m_serverInfoMessageTime) < 5.0)
+		{
+		x = (320-26*8)/2;
+		M_DrawTextBox (x, 138, 24, 4);
+		x += 8;
+		M_Print (x, 146, "  More than 4 players   ");
+		M_Print (x, 154, " requires using command ");
+		M_Print (x, 162, "line parameters; please ");
+		M_Print (x, 170, "   see techinfo.txt.    ");
+		}
+		else
+		{
+		m_serverInfoMessage = false;
+		}
 		}*/
 }
 

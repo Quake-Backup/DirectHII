@@ -15,8 +15,7 @@
 
 static int	vid_line, vid_wmodes;
 
-typedef struct modedesc_s
-{
+typedef struct modedesc_s {
 	int		modenum;
 	char	*desc;
 	int		iscur;
@@ -58,44 +57,44 @@ void M_Video_Draw (void)
 
 	for (i = 1; (i < lnummodes) && (vid_wmodes < MAX_MODEDESCS); i++)
 	{
-		ptr = D_GetModeDescription (i);
-		pv = VID_GetModePtr (i);
+	ptr = D_GetModeDescription (i);
+	pv = VID_GetModePtr (i);
 
-		k = vid_wmodes;
+	k = vid_wmodes;
 
-		modedescs[k].modenum = i;
-		modedescs[k].desc = ptr;
-		modedescs[k].iscur = 0;
+	modedescs[k].modenum = i;
+	modedescs[k].desc = ptr;
+	modedescs[k].iscur = 0;
 
-		if (i == vid_modenum)
-			modedescs[k].iscur = 1;
+	if (i == vid_modenum)
+	modedescs[k].iscur = 1;
 
-		vid_wmodes++;
+	vid_wmodes++;
 
 	}
 
 	if (vid_wmodes > 0)
 	{
-		M_Print (2 * 8, 60 + 0 * 8, "Fullscreen Modes (WIDTHxHEIGHTxBPP)");
+	M_Print (2 * 8, 60 + 0 * 8, "Fullscreen Modes (WIDTHxHEIGHTxBPP)");
 
-		column = 8;
-		row = 60 + 2 * 8;
+	column = 8;
+	row = 60 + 2 * 8;
 
-		for (i = 0; i < vid_wmodes; i++)
-		{
-			if (modedescs[i].iscur)
-				M_PrintWhite (column, row, modedescs[i].desc);
-			else
-				M_Print (column, row, modedescs[i].desc);
+	for (i = 0; i < vid_wmodes; i++)
+	{
+	if (modedescs[i].iscur)
+	M_PrintWhite (column, row, modedescs[i].desc);
+	else
+	M_Print (column, row, modedescs[i].desc);
 
-			column += 13 * 8;
+	column += 13 * 8;
 
-			if ((i % VID_ROW_SIZE) == (VID_ROW_SIZE - 1))
-			{
-				column = 8;
-				row += 8;
-			}
-		}
+	if ((i % VID_ROW_SIZE) == (VID_ROW_SIZE - 1))
+	{
+	column = 8;
+	row += 8;
+	}
+	}
 	}
 	*/
 

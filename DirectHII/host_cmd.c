@@ -66,7 +66,7 @@ void Host_Status_f (void)
 	int			minutes;
 	int			hours = 0;
 	int			j;
-	void	(*print) (char *fmt);
+	void (*print) (char *fmt);
 
 	if (cmd_source == src_command)
 	{
@@ -134,7 +134,7 @@ void Host_God_f (void)
 	}
 
 	if ((pr_global_struct->deathmatch ||
-			pr_global_struct->coop || skill.value > 2) && !host_client->privileged)
+		pr_global_struct->coop || skill.value > 2) && !host_client->privileged)
 		return;
 
 	sv_player->v.flags = (int) sv_player->v.flags ^ FL_GODMODE;
@@ -175,7 +175,7 @@ void Host_Noclip_f (void)
 	}
 
 	if ((pr_global_struct->deathmatch ||
-			pr_global_struct->coop || skill.value > 2) && !host_client->privileged)
+		pr_global_struct->coop || skill.value > 2) && !host_client->privileged)
 		return;
 
 	if (sv_player->v.movetype != MOVETYPE_NOCLIP)
@@ -496,7 +496,7 @@ void Host_Savegame_f (void)
 {
 	FILE	*f;
 	int		i;
-	char	comment[SAVEGAME_COMMENT_LENGTH+1];
+	char	comment[SAVEGAME_COMMENT_LENGTH + 1];
 	//	char	name[MAX_OSPATH],dest[MAX_OSPATH],tempdir[MAX_OSPATH];
 	qboolean error_state = false;
 	int attempts = 0;
@@ -806,7 +806,7 @@ void SaveGamestate (qboolean ClientsOnly)
 	//	char	name[MAX_OSPATH],tempdir[MAX_OSPATH];
 	FILE	*f;
 	int		i;
-	char	comment[SAVEGAME_COMMENT_LENGTH+1];
+	char	comment[SAVEGAME_COMMENT_LENGTH + 1];
 	edict_t	*ent;
 	int start, end;
 	qboolean error_state = false;
@@ -959,7 +959,7 @@ void RestoreClients (void)
 			// copy spawn parms out of the client_t
 
 			for (j = 0; j < NUM_SPAWN_PARMS; j++)
-				(&pr_global_struct->parm1) [j] = host_client->spawn_parms[j];
+				(&pr_global_struct->parm1)[j] = host_client->spawn_parms[j];
 
 			// call the spawn function
 
@@ -1279,7 +1279,7 @@ void Host_Class_f (void)
 		if (!(int) cl_playerclass.value)
 			Con_Printf (PRINT_NORMAL, va ("\"playerclass\" is %d (\"unknown\")\n", (int) cl_playerclass.value));
 		else
-			Con_Printf (PRINT_NORMAL, va ("\"playerclass\" is %d (\"%s\")\n", (int) cl_playerclass.value, ClassNames[(int) cl_playerclass.value-1]));
+			Con_Printf (PRINT_NORMAL, va ("\"playerclass\" is %d (\"%s\")\n", (int) cl_playerclass.value, ClassNames[(int) cl_playerclass.value - 1]));
 
 		return;
 	}
@@ -1407,7 +1407,7 @@ void Host_Please_f (void)
 		if (cl->privileged)
 		{
 			cl->privileged = false;
-			cl->edict->v.flags = (int) cl->edict->v.flags & ~ (FL_GODMODE | FL_NOTARGET);
+			cl->edict->v.flags = (int) cl->edict->v.flags & ~(FL_GODMODE | FL_NOTARGET);
 			cl->edict->v.movetype = MOVETYPE_WALK;
 			noclip_anglehack = false;
 		}
@@ -1428,7 +1428,7 @@ void Host_Please_f (void)
 			if (cl->privileged)
 			{
 				cl->privileged = false;
-				cl->edict->v.flags = (int) cl->edict->v.flags & ~ (FL_GODMODE | FL_NOTARGET);
+				cl->edict->v.flags = (int) cl->edict->v.flags & ~(FL_GODMODE | FL_NOTARGET);
 				cl->edict->v.movetype = MOVETYPE_WALK;
 				noclip_anglehack = false;
 			}
@@ -1476,7 +1476,7 @@ void Host_Say (qboolean teamonly)
 	if (*p == '"')
 	{
 		p++;
-		p[strlen (p)-1] = 0;
+		p[strlen (p) - 1] = 0;
 	}
 
 	// turn on color set 1
@@ -1549,7 +1549,7 @@ void Host_Tell_f (void)
 	if (*p == '"')
 	{
 		p++;
-		p[strlen (p)-1] = 0;
+		p[strlen (p) - 1] = 0;
 	}
 
 	// check length & truncate if necessary
@@ -1776,7 +1776,7 @@ void Host_Spawn_f (void)
 			// copy spawn parms out of the client_t
 
 			for (i = 0; i < NUM_SPAWN_PARMS; i++)
-				(&pr_global_struct->parm1) [i] = host_client->spawn_parms[i];
+				(&pr_global_struct->parm1)[i] = host_client->spawn_parms[i];
 
 			// call the spawn function
 
@@ -1975,7 +1975,7 @@ void Host_Create_f (void)
 		if (NumFound != 1)
 		{
 			sprintf (key_lines[edit_line], ">create %s", func->s_name + pr_strings);
-			key_lines[edit_line][Diff+8] = 0;
+			key_lines[edit_line][Diff + 8] = 0;
 			key_linepos = strlen (key_lines[edit_line]);
 			return;
 		}
@@ -2164,23 +2164,23 @@ void Host_Give_f (void)
 	case '9':
 		// MED 01/04/97 added hipnotic give stuff
 		/*      if (hipnotic)
-		      {
-		         if (t[0] == '6')
-		         {
-		            if (t[1] == 'a')
-		               sv_player->v.items = (int)sv_player->v.items | HIT_PROXIMITY_GUN;
-		            else
-		               sv_player->v.items = (int)sv_player->v.items | IT_GRENADE_LAUNCHER;
-		         }
-		         else if (t[0] == '9')
-		            sv_player->v.items = (int)sv_player->v.items | HIT_LASER_CANNON;
-		         else if (t[0] == '0')
-		            sv_player->v.items = (int)sv_player->v.items | HIT_MJOLNIR;
-		         else if (t[0] >= '2')
-		            sv_player->v.items = (int)sv_player->v.items | (IT_SHOTGUN << (t[0] - '2'));
-		      }
-		      else
-		*/
+			  {
+			  if (t[0] == '6')
+			  {
+			  if (t[1] == 'a')
+			  sv_player->v.items = (int)sv_player->v.items | HIT_PROXIMITY_GUN;
+			  else
+			  sv_player->v.items = (int)sv_player->v.items | IT_GRENADE_LAUNCHER;
+			  }
+			  else if (t[0] == '9')
+			  sv_player->v.items = (int)sv_player->v.items | HIT_LASER_CANNON;
+			  else if (t[0] == '0')
+			  sv_player->v.items = (int)sv_player->v.items | HIT_MJOLNIR;
+			  else if (t[0] >= '2')
+			  sv_player->v.items = (int)sv_player->v.items | (IT_SHOTGUN << (t[0] - '2'));
+			  }
+			  else
+			  */
 	{
 		if (t[0] >= '2')
 			sv_player->v.items = (int) sv_player->v.items | (IT_SHOTGUN << (t[0] - '2'));
@@ -2190,67 +2190,67 @@ void Host_Give_f (void)
 	case 's':
 		/*		if (rogue)
 				{
-			        val = GetEdictFieldValue(sv_player, "ammo_shells1");
-				    if (val)
-					    val->_float = v;
+				val = GetEdictFieldValue(sv_player, "ammo_shells1");
+				if (val)
+				val->_float = v;
 				}
 
-		        sv_player->v.ammo_shells = v;
-		        break;		*/
+				sv_player->v.ammo_shells = v;
+				break;		*/
 	case 'n':
 		/*		if (rogue)
 				{
 				val = GetEdictFieldValue(sv_player, "ammo_nails1");
-					if (val)
-					{
-						val->_float = v;
-						if (sv_player->v.weapon <= IT_LIGHTNING)
-							sv_player->v.ammo_nails = v;
-					}
+				if (val)
+				{
+				val->_float = v;
+				if (sv_player->v.weapon <= IT_LIGHTNING)
+				sv_player->v.ammo_nails = v;
+				}
 				}
 				else
 				{
-					sv_player->v.ammo_nails = v;
+				sv_player->v.ammo_nails = v;
 				}*/
 		break;
 	case 'l':
 		/*		if (rogue)
 				{
-					val = GetEdictFieldValue(sv_player, "ammo_lava_nails");
-					if (val)
-					{
-						val->_float = v;
-						if (sv_player->v.weapon > IT_LIGHTNING)
-							sv_player->v.ammo_nails = v;
-					}
+				val = GetEdictFieldValue(sv_player, "ammo_lava_nails");
+				if (val)
+				{
+				val->_float = v;
+				if (sv_player->v.weapon > IT_LIGHTNING)
+				sv_player->v.ammo_nails = v;
+				}
 				}*/
 		break;
 	case 'r':
 		/*		if (rogue)
 				{
-					val = GetEdictFieldValue(sv_player, "ammo_rockets1");
-					if (val)
-					{
-						val->_float = v;
-						if (sv_player->v.weapon <= IT_LIGHTNING)
-							sv_player->v.ammo_rockets = v;
-					}
+				val = GetEdictFieldValue(sv_player, "ammo_rockets1");
+				if (val)
+				{
+				val->_float = v;
+				if (sv_player->v.weapon <= IT_LIGHTNING)
+				sv_player->v.ammo_rockets = v;
+				}
 				}
 				else
 				{
-					sv_player->v.ammo_rockets = v;
+				sv_player->v.ammo_rockets = v;
 				}*/
 		break;
 	case 'm':
 		/*		if (rogue)
 				{
-					val = GetEdictFieldValue(sv_player, "ammo_multi_rockets");
-					if (val)
-					{
-						val->_float = v;
-						if (sv_player->v.weapon > IT_LIGHTNING)
-							sv_player->v.ammo_rockets = v;
-					}
+				val = GetEdictFieldValue(sv_player, "ammo_multi_rockets");
+				if (val)
+				{
+				val->_float = v;
+				if (sv_player->v.weapon > IT_LIGHTNING)
+				sv_player->v.ammo_rockets = v;
+				}
 				}*/
 		break;
 	case 'h':
@@ -2259,29 +2259,29 @@ void Host_Give_f (void)
 	case 'c':
 		/*		if (rogue)
 				{
-					val = GetEdictFieldValue(sv_player, "ammo_cells1");
-					if (val)
-					{
-						val->_float = v;
-						if (sv_player->v.weapon <= IT_LIGHTNING)
-							sv_player->v.ammo_cells = v;
-					}
+				val = GetEdictFieldValue(sv_player, "ammo_cells1");
+				if (val)
+				{
+				val->_float = v;
+				if (sv_player->v.weapon <= IT_LIGHTNING)
+				sv_player->v.ammo_cells = v;
+				}
 				}
 				else
 				{
-					sv_player->v.ammo_cells = v;
+				sv_player->v.ammo_cells = v;
 				}*/
 		break;
 	case 'p':
 		/*		if (rogue)
 				{
-					val = GetEdictFieldValue(sv_player, "ammo_plasma");
-					if (val)
-					{
-						val->_float = v;
-						if (sv_player->v.weapon > IT_LIGHTNING)
-							sv_player->v.ammo_cells = v;
-					}
+				val = GetEdictFieldValue(sv_player, "ammo_plasma");
+				if (val)
+				{
+				val->_float = v;
+				if (sv_player->v.weapon > IT_LIGHTNING)
+				sv_player->v.ammo_cells = v;
+				}
 				}*/
 		break;
 	}
@@ -2458,7 +2458,7 @@ void Host_Startdemos_f (void)
 	Con_Printf (PRINT_NORMAL, va ("%i demo(s) in loop\n", c));
 
 	for (i = 1; i < c + 1; i++)
-		strncpy (cls.demos[i-1], Cmd_Argv (i), sizeof (cls.demos[0]) - 1);
+		strncpy (cls.demos[i - 1], Cmd_Argv (i), sizeof (cls.demos[0]) - 1);
 
 	if (!sv.active && cls.demonum != -1 && !cls.demoplayback)
 	{

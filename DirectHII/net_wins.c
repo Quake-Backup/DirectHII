@@ -103,7 +103,7 @@ int WINS_Init (void)
 
 	if (local)
 	{
-		myAddr = * (int *) local->h_addr_list[0];
+		myAddr = *(int *) local->h_addr_list[0];
 
 		// if the quake hostname isn't set, set it to the machine name
 		if (strcmp (hostname.string, "UNNAMED") == 0)
@@ -142,7 +142,7 @@ int WINS_Init (void)
 	((struct sockaddr_in *) &broadcastaddr)->sin_port = htons ((unsigned short) net_hostport);
 
 	WINS_GetSocketAddr (net_controlsocket, &addr);
-	strcpy (my_tcpip_address,  WINS_AddrToString (&addr));
+	strcpy (my_tcpip_address, WINS_AddrToString (&addr));
 	p = strrchr (my_tcpip_address, ':');
 
 	if (p)
@@ -473,7 +473,7 @@ int WINS_GetAddrFromName (char *name, struct qsockaddr *addr)
 
 	addr->sa_family = AF_INET;
 	((struct sockaddr_in *) addr)->sin_port = htons ((unsigned short) net_hostport);
-	((struct sockaddr_in *) addr)->sin_addr.s_addr = * (int *) hostentry->h_addr_list[0];
+	((struct sockaddr_in *) addr)->sin_addr.s_addr = *(int *) hostentry->h_addr_list[0];
 
 	return 0;
 }

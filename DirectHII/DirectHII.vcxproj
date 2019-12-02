@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{41BCA8DA-B0DE-4010-9787-818611DE5E9F}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v120</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;CINTERFACE;NDEBUG;WIN32;_WINDOWS;QUAKE2RJ;RJNET;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;CINTERFACE;_DEBUG;WIN32;_WINDOWS;QUAKE2RJ;RJNET;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>precompiled.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;wsock32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Image Include="qe3.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="winquake.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bspfile.h" />
+    <ClInclude Include="cdaudio.h" />
+    <ClInclude Include="client.h" />
+    <ClInclude Include="cl_effect.h" />
+    <ClInclude Include="cmd.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="conproc.h" />
+    <ClInclude Include="console.h" />
+    <ClInclude Include="crc.h" />
+    <ClInclude Include="cvar.h" />
+    <ClInclude Include="draw.h" />
+    <ClInclude Include="d_draw.h" />
+    <ClInclude Include="d_image.h" />
+    <ClInclude Include="d_light.h" />
+    <ClInclude Include="d_local.h" />
+    <ClInclude Include="d_main.h" />
+    <ClInclude Include="d_mesh.h" />
+    <ClInclude Include="d_particles.h" />
+    <ClInclude Include="d_quadbatch.h" />
+    <ClInclude Include="d_sprite.h" />
+    <ClInclude Include="d_surf.h" />
+    <ClInclude Include="d_texture.h" />
+    <ClInclude Include="d_video.h" />
+    <ClInclude Include="glquake.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="keys.h" />
+    <ClInclude Include="mathlib.h" />
+    <ClInclude Include="matrix.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="menu_common.h" />
+    <ClInclude Include="midi.h" />
+    <ClInclude Include="midstuff.h" />
+    <ClInclude Include="model.h" />
+    <ClInclude Include="modelgen.h" />
+    <ClInclude Include="net.h" />
+    <ClInclude Include="net_dgrm.h" />
+    <ClInclude Include="net_loop.h" />
+    <ClInclude Include="net_ser.h" />
+    <ClInclude Include="net_vcr.h" />
+    <ClInclude Include="net_wins.h" />
+    <ClInclude Include="net_wipx.h" />
+    <ClInclude Include="particles.h" />
+    <ClInclude Include="precompiled.h" />
+    <ClInclude Include="progdefs.h" />
+    <ClInclude Include="progs.h" />
+    <ClInclude Include="protocol.h" />
+    <ClInclude Include="pr_comp.h" />
+    <ClInclude Include="quakedef.h" />
+    <ClInclude Include="render.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="sbar.h" />
+    <ClInclude Include="screen.h" />
+    <ClInclude Include="server.h" />
+    <ClInclude Include="sound.h" />
+    <ClInclude Include="spritegn.h" />
+    <ClInclude Include="sys.h" />
+    <ClInclude Include="vid.h" />
+    <ClInclude Include="view.h" />
+    <ClInclude Include="wad.h" />
+    <ClInclude Include="winquake.h" />
+    <ClInclude Include="world.h" />
+    <ClInclude Include="zone.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cd_win.c" />
+    <ClCompile Include="cl_demo.c" />
+    <ClCompile Include="cl_effect.c" />
+    <ClCompile Include="cl_input.c" />
+    <ClCompile Include="cl_main.c" />
+    <ClCompile Include="cl_parse.c" />
+    <ClCompile Include="cl_particles.c" />
+    <ClCompile Include="cl_refrag.c" />
+    <ClCompile Include="cl_tent.c" />
+    <ClCompile Include="cl_view.c" />
+    <ClCompile Include="cmd.c" />
+    <ClCompile Include="common.c" />
+    <ClCompile Include="conproc.c" />
+    <ClCompile Include="console.c" />
+    <ClCompile Include="crc.c" />
+    <ClCompile Include="cvar.c" />
+    <ClCompile Include="d_draw.c" />
+    <ClCompile Include="d_image.c" />
+    <ClCompile Include="d_light.c" />
+    <ClCompile Include="d_main.c" />
+    <ClCompile Include="d_mesh.c" />
+    <ClCompile Include="d_quadbatch.c" />
+    <ClCompile Include="d_shader.c" />
+    <ClCompile Include="d_state.c" />
+    <ClCompile Include="d_surf.c" />
+    <ClCompile Include="d_texture.c" />
+    <ClCompile Include="d_video.c" />
+    <ClCompile Include="host.c" />
+    <ClCompile Include="host_cmd.c" />
+    <ClCompile Include="in_win.c" />
+    <ClCompile Include="keys.c" />
+    <ClCompile Include="mathlib.c" />
+    <ClCompile Include="matrix.c" />
+    <ClCompile Include="menu_class.c" />
+    <ClCompile Include="menu_common.c" />
+    <ClCompile Include="menu_difficulty.c" />
+    <ClCompile Include="menu_gameoptions.c" />
+    <ClCompile Include="menu_help.c" />
+    <ClCompile Include="menu_keys.c" />
+    <ClCompile Include="menu_lanconfig.c" />
+    <ClCompile Include="menu_main.c" />
+    <ClCompile Include="menu_modem.c" />
+    <ClCompile Include="menu_multiplayer.c" />
+    <ClCompile Include="menu_net.c" />
+    <ClCompile Include="menu_options.c" />
+    <ClCompile Include="menu_quit.c" />
+    <ClCompile Include="menu_saveload.c" />
+    <ClCompile Include="menu_search.c" />
+    <ClCompile Include="menu_serial.c" />
+    <ClCompile Include="menu_setup.c" />
+    <ClCompile Include="menu_singleplayer.c" />
+    <ClCompile Include="menu_slist.c" />
+    <ClCompile Include="menu_video.c" />
+    <ClCompile Include="midi.c" />
+    <ClCompile Include="model.c" />
+    <ClCompile Include="mod_alias.c" />
+    <ClCompile Include="mod_brush.c" />
+    <ClCompile Include="mod_sprite.c" />
+    <ClCompile Include="mstrconv.c" />
+    <ClCompile Include="net_dgrm.c" />
+    <ClCompile Include="net_loop.c" />
+    <ClCompile Include="net_main.c" />
+    <ClCompile Include="net_vcr.c" />
+    <ClCompile Include="net_win.c" />
+    <ClCompile Include="net_wins.c" />
+    <ClCompile Include="net_wipx.c" />
+    <ClCompile Include="precompiled.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="pr_cmds.c" />
+    <ClCompile Include="pr_edict.c" />
+    <ClCompile Include="pr_exec.c" />
+    <ClCompile Include="r_draw.c" />
+    <ClCompile Include="r_light.c" />
+    <ClCompile Include="r_main.c" />
+    <ClCompile Include="r_mesh.c" />
+    <ClCompile Include="r_misc.c" />
+    <ClCompile Include="r_screen.c" />
+    <ClCompile Include="r_surf.c" />
+    <ClCompile Include="r_vcache.c" />
+    <ClCompile Include="sbar.c" />
+    <ClCompile Include="snd_dma.c" />
+    <ClCompile Include="snd_mem.c" />
+    <ClCompile Include="snd_mix.c" />
+    <ClCompile Include="snd_win.c" />
+    <ClCompile Include="sv_main.c" />
+    <ClCompile Include="sv_move.c" />
+    <ClCompile Include="sv_phys.c" />
+    <ClCompile Include="sv_user.c" />
+    <ClCompile Include="sv_world.c" />
+    <ClCompile Include="sys_win.c" />
+    <ClCompile Include="vidnt.c" />
+    <ClCompile Include="vid_cmds.c" />
+    <ClCompile Include="wad.c" />
+    <ClCompile Include="zone.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="bugs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fxCommon.shader" />
+    <None Include="fxDraw.shader" />
+    <None Include="fxMesh.shader" />
+    <None Include="fxParticle.shader" />
+    <None Include="fxSprite.shader" />
+    <None Include="fxSurf.shader" />
+    <None Include="fxWaterwarp.shader" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

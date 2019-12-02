@@ -180,9 +180,9 @@ void D_DrawPolyblend (void)
 	D_BeginQuadBatch ();
 
 	D_QuadVertexPosition2f (-1, -1);
-	D_QuadVertexPosition2f ( 1, -1);
-	D_QuadVertexPosition2f ( 1,  1);
-	D_QuadVertexPosition2f (-1,  1);
+	D_QuadVertexPosition2f (1, -1);
+	D_QuadVertexPosition2f (1, 1);
+	D_QuadVertexPosition2f (-1, 1);
 
 	D_EndQuadBatch ();
 }
@@ -275,9 +275,9 @@ void D_AddParticle (float *origin, unsigned color)
 	D_CheckQuadBatch ();
 
 	D_QuadVertexPosition3fvColorTexCoord2f (origin, color, -1, -1);
-	D_QuadVertexPosition3fvColorTexCoord2f (origin, color, -1,  1);
-	D_QuadVertexPosition3fvColorTexCoord2f (origin, color,  1,  1);
-	D_QuadVertexPosition3fvColorTexCoord2f (origin, color,  1, -1);
+	D_QuadVertexPosition3fvColorTexCoord2f (origin, color, -1, 1);
+	D_QuadVertexPosition3fvColorTexCoord2f (origin, color, 1, 1);
+	D_QuadVertexPosition3fvColorTexCoord2f (origin, color, 1, -1);
 }
 
 void D_EndParticles (void)
@@ -374,9 +374,9 @@ void D_DoWaterWarp (int width, int height)
 	D_BeginQuadBatch ();
 
 	D_QuadVertexPosition2fColorTexCoord2f (-1, -1, 0xffffffff, 0, 0);
-	D_QuadVertexPosition2fColorTexCoord2f ( 1, -1, 0xffffffff, s, 0);
-	D_QuadVertexPosition2fColorTexCoord2f ( 1,  1, 0xffffffff, s, t);
-	D_QuadVertexPosition2fColorTexCoord2f (-1,  1, 0xffffffff, 0, t);
+	D_QuadVertexPosition2fColorTexCoord2f (1, -1, 0xffffffff, s, 0);
+	D_QuadVertexPosition2fColorTexCoord2f (1, 1, 0xffffffff, s, t);
+	D_QuadVertexPosition2fColorTexCoord2f (-1, 1, 0xffffffff, 0, t);
 
 	D_EndQuadBatch ();
 }

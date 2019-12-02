@@ -13,7 +13,7 @@ int	m_net_cursor = 0;
 int m_net_items;
 int m_net_saveHeight;
 
-char *net_helpMessage [] =
+char *net_helpMessage[] =
 {
 	/* .........1.........2.... */
 	"                        ",
@@ -99,10 +99,10 @@ void M_Net_Draw (void)
 	f += 19;
 	/*	rjr
 		if (ipxAvailable)
-			p = Draw_CachePic ("gfx/netmen3.lmp");
+		p = Draw_CachePic ("gfx/netmen3.lmp");
 		else
-			p = Draw_CachePic ("gfx/dim_ipx.lmp");
-	*/
+		p = Draw_CachePic ("gfx/dim_ipx.lmp");
+		*/
 	//	M_DrawTransPic (72, f, p);
 	M_DrawBigString (72, f, "IPX");
 
@@ -110,20 +110,20 @@ void M_Net_Draw (void)
 	f += 19;
 	/* rjr
 		if (tcpipAvailable)
-			p = Draw_CachePic ("gfx/netmen4.lmp");
+		p = Draw_CachePic ("gfx/netmen4.lmp");
 		else
-			p = Draw_CachePic ("gfx/dim_tcp.lmp");
-	*/
+		p = Draw_CachePic ("gfx/dim_tcp.lmp");
+		*/
 	//	M_DrawTransPic (72, f, p);
 	M_DrawBigString (72, f, "TCP/IP");
 
 	f = (320 - 26 * 8) / 2;
 	M_DrawTextBox (f, 134, 24, 4);
 	f += 8;
-	M_Print (f, 142, net_helpMessage[m_net_cursor*4+0]);
-	M_Print (f, 150, net_helpMessage[m_net_cursor*4+1]);
-	M_Print (f, 158, net_helpMessage[m_net_cursor*4+2]);
-	M_Print (f, 166, net_helpMessage[m_net_cursor*4+3]);
+	M_Print (f, 142, net_helpMessage[m_net_cursor * 4 + 0]);
+	M_Print (f, 150, net_helpMessage[m_net_cursor * 4 + 1]);
+	M_Print (f, 158, net_helpMessage[m_net_cursor * 4 + 2]);
+	M_Print (f, 166, net_helpMessage[m_net_cursor * 4 + 3]);
 
 	f = (int) (realtime * 10) % 8;
 	M_DrawTransPic (43, 24 + m_net_cursor * 20, Draw_CachePic (va ("gfx/menu/menudot%i.lmp", f + 1)));

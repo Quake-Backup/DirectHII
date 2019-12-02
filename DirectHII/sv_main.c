@@ -16,13 +16,13 @@ char	localmodels[MAX_MODELS][5];			// inline model names for precache
 #if RJNET
 cvar_t	sv_sound_distance = {"sv_sound_distance", "800", true};
 
-cvar_t	sv_update_player	= {"sv_update_player", "1", true};
-cvar_t	sv_update_monsters	= {"sv_update_monsters", "1", true};
-cvar_t	sv_update_missiles	= {"sv_update_missiles", "1", true};
-cvar_t	sv_update_misc		= {"sv_update_misc", "1", true};
+cvar_t	sv_update_player = {"sv_update_player", "1", true};
+cvar_t	sv_update_monsters = {"sv_update_monsters", "1", true};
+cvar_t	sv_update_missiles = {"sv_update_missiles", "1", true};
+cvar_t	sv_update_misc = {"sv_update_misc", "1", true};
 
-cvar_t	sv_ce_scale			= {"sv_ce_scale", "0", true};
-cvar_t	sv_ce_max_size		= {"sv_ce_max_size", "0", true};
+cvar_t	sv_ce_scale = {"sv_ce_scale", "0", true};
+cvar_t	sv_ce_max_size = {"sv_ce_max_size", "0", true};
 
 #endif
 
@@ -113,9 +113,9 @@ void SV_Edicts (char *Name)
 	{
 		e = EDICT_NUM (i);
 		fprintf (FH, "%3d. %8.2f %-30s %-30s %-40s %-40s %-40s\n",
-				 i, e->v.nextthink, e->v.classname + pr_strings, e->v.model + pr_strings,
-				 pr_functions[e->v.think].s_name + pr_strings, pr_functions[e->v.touch].s_name + pr_strings,
-				 pr_functions[e->v.use].s_name + pr_strings);
+			i, e->v.nextthink, e->v.classname + pr_strings, e->v.model + pr_strings,
+			pr_functions[e->v.think].s_name + pr_strings, pr_functions[e->v.touch].s_name + pr_strings,
+			pr_functions[e->v.use].s_name + pr_strings);
 	}
 
 	fclose (FH);
@@ -320,7 +320,7 @@ Larger attenuations will drop off.  (max 4 attenuation)
 ==================
 */
 void SV_StartSound (edict_t *entity, int channel, char *sample, int volume,
-					float attenuation)
+	float attenuation)
 {
 	int         sound_num;
 	int			field_mask;
@@ -355,7 +355,7 @@ void SV_StartSound (edict_t *entity, int channel, char *sample, int volume,
 
 	// find precache number for sound
 	for (sound_num = 1; sound_num < MAX_SOUNDS
-			&& sv.sound_precache[sound_num]; sound_num++)
+		&& sv.sound_precache[sound_num]; sound_num++)
 		if (!strcmp (sample, sv.sound_precache[sound_num]))
 			break;
 
@@ -481,7 +481,7 @@ void SV_SendServerinfo (client_t *client)
 
 	if (sv.edicts->v.message > 0 && sv.edicts->v.message <= pr_string_count)
 	{
-		MSG_WriteString (&client->message, &pr_global_strings[pr_string_index[(int) sv.edicts->v.message-1]]);
+		MSG_WriteString (&client->message, &pr_global_strings[pr_string_index[(int) sv.edicts->v.message - 1]]);
 	}
 	else
 	{
@@ -671,7 +671,7 @@ crosses a waterline.
 */
 
 int		fatbytes;
-byte	fatpvs[MAX_MAP_LEAFS/8];
+byte	fatpvs[MAX_MAP_LEAFS / 8];
 
 void SV_AddToFatPVS (vec3_t org, mnode_t *node)
 {
@@ -740,347 +740,347 @@ SV_WriteEntitiesToClient
 /*
 void SV_WriteEntitiesToClient (client_t *client, edict_t	*clent, sizebuf_t *msg)
 {
-	int		e, i;
-	int		bits;
-	byte	*pvs;
-	vec3_t	org;
-	float	miss;
-	edict_t	*ent;
-	int		temp_index;
-	char	NewName[MAX_QPATH];
-	long	flagtest;
+int		e, i;
+int		bits;
+byte	*pvs;
+vec3_t	org;
+float	miss;
+edict_t	*ent;
+int		temp_index;
+char	NewName[MAX_QPATH];
+long	flagtest;
 
 #if RJNET
-	int client_num;
+int client_num;
 
-	client_num = client-svs.clients;
+client_num = client-svs.clients;
 #endif
 
 // find the client's PVS
-	if (clent->v.cameramode)
-	{
-		ent = PROG_TO_EDICT(clent->v.cameramode);
-		VectorCopy(ent->v.origin, org);
-	}
-	else
-		VectorAdd (clent->v.origin, clent->v.view_ofs, org);
+if (clent->v.cameramode)
+{
+ent = PROG_TO_EDICT(clent->v.cameramode);
+VectorCopy(ent->v.origin, org);
+}
+else
+VectorAdd (clent->v.origin, clent->v.view_ofs, org);
 
-	pvs = SV_FatPVS (org);
+pvs = SV_FatPVS (org);
 
 // send over all entities (excpet the client) that touch the pvs
-	ent = NEXT_EDICT(sv.edicts);
-	for (e=1; e<sv.num_edicts; e++, ent = NEXT_EDICT(ent))
-	{
+ent = NEXT_EDICT(sv.edicts);
+for (e=1; e<sv.num_edicts; e++, ent = NEXT_EDICT(ent))
+{
 #ifdef QUAKE2RJ
-		// don't send if flagged for NODRAW and there are no lighting effects
-		if (ent->v.effects == EF_NODRAW)
-		{
+// don't send if flagged for NODRAW and there are no lighting effects
+if (ent->v.effects == EF_NODRAW)
+{
 #if RJNET
-			if (ent->baseline[client_num].flags & BASE_ENT_ON)
-			{
-					ent->baseline[client_num].flags &= ~BASE_ENT_ON;
-					bits = U_ENT_OFF;
-					goto skip;
-			}
-			else
-				continue;
+if (ent->baseline[client_num].flags & BASE_ENT_ON)
+{
+ent->baseline[client_num].flags &= ~BASE_ENT_ON;
+bits = U_ENT_OFF;
+goto skip;
+}
+else
+continue;
 #else
-			continue;
+continue;
 #endif
-		}
+}
 #endif
 
 // ignore if not touching a PV leaf
-		if (ent != clent)	// clent is ALLWAYS sent
-		{
+if (ent != clent)	// clent is ALLWAYS sent
+{
 // ignore ents without visible models
-			if (!ent->v.modelindex || !pr_strings[ent->v.model])
-			{
+if (!ent->v.modelindex || !pr_strings[ent->v.model])
+{
 #if RJNET
-				if (ent->baseline[client_num].flags & BASE_ENT_ON)
-				{
-					ent->baseline[client_num].flags &= ~BASE_ENT_ON;
-					bits = U_ENT_OFF;
-					goto skip;
-				}
-				else
-					continue;
+if (ent->baseline[client_num].flags & BASE_ENT_ON)
+{
+ent->baseline[client_num].flags &= ~BASE_ENT_ON;
+bits = U_ENT_OFF;
+goto skip;
+}
+else
+continue;
 #else
-				continue;
+continue;
 #endif
-			}
+}
 
-			for (i=0; i < ent->num_leafs; i++)
-				if (pvs[ent->leafnums[i] >> 3] & (1 << (ent->leafnums[i]&7) ))
-					break;
+for (i=0; i < ent->num_leafs; i++)
+if (pvs[ent->leafnums[i] >> 3] & (1 << (ent->leafnums[i]&7) ))
+break;
 
-			if (i == ent->num_leafs)
-			{
+if (i == ent->num_leafs)
+{
 #if RJNET
-				if (ent->baseline[client_num].flags & BASE_ENT_ON)
-				{
-					ent->baseline[client_num].flags &= ~BASE_ENT_ON;
-					bits = U_ENT_OFF;
-					goto skip;
-				}
-				else
-					continue;
+if (ent->baseline[client_num].flags & BASE_ENT_ON)
+{
+ent->baseline[client_num].flags &= ~BASE_ENT_ON;
+bits = U_ENT_OFF;
+goto skip;
+}
+else
+continue;
 #else
-				continue;
+continue;
 #endif
-			}
-		}
+}
+}
 
-		if (msg->maxsize - msg->cursize < 16)
-		{
-			Con_Printf (PRINT_NORMAL, "packet overflow\n");
-			return;
-		}
+if (msg->maxsize - msg->cursize < 16)
+{
+Con_Printf (PRINT_NORMAL, "packet overflow\n");
+return;
+}
 
 // send an update
-		bits = 0;
+bits = 0;
 
-		for (i=0; i<3; i++)
-		{
+for (i=0; i<3; i++)
+{
 #if RJNET
-			miss = ent->v.origin[i] - ent->baseline[client_num].origin[i];
-			if ( miss < -0.1 || miss > 0.1 )
-			{
-				bits |= U_ORIGIN0<<i;
-				ent->baseline[client_num].origin[i] = ent->v.origin[i];
-			}
+miss = ent->v.origin[i] - ent->baseline[client_num].origin[i];
+if ( miss < -0.1 || miss > 0.1 )
+{
+bits |= U_ORIGIN0<<i;
+ent->baseline[client_num].origin[i] = ent->v.origin[i];
+}
 #else
-			miss = ent->v.origin[i] - ent->baseline.origin[i];
-			if ( miss < -0.1 || miss > 0.1 )
-				bits |= U_ORIGIN0<<i;
+miss = ent->v.origin[i] - ent->baseline.origin[i];
+if ( miss < -0.1 || miss > 0.1 )
+bits |= U_ORIGIN0<<i;
 #endif
-		}
+}
 
 #if RJNET
-		if ( ent->v.angles[0] != ent->baseline[client_num].angles[0] )
-		{
-			bits |= U_ANGLES0;
-			ent->baseline[client_num].angles[0] = ent->v.angles[0];
-		}
+if ( ent->v.angles[0] != ent->baseline[client_num].angles[0] )
+{
+bits |= U_ANGLES0;
+ent->baseline[client_num].angles[0] = ent->v.angles[0];
+}
 #else
-		if ( ent->v.angles[0] != ent->baseline.angles[0] )
-			bits |= U_ANGLES0;
-#endif
-
-#if RJNET
-		if ( ent->v.angles[1] != ent->baseline[client_num].angles[1] )
-		{
-			bits |= U_ANGLES1;
-			ent->baseline[client_num].angles[1] = ent->v.angles[1];
-		}
-#else
-		if ( ent->v.angles[1] != ent->baseline.angles[1] )
-			bits |= U_ANGLES1;
+if ( ent->v.angles[0] != ent->baseline.angles[0] )
+bits |= U_ANGLES0;
 #endif
 
 #if RJNET
-		if ( ent->v.angles[2] != ent->baseline[client_num].angles[2] )
-		{
-			bits |= U_ANGLES2;
-			ent->baseline[client_num].angles[2] = ent->v.angles[2];
-		}
+if ( ent->v.angles[1] != ent->baseline[client_num].angles[1] )
+{
+bits |= U_ANGLES1;
+ent->baseline[client_num].angles[1] = ent->v.angles[1];
+}
 #else
-		if ( ent->v.angles[2] != ent->baseline.angles[2] )
-			bits |= U_ANGLES2;
-#endif
-
-		if (ent->v.movetype == MOVETYPE_STEP)
-			bits |= U_STEP;	// don't mess up the step animation
-
-#if RJNET
-		if (ent->baseline[client_num].colormap != ent->v.colormap)
-		{
-			bits |= U_COLORMAP;
-			ent->baseline[client_num].colormap = ent->v.colormap;
-		}
-#else
-		if (ent->baseline.colormap != ent->v.colormap)
-			bits |= U_COLORMAP;
+if ( ent->v.angles[1] != ent->baseline.angles[1] )
+bits |= U_ANGLES1;
 #endif
 
 #if RJNET
-		if (ent->baseline[client_num].skin != ent->v.skin
-			|| ent->baseline[client_num].drawflags != ent->v.drawflags)
-		{
-			bits |= U_SKIN;
-			ent->baseline[client_num].skin = ent->v.skin;
-			ent->baseline[client_num].drawflags = ent->v.drawflags;
-		}
+if ( ent->v.angles[2] != ent->baseline[client_num].angles[2] )
+{
+bits |= U_ANGLES2;
+ent->baseline[client_num].angles[2] = ent->v.angles[2];
+}
 #else
-		if (ent->baseline.skin != ent->v.skin
-			|| ent->baseline.drawflags != ent->v.drawflags)
-			bits |= U_SKIN;
+if ( ent->v.angles[2] != ent->baseline.angles[2] )
+bits |= U_ANGLES2;
+#endif
+
+if (ent->v.movetype == MOVETYPE_STEP)
+bits |= U_STEP;	// don't mess up the step animation
+
+#if RJNET
+if (ent->baseline[client_num].colormap != ent->v.colormap)
+{
+bits |= U_COLORMAP;
+ent->baseline[client_num].colormap = ent->v.colormap;
+}
+#else
+if (ent->baseline.colormap != ent->v.colormap)
+bits |= U_COLORMAP;
 #endif
 
 #if RJNET
-		if (ent->baseline[client_num].frame != ent->v.frame)
-		{
-			bits |= U_FRAME;
-			ent->baseline[client_num].frame = ent->v.frame;
-		}
+if (ent->baseline[client_num].skin != ent->v.skin
+|| ent->baseline[client_num].drawflags != ent->v.drawflags)
+{
+bits |= U_SKIN;
+ent->baseline[client_num].skin = ent->v.skin;
+ent->baseline[client_num].drawflags = ent->v.drawflags;
+}
 #else
-		if (ent->baseline.frame != ent->v.frame)
-			bits |= U_FRAME;
+if (ent->baseline.skin != ent->v.skin
+|| ent->baseline.drawflags != ent->v.drawflags)
+bits |= U_SKIN;
 #endif
 
 #if RJNET
-		if (ent->baseline[client_num].effects != ent->v.effects)
-		{
-			bits |= U_EFFECTS;
-			ent->baseline[client_num].effects = ent->v.effects;
-		}
+if (ent->baseline[client_num].frame != ent->v.frame)
+{
+bits |= U_FRAME;
+ent->baseline[client_num].frame = ent->v.frame;
+}
 #else
-		if (ent->baseline.effects != ent->v.effects)
-			bits |= U_EFFECTS;
-#endif
-
-		flagtest = (long)ent->v.flags;
-		if (flagtest & 0xff000000)
-		{
-			Host_Error("Invalid flags setting for class %s",ent->v.classname + pr_strings);
-			return;
-		}
-
-		temp_index = ent->v.modelindex;
-		if (((int)ent->v.flags & FL_CLASS_DEPENDENT) && ent->v.model)
-		{
-			strcpy(NewName,ent->v.model + pr_strings);
-			NewName[strlen(NewName)-5] = client->playerclass + 48;
-			temp_index = SV_ModelIndex (NewName);
-		}
-
-#if RJNET
-		if (ent->baseline[client_num].modelindex != temp_index)
-		{
-			bits |= U_MODEL;
-			ent->baseline[client_num].modelindex = temp_index;
-		}
-#else
-		if (ent->baseline.modelindex != temp_index)
-			bits |= U_MODEL;
+if (ent->baseline.frame != ent->v.frame)
+bits |= U_FRAME;
 #endif
 
 #if RJNET
-		if (ent->baseline[client_num].scale != ((int)(ent->v.scale*100.0)&255)
-			|| ent->baseline[client_num].abslight != (int)(ent->v.abslight*255.0)&255)
-		{
-			bits |= U_SCALE;
-			ent->baseline[client_num].scale = ((int)(ent->v.scale*100.0)&255);
-			ent->baseline[client_num].abslight = (int)(ent->v.abslight*255.0)&255;
-		}
+if (ent->baseline[client_num].effects != ent->v.effects)
+{
+bits |= U_EFFECTS;
+ent->baseline[client_num].effects = ent->v.effects;
+}
 #else
-		if (ent->baseline.scale != ((int)(ent->v.scale*100.0)&255)
-			|| ent->baseline.abslight != (int)(ent->v.abslight*255.0)&255)
-			bits |= U_SCALE;
+if (ent->baseline.effects != ent->v.effects)
+bits |= U_EFFECTS;
+#endif
+
+flagtest = (long)ent->v.flags;
+if (flagtest & 0xff000000)
+{
+Host_Error("Invalid flags setting for class %s",ent->v.classname + pr_strings);
+return;
+}
+
+temp_index = ent->v.modelindex;
+if (((int)ent->v.flags & FL_CLASS_DEPENDENT) && ent->v.model)
+{
+strcpy(NewName,ent->v.model + pr_strings);
+NewName[strlen(NewName)-5] = client->playerclass + 48;
+temp_index = SV_ModelIndex (NewName);
+}
+
+#if RJNET
+if (ent->baseline[client_num].modelindex != temp_index)
+{
+bits |= U_MODEL;
+ent->baseline[client_num].modelindex = temp_index;
+}
+#else
+if (ent->baseline.modelindex != temp_index)
+bits |= U_MODEL;
 #endif
 
 #if RJNET
-		if (!(ent->baseline[client_num].flags & BASE_ENT_ON))
-		{
-			ent->baseline[client_num].flags |= BASE_ENT_ON;
-			bits |= U_ENT_ON;
-		}
+if (ent->baseline[client_num].scale != ((int)(ent->v.scale*100.0)&255)
+|| ent->baseline[client_num].abslight != (int)(ent->v.abslight*255.0)&255)
+{
+bits |= U_SCALE;
+ent->baseline[client_num].scale = ((int)(ent->v.scale*100.0)&255);
+ent->baseline[client_num].abslight = (int)(ent->v.abslight*255.0)&255;
+}
+#else
+if (ent->baseline.scale != ((int)(ent->v.scale*100.0)&255)
+|| ent->baseline.abslight != (int)(ent->v.abslight*255.0)&255)
+bits |= U_SCALE;
+#endif
+
+#if RJNET
+if (!(ent->baseline[client_num].flags & BASE_ENT_ON))
+{
+ent->baseline[client_num].flags |= BASE_ENT_ON;
+bits |= U_ENT_ON;
+}
 #endif
 
 skip:
 #if RJNET
-		if (!bits) continue;
+if (!bits) continue;
 
-		if (!(ent->baseline[client_num].flags & BASE_ENT_SENT))
-		{
-			ent->baseline[client_num].flags |= BASE_ENT_SENT;
-			bits |= U_CLEAR_ENT;
-		}
-		if (e >= 256)
-			bits |= U_LONGENTITY;
+if (!(ent->baseline[client_num].flags & BASE_ENT_SENT))
+{
+ent->baseline[client_num].flags |= BASE_ENT_SENT;
+bits |= U_CLEAR_ENT;
+}
+if (e >= 256)
+bits |= U_LONGENTITY;
 
-		if (bits >= 256)
-			bits |= U_MOREBITS;
+if (bits >= 256)
+bits |= U_MOREBITS;
 
-		if (bits >= 65536)
-			bits |= U_MOREBITS2;
+if (bits >= 65536)
+bits |= U_MOREBITS2;
 #else
-		if (e >= 256)
-			bits |= U_LONGENTITY;
+if (e >= 256)
+bits |= U_LONGENTITY;
 
-		if (bits >= 256)
-			bits |= U_MOREBITS;
+if (bits >= 256)
+bits |= U_MOREBITS;
 #endif
 
 
-	// write the message
-		MSG_WriteByte (msg,bits | U_SIGNAL);
+// write the message
+MSG_WriteByte (msg,bits | U_SIGNAL);
 
-		if (bits & U_MOREBITS)
-			MSG_WriteByte (msg, bits>>8);
+if (bits & U_MOREBITS)
+MSG_WriteByte (msg, bits>>8);
 #if RJNET
-		if (bits & U_MOREBITS2)
-			MSG_WriteByte (msg, bits>>16);
+if (bits & U_MOREBITS2)
+MSG_WriteByte (msg, bits>>16);
 #endif
 
-		if (bits & U_LONGENTITY)
-			MSG_WriteShort (msg,e);
-		else
-			MSG_WriteByte (msg,e);
+if (bits & U_LONGENTITY)
+MSG_WriteShort (msg,e);
+else
+MSG_WriteByte (msg,e);
 
-		if (bits & U_MODEL)
-			MSG_WriteShort (msg, temp_index);
-		if (bits & U_FRAME)
-			MSG_WriteByte (msg, ent->v.frame);
-		if (bits & U_COLORMAP)
-			MSG_WriteByte (msg, ent->v.colormap);
-		if(bits & U_SKIN)
-		{ // Used for skin and drawflags
-			MSG_WriteByte(msg, ent->v.skin);
-			MSG_WriteByte(msg, ent->v.drawflags);
-		}
-		if (bits & U_EFFECTS)
-			MSG_WriteByte (msg, ent->v.effects);
-		if (bits & U_ORIGIN0)
-			MSG_WriteCoord (msg, ent->v.origin[0]);
-		if (bits & U_ANGLES0)
-			MSG_WriteAngle(msg, ent->v.angles[0]);
-		if (bits & U_ORIGIN1)
-			MSG_WriteCoord (msg, ent->v.origin[1]);
-		if (bits & U_ANGLES1)
-			MSG_WriteAngle(msg, ent->v.angles[1]);
-		if (bits & U_ORIGIN2)
-			MSG_WriteCoord (msg, ent->v.origin[2]);
-		if (bits & U_ANGLES2)
-			MSG_WriteAngle(msg, ent->v.angles[2]);
-		if(bits & U_SCALE)
-		{ // Used for scale and abslight
-			MSG_WriteByte(msg, (int)(ent->v.scale*100.0)&255);
-			MSG_WriteByte(msg, (int)(ent->v.abslight*255.0)&255);
-		}
-	}
+if (bits & U_MODEL)
+MSG_WriteShort (msg, temp_index);
+if (bits & U_FRAME)
+MSG_WriteByte (msg, ent->v.frame);
+if (bits & U_COLORMAP)
+MSG_WriteByte (msg, ent->v.colormap);
+if(bits & U_SKIN)
+{ // Used for skin and drawflags
+MSG_WriteByte(msg, ent->v.skin);
+MSG_WriteByte(msg, ent->v.drawflags);
+}
+if (bits & U_EFFECTS)
+MSG_WriteByte (msg, ent->v.effects);
+if (bits & U_ORIGIN0)
+MSG_WriteCoord (msg, ent->v.origin[0]);
+if (bits & U_ANGLES0)
+MSG_WriteAngle(msg, ent->v.angles[0]);
+if (bits & U_ORIGIN1)
+MSG_WriteCoord (msg, ent->v.origin[1]);
+if (bits & U_ANGLES1)
+MSG_WriteAngle(msg, ent->v.angles[1]);
+if (bits & U_ORIGIN2)
+MSG_WriteCoord (msg, ent->v.origin[2]);
+if (bits & U_ANGLES2)
+MSG_WriteAngle(msg, ent->v.angles[2]);
+if(bits & U_SCALE)
+{ // Used for scale and abslight
+MSG_WriteByte(msg, (int)(ent->v.scale*100.0)&255);
+MSG_WriteByte(msg, (int)(ent->v.abslight*255.0)&255);
+}
+}
 }
 
 */
 
 /*entity_state2_t *FindEntInList(int index)
 {
-	int i,frame;
+int i,frame;
 
-	frame = -1;
-	for(i=0;i<MAX_FRAMES;i++)
-	{
-		if (find_client->current_frame == frames[client_num][i].frame)
-			frame = i;
-	}
+frame = -1;
+for(i=0;i<MAX_FRAMES;i++)
+{
+if (find_client->current_frame == frames[client_num][i].frame)
+frame = i;
+}
 
-	if (frame == -1) return NULL;
+if (frame == -1) return NULL;
 
-	for(i=0;i<frames[client_num][frame].count;i++)
-		if (frames[client_num][frame].states[i].index == index)
-			return &frames[client_num][frame].states[i];
+for(i=0;i<frames[client_num][frame].count;i++)
+if (frames[client_num][frame].states[i].index == index)
+return &frames[client_num][frame].states[i];
 
-	return NULL;
+return NULL;
 }
 */
 
@@ -1125,8 +1125,8 @@ void SV_PrepareClientEntities (client_t *client, edict_t	*clent, sizebuf_t *msg)
 			client->current_frame = MAX_FRAMES + 1;
 	}
 	else if (client->last_frame == CLIENT_FRAME_INIT ||
-			 client->last_frame == 0 ||
-			 client->last_frame == MAX_FRAMES + 1)
+		client->last_frame == 0 ||
+		client->last_frame == MAX_FRAMES + 1)
 	{
 		// Reference expired in current sequence
 		//		Con_Printf("SV: Expired SV(%d,%d) CL(%d,%d)\n",client->current_sequence, client->current_frame, client->last_sequence, client->last_frame);
@@ -1406,7 +1406,7 @@ skipA:;
 		if (((int) ent->v.flags & FL_CLASS_DEPENDENT) && ent->v.model)
 		{
 			strcpy (NewName, ent->v.model + pr_strings);
-			NewName[strlen (NewName)-5] = client->playerclass + 48;
+			NewName[strlen (NewName) - 5] = client->playerclass + 48;
 			temp_index = SV_ModelIndex (NewName);
 		}
 
@@ -1583,9 +1583,9 @@ void SV_WriteClientdataToMessage (client_t *client, edict_t *ent, sizebuf_t *msg
 	if (client->send_all_v)
 	{
 		bits = SU_VIEWHEIGHT | SU_IDEALPITCH | SU_IDEALROLL |
-			   SU_VELOCITY1 | (SU_VELOCITY1 << 1) | (SU_VELOCITY1 << 2) |
-			   SU_PUNCH1 | (SU_PUNCH1 << 1) | (SU_PUNCH1 << 2) | SU_WEAPONFRAME |
-			   SU_ARMOR | SU_WEAPON;
+			SU_VELOCITY1 | (SU_VELOCITY1 << 1) | (SU_VELOCITY1 << 2) |
+			SU_PUNCH1 | (SU_PUNCH1 << 1) | (SU_PUNCH1 << 2) | SU_WEAPONFRAME |
+			SU_ARMOR | SU_WEAPON;
 	}
 	else
 	{
@@ -1644,15 +1644,15 @@ void SV_WriteClientdataToMessage (client_t *client, edict_t *ent, sizebuf_t *msg
 			break;
 		case 3:bits |= SU_VELOCITY1;
 			break;
-		case 4:bits |= (SU_VELOCITY1<<1);
+		case 4:bits |= (SU_VELOCITY1 << 1);
 			break;
-		case 5:bits |= (SU_VELOCITY1<<2);
+		case 5:bits |= (SU_VELOCITY1 << 2);
 			break;
 		case 6:bits |= SU_PUNCH1;
 			break;
-		case 7:bits |= (SU_PUNCH1<<1);
+		case 7:bits |= (SU_PUNCH1 << 1);
 			break;
-		case 8:bits |= (SU_PUNCH1<<2);
+		case 8:bits |= (SU_PUNCH1 << 2);
 			break;
 		case 9:bits |= SU_WEAPONFRAME;
 			break;
@@ -2129,7 +2129,7 @@ qboolean SV_SendClientDatagram (client_t *client)
 
 	/*	if ((rand () & 0xff) < 200)
 		{
-			return true;
+		return true;
 		}*/
 
 	// copy the server datagram if there is space
@@ -2287,7 +2287,7 @@ void SV_SendClientMessages (void)
 			else
 			{
 				if (NET_SendMessage (host_client->netconnection
-									 , &host_client->message) == -1)
+					, &host_client->message) == -1)
 					SV_DropClient (true);	// if the message couldn't send, kick off
 
 				SZ_Clear (&host_client->message);
@@ -2373,7 +2373,7 @@ void SV_CreateBaseline (void)
 		svent->baseline.drawflags = svent->v.drawflags;
 		svent->baseline.abslight = (int) (svent->v.abslight * 255.0) & 255;
 
-		if (entnum > 0	&& entnum <= svs.maxclients)
+		if (entnum > 0 && entnum <= svs.maxclients)
 		{
 			svent->baseline.colormap = entnum;
 			svent->baseline.modelindex = 0;//SV_ModelIndex("models/paladin.mdl");
@@ -2660,8 +2660,8 @@ void SV_SpawnServer (char *server)
 
 	for (i = 1; i < sv.worldmodel->numsubmodels; i++)
 	{
-		sv.model_precache[1+i] = localmodels[i];
-		sv.models[i+1] = Mod_ForName (localmodels[i], false);
+		sv.model_precache[1 + i] = localmodels[i];
+		sv.models[i + 1] = Mod_ForName (localmodels[i], false);
 	}
 
 	// load the rest of the entities

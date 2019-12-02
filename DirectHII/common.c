@@ -9,8 +9,8 @@ vec3_t vec3_origin = {0, 0, 0};
 
 // these are split off so that they can be consistently determined during both the change-check and the send
 // this can be useful if we ever add a protocol that does more accurate origin and angles stuff
-int QuantizedOrigin (float o) {return Q_rint (o * 8);}
-int QuantizedAngles (float a) {return (int) ((a * 256.0f) / 360.0f) & 255;}
+int QuantizedOrigin (float o) { return Q_rint (o * 8); }
+int QuantizedAngles (float a) { return (int) ((a * 256.0f) / 360.0f) & 255; }
 
 // prevent wild flickering when running fast; this also keeps random effects synced with time which means they won't flicker when paused
 #define TIMEDRANDOMTABLE_SIZE	65536
@@ -256,7 +256,7 @@ void InsertLinkAfter (link_t *l, link_t *after)
 /*
 ============================================================================
 
-					LIBRARY REPLACEMENT FUNCTIONS
+LIBRARY REPLACEMENT FUNCTIONS
 
 ============================================================================
 */
@@ -264,297 +264,297 @@ void InsertLinkAfter (link_t *l, link_t *after)
 /*
 void Q_memset (void *dest, int fill, int count)
 {
-	int             i;
+int             i;
 
-	if ((((long)dest | count) & 3) == 0)
-	{
-		count >>= 2;
-		fill = fill | (fill<<8) | (fill<<16) | (fill<<24);
-		for (i=0; i<count; i++)
-			((int *)dest)[i] = fill;
-	}
-	else
-		for (i=0; i<count; i++)
-			((byte *)dest)[i] = fill;
+if ((((long)dest | count) & 3) == 0)
+{
+count >>= 2;
+fill = fill | (fill<<8) | (fill<<16) | (fill<<24);
+for (i=0; i<count; i++)
+((int *)dest)[i] = fill;
+}
+else
+for (i=0; i<count; i++)
+((byte *)dest)[i] = fill;
 }
 
 void Q_memcpy (void *dest, void *src, int count)
 {
-	int             i;
+int             i;
 
-	if ((((long)dest | (long)src | count) & 3) == 0 )
-	{
-		count>>=2;
-		for (i=0; i<count; i++)
-			((int *)dest)[i] = ((int *)src)[i];
-	}
-	else
-		for (i=0; i<count; i++)
-			((byte *)dest)[i] = ((byte *)src)[i];
+if ((((long)dest | (long)src | count) & 3) == 0 )
+{
+count>>=2;
+for (i=0; i<count; i++)
+((int *)dest)[i] = ((int *)src)[i];
+}
+else
+for (i=0; i<count; i++)
+((byte *)dest)[i] = ((byte *)src)[i];
 }
 
 int Q_memcmp (void *m1, void *m2, int count)
 {
-	while(count)
-	{
-		count--;
-		if (((byte *)m1)[count] != ((byte *)m2)[count])
-			return -1;
-	}
-	return 0;
+while(count)
+{
+count--;
+if (((byte *)m1)[count] != ((byte *)m2)[count])
+return -1;
+}
+return 0;
 }
 
 void Q_strcpy (char *dest, char *src)
 {
-	while (*src)
-	{
-		*dest++ = *src++;
-	}
-	*dest++ = 0;
+while (*src)
+{
+*dest++ = *src++;
+}
+*dest++ = 0;
 }
 
 void Q_strncpy (char *dest, char *src, int count)
 {
-	while (*src && count--)
-	{
-		*dest++ = *src++;
-	}
-	if (count)
-		*dest++ = 0;
+while (*src && count--)
+{
+*dest++ = *src++;
+}
+if (count)
+*dest++ = 0;
 }
 
 int Q_strlen (char *str)
 {
-	int             count;
+int             count;
 
-	count = 0;
-	while (str[count])
-		count++;
+count = 0;
+while (str[count])
+count++;
 
-	return count;
+return count;
 }
 
 char *Q_strrchr(char *s, char c)
 {
-    int len = Q_strlen(s);
-    s += len;
-    while (len--)
-	if (*--s == c) return s;
-    return 0;
+int len = Q_strlen(s);
+s += len;
+while (len--)
+if (*--s == c) return s;
+return 0;
 }
 
 void Q_strcat (char *dest, char *src)
 {
-	dest += Q_strlen(dest);
-	Q_strcpy (dest, src);
+dest += Q_strlen(dest);
+Q_strcpy (dest, src);
 }
 
 int Q_strcmp (char *s1, char *s2)
 {
-	while (1)
-	{
-		if (*s1 != *s2)
-			return -1;              // strings not equal
-		if (!*s1)
-			return 0;               // strings are equal
-		s1++;
-		s2++;
-	}
+while (1)
+{
+if (*s1 != *s2)
+return -1;              // strings not equal
+if (!*s1)
+return 0;               // strings are equal
+s1++;
+s2++;
+}
 
-	return -1;
+return -1;
 }
 
 int Q_strncmp (char *s1, char *s2, int count)
 {
-	while (1)
-	{
-		if (!count--)
-			return 0;
-		if (*s1 != *s2)
-			return -1;              // strings not equal
-		if (!*s1)
-			return 0;               // strings are equal
-		s1++;
-		s2++;
-	}
+while (1)
+{
+if (!count--)
+return 0;
+if (*s1 != *s2)
+return -1;              // strings not equal
+if (!*s1)
+return 0;               // strings are equal
+s1++;
+s2++;
+}
 
-	return -1;
+return -1;
 }
 
 int Q_strncasecmp (char *s1, char *s2, int n)
 {
-	int             c1, c2;
+int             c1, c2;
 
-	while (1)
-	{
-		c1 = *s1++;
-		c2 = *s2++;
+while (1)
+{
+c1 = *s1++;
+c2 = *s2++;
 
-		if (!n--)
-			return 0;               // strings are equal until end point
+if (!n--)
+return 0;               // strings are equal until end point
 
-		if (c1 != c2)
-		{
-			if (c1 >= 'a' && c1 <= 'z')
-				c1 -= ('a' - 'A');
-			if (c2 >= 'a' && c2 <= 'z')
-				c2 -= ('a' - 'A');
-			if (c1 != c2)
-				return -1;              // strings not equal
-		}
-		if (!c1)
-			return 0;               // strings are equal
+if (c1 != c2)
+{
+if (c1 >= 'a' && c1 <= 'z')
+c1 -= ('a' - 'A');
+if (c2 >= 'a' && c2 <= 'z')
+c2 -= ('a' - 'A');
+if (c1 != c2)
+return -1;              // strings not equal
+}
+if (!c1)
+return 0;               // strings are equal
 //              s1++;
 //              s2++;
-	}
+}
 
-	return -1;
+return -1;
 }
 
 int Q_strcasecmp (char *s1, char *s2)
 {
-	return Q_strncasecmp (s1, s2, 99999);
+return Q_strncasecmp (s1, s2, 99999);
 }
 
 int Q_atoi (char *str)
 {
-	int             val;
-	int             sign;
-	int             c;
+int             val;
+int             sign;
+int             c;
 
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
-	else
-		sign = 1;
+if (*str == '-')
+{
+sign = -1;
+str++;
+}
+else
+sign = 1;
 
-	val = 0;
+val = 0;
 
 //
 // check for hex
 //
-	if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X') )
-	{
-		str += 2;
-		while (1)
-		{
-			c = *str++;
-			if (c >= '0' && c <= '9')
-				val = (val<<4) + c - '0';
-			else if (c >= 'a' && c <= 'f')
-				val = (val<<4) + c - 'a' + 10;
-			else if (c >= 'A' && c <= 'F')
-				val = (val<<4) + c - 'A' + 10;
-			else
-				return val*sign;
-		}
-	}
+if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X') )
+{
+str += 2;
+while (1)
+{
+c = *str++;
+if (c >= '0' && c <= '9')
+val = (val<<4) + c - '0';
+else if (c >= 'a' && c <= 'f')
+val = (val<<4) + c - 'a' + 10;
+else if (c >= 'A' && c <= 'F')
+val = (val<<4) + c - 'A' + 10;
+else
+return val*sign;
+}
+}
 
 //
 // check for character
 //
-	if (str[0] == '\'')
-	{
-		return sign * str[1];
-	}
+if (str[0] == '\'')
+{
+return sign * str[1];
+}
 
 //
 // assume decimal
 //
-	while (1)
-	{
-		c = *str++;
-		if (c <'0' || c > '9')
-			return val*sign;
-		val = val*10 + c - '0';
-	}
+while (1)
+{
+c = *str++;
+if (c <'0' || c > '9')
+return val*sign;
+val = val*10 + c - '0';
+}
 
-	return 0;
+return 0;
 }
 
 
 float Q_atof (char *str)
 {
-	double			val;
-	int             sign;
-	int             c;
-	int             decimal, total;
+double			val;
+int             sign;
+int             c;
+int             decimal, total;
 
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
-	else
-		sign = 1;
+if (*str == '-')
+{
+sign = -1;
+str++;
+}
+else
+sign = 1;
 
-	val = 0;
+val = 0;
 
 //
 // check for hex
 //
-	if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X') )
-	{
-		str += 2;
-		while (1)
-		{
-			c = *str++;
-			if (c >= '0' && c <= '9')
-				val = (val*16) + c - '0';
-			else if (c >= 'a' && c <= 'f')
-				val = (val*16) + c - 'a' + 10;
-			else if (c >= 'A' && c <= 'F')
-				val = (val*16) + c - 'A' + 10;
-			else
-				return val*sign;
-		}
-	}
+if (str[0] == '0' && (str[1] == 'x' || str[1] == 'X') )
+{
+str += 2;
+while (1)
+{
+c = *str++;
+if (c >= '0' && c <= '9')
+val = (val*16) + c - '0';
+else if (c >= 'a' && c <= 'f')
+val = (val*16) + c - 'a' + 10;
+else if (c >= 'A' && c <= 'F')
+val = (val*16) + c - 'A' + 10;
+else
+return val*sign;
+}
+}
 
 //
 // check for character
 //
-	if (str[0] == '\'')
-	{
-		return sign * str[1];
-	}
+if (str[0] == '\'')
+{
+return sign * str[1];
+}
 
 //
 // assume decimal
 //
-	decimal = -1;
-	total = 0;
-	while (1)
-	{
-		c = *str++;
-		if (c == '.')
-		{
-			decimal = total;
-			continue;
-		}
-		if (c <'0' || c > '9')
-			break;
-		val = val*10 + c - '0';
-		total++;
-	}
+decimal = -1;
+total = 0;
+while (1)
+{
+c = *str++;
+if (c == '.')
+{
+decimal = total;
+continue;
+}
+if (c <'0' || c > '9')
+break;
+val = val*10 + c - '0';
+total++;
+}
 
-	if (decimal == -1)
-		return val*sign;
-	while (total > decimal)
-	{
-		val /= 10;
-		total--;
-	}
+if (decimal == -1)
+return val*sign;
+while (total > decimal)
+{
+val /= 10;
+total--;
+}
 
-	return val*sign;
+return val*sign;
 }
 */
 
 /*
 ============================================================================
 
-					BYTE ORDER FUNCTIONS
+BYTE ORDER FUNCTIONS
 
 ============================================================================
 */
@@ -602,8 +602,7 @@ int     LongNoSwap (int l)
 
 float FloatSwap (float f)
 {
-	union
-	{
+	union {
 		float   f;
 		byte    b[4];
 	} dat1, dat2;
@@ -625,7 +624,7 @@ float FloatNoSwap (float f)
 /*
 ==============================================================================
 
-			MESSAGE IO FUNCTIONS
+MESSAGE IO FUNCTIONS
 
 Handles byte ordering and avoids alignment errors
 ==============================================================================
@@ -701,8 +700,7 @@ void MSG_WriteFixed16 (sizebuf_t *sb, float f)
 
 void MSG_WriteFloat (sizebuf_t *sb, float f)
 {
-	union
-	{
+	union {
 		float   f;
 		int     l;
 	} dat;
@@ -793,7 +791,7 @@ int MSG_ReadShort (void)
 	}
 
 	c = (short) (net_message.data[msg_readcount]
-				 + (net_message.data[msg_readcount+1] << 8));
+		+ (net_message.data[msg_readcount + 1] << 8));
 
 	msg_readcount += 2;
 
@@ -811,9 +809,9 @@ int MSG_ReadLong (void)
 	}
 
 	c = net_message.data[msg_readcount]
-		+ (net_message.data[msg_readcount+1] << 8)
-		+ (net_message.data[msg_readcount+2] << 16)
-		+ (net_message.data[msg_readcount+3] << 24);
+		+ (net_message.data[msg_readcount + 1] << 8)
+		+ (net_message.data[msg_readcount + 2] << 16)
+		+ (net_message.data[msg_readcount + 3] << 24);
 
 	msg_readcount += 4;
 
@@ -828,17 +826,16 @@ float MSG_ReadFixed16 (void)
 
 float MSG_ReadFloat (void)
 {
-	union
-	{
+	union {
 		byte    b[4];
 		float   f;
 		int     l;
 	} dat;
 
-	dat.b[0] =      net_message.data[msg_readcount];
-	dat.b[1] =      net_message.data[msg_readcount+1];
-	dat.b[2] =      net_message.data[msg_readcount+2];
-	dat.b[3] =      net_message.data[msg_readcount+3];
+	dat.b[0] = net_message.data[msg_readcount];
+	dat.b[1] = net_message.data[msg_readcount + 1];
+	dat.b[2] = net_message.data[msg_readcount + 2];
+	dat.b[3] = net_message.data[msg_readcount + 3];
 	msg_readcount += 4;
 
 	dat.l = LittleLong (dat.l);
@@ -862,8 +859,7 @@ char *MSG_ReadString (void)
 
 		string[l] = c;
 		l++;
-	}
-	while (l < sizeof (string) - 1);
+	} while (l < sizeof (string) - 1);
 
 	string[l] = 0;
 
@@ -953,7 +949,7 @@ void SZ_Print (sizebuf_t *buf, char *data)
 	len = strlen (data) + 1;
 
 	// byte * cast to keep VC++ happy
-	if (buf->data[buf->cursize-1])
+	if (buf->data[buf->cursize - 1])
 		memcpy ((byte *) SZ_GetSpace (buf, len), data, len); // no trailing 0
 	else
 		memcpy ((byte *) SZ_GetSpace (buf, len - 1) - 1, data, len); // write over trailing 0
@@ -1046,7 +1042,7 @@ void COM_FileBase (char *in, char *out)
 	{
 		s--;
 		strncpy (out, s2 + 1, s - s2);
-		out[s-s2] = 0;
+		out[s - s2] = 0;
 	}
 }
 
@@ -1154,8 +1150,7 @@ skipwhite:
 
 		if (c == '{' || c == '}' || c == ')' || c == '(' || c == '\'' || c == ':')
 			break;
-	}
-	while (c > 32);
+	} while (c > 32);
 
 	com_token[len] = 0;
 	return data;
@@ -1273,8 +1268,8 @@ void COM_InitArgv (int argc, char **argv)
 
 	safe = false;
 
-	for (com_argc = 0; (com_argc < MAX_NUM_ARGVS) && (com_argc < argc) ;
-			com_argc++)
+	for (com_argc = 0; (com_argc < MAX_NUM_ARGVS) && (com_argc < argc);
+		com_argc++)
 	{
 		largv[com_argc] = argv[com_argc];
 
@@ -1298,16 +1293,16 @@ void COM_InitArgv (int argc, char **argv)
 
 	/*	if (COM_CheckParm ("-rogue"))
 		{
-			rogue = true;
-			standard_quake = false;
+		rogue = true;
+		standard_quake = false;
 		}
 
 		if (COM_CheckParm ("-hipnotic"))
 		{
-			hipnotic = true;
-			standard_quake = false;
+		hipnotic = true;
+		standard_quake = false;
 		}
-	*/
+		*/
 }
 
 
@@ -1321,7 +1316,7 @@ void COM_Init (char *basedir)
 	byte    swaptest[2] = {1, 0};
 
 	// set the byte swapping variables in a portable manner
-	if (* (short *) swaptest == 1)
+	if (*(short *) swaptest == 1)
 	{
 		bigendien = false;
 		BigShort = ShortSwap;
@@ -1408,14 +1403,12 @@ int     com_filesize;
 // in memory
 //
 
-typedef struct packfile_s
-{
+typedef struct packfile_s {
 	char name[MAX_QPATH];
 	int filepos, filelen;
 } packfile_t;
 
-typedef struct pack_s
-{
+typedef struct pack_s {
 	char filename[MAX_OSPATH];
 	int handle;
 	int numfiles;
@@ -1425,14 +1418,12 @@ typedef struct pack_s
 //
 // on disk
 //
-typedef struct dpackfile_s
-{
+typedef struct dpackfile_s {
 	char name[56];
 	int filepos, filelen;
 } dpackfile_t;
 
-typedef struct dpackheader_s
-{
+typedef struct dpackheader_s {
 	char id[4];
 	int dirofs;
 	int dirlen;
@@ -1444,8 +1435,7 @@ char    com_cachedir[MAX_OSPATH];
 char    com_gamedir[MAX_OSPATH];
 char    com_savedir[MAX_OSPATH];
 
-typedef struct searchpath_s
-{
+typedef struct searchpath_s {
 	char    filename[MAX_OSPATH];
 	pack_t  *pack;          // only one of filename / pack will be used
 	struct searchpath_s *next;
@@ -1811,7 +1801,7 @@ byte *FS_LoadFile (hunktype_t hunk, char *path)
 	if ((buf = Hunk_Alloc (hunk, len + 1)) == NULL)
 		Sys_Error ("FS_LoadFile: not enough space for %s", path);
 
-	((byte *) buf) [len] = 0;
+	((byte *) buf)[len] = 0;
 
 	Draw_BeginDisc ();
 	Sys_FileRead (h, buf, len);
@@ -1952,7 +1942,7 @@ void COM_InitFilesystem (void)
 	i = COM_CheckParm ("-basedir");
 
 	if (i && i < com_argc - 1)
-		strcpy (basedir, com_argv[i+1]);
+		strcpy (basedir, com_argv[i + 1]);
 	else
 		strcpy (basedir, host_parms.basedir);
 
@@ -1960,8 +1950,8 @@ void COM_InitFilesystem (void)
 
 	if (j > 0)
 	{
-		if ((basedir[j-1] == '\\') || (basedir[j-1] == '/'))
-			basedir[j-1] = 0;
+		if ((basedir[j - 1] == '\\') || (basedir[j - 1] == '/'))
+			basedir[j - 1] = 0;
 	}
 
 	// -cachedir <path>
@@ -1971,10 +1961,10 @@ void COM_InitFilesystem (void)
 
 	if (i && i < com_argc - 1)
 	{
-		if (com_argv[i+1][0] == '-')
+		if (com_argv[i + 1][0] == '-')
 			com_cachedir[0] = 0;
 		else
-			strcpy (com_cachedir, com_argv[i+1]);
+			strcpy (com_cachedir, com_argv[i + 1]);
 	}
 	else if (host_parms.cachedir)
 		strcpy (com_cachedir, host_parms.cachedir);
@@ -1991,7 +1981,7 @@ void COM_InitFilesystem (void)
 	if (i && i < com_argc - 1)
 	{
 		com_modified = true;
-		COM_AddGameDirectory (va ("%s/%s", basedir, com_argv[i+1]));
+		COM_AddGameDirectory (va ("%s/%s", basedir, com_argv[i + 1]));
 	}
 
 	// -path <dir or packfile> [<dir or packfile>] ...

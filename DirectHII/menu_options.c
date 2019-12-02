@@ -15,8 +15,7 @@ extern	cvar_t	freelook;
 
 #define	SLIDER_RANGE	10
 
-enum
-{
+enum {
 	OPT_CUSTOMIZE = 0,
 	OPT_CONSOLE,
 	OPT_DEFAULTS,
@@ -239,25 +238,25 @@ void M_Options_Draw (void)
 	r = volume.value;
 	M_DrawSlider (220, 60 + (8 * 8), r);
 
-	M_Print (16, 60 + (9 * 8),				"            Always Run");
+	M_Print (16, 60 + (9 * 8), "            Always Run");
 	M_DrawCheckbox (220, 60 + (9 * 8), cl_forwardspeed.value > 200);
 
-	M_Print (16, 60 + (OPT_INVMOUSE * 8),	"          Invert Mouse");
+	M_Print (16, 60 + (OPT_INVMOUSE * 8), "          Invert Mouse");
 	M_DrawCheckbox (220, 60 + (OPT_INVMOUSE * 8), m_pitch.value < 0);
 
-	M_Print (16, 60 + (OPT_LOOKSPRING * 8),	"            Lookspring");
+	M_Print (16, 60 + (OPT_LOOKSPRING * 8), "            Lookspring");
 	M_DrawCheckbox (220, 60 + (OPT_LOOKSPRING * 8), lookspring.value);
 
-	M_Print (16, 60 + (OPT_LOOKSTRAFE * 8),	"            Lookstrafe");
+	M_Print (16, 60 + (OPT_LOOKSTRAFE * 8), "            Lookstrafe");
 	M_DrawCheckbox (220, 60 + (OPT_LOOKSTRAFE * 8), lookstrafe.value);
 
-	M_Print (16, 60 + (OPT_CROSSHAIR * 8),	"        Show Crosshair");
+	M_Print (16, 60 + (OPT_CROSSHAIR * 8), "        Show Crosshair");
 	M_DrawCheckbox (220, 60 + (OPT_CROSSHAIR * 8), crosshair.value);
 
-	M_Print (16, 60 + (OPT_ALWAYSMLOOK * 8),	"            Mouse Look");
+	M_Print (16, 60 + (OPT_ALWAYSMLOOK * 8), "            Mouse Look");
 	M_DrawCheckbox (220, 60 + (OPT_ALWAYSMLOOK * 8), freelook.value);
 
-	M_Print (16, 60 + (OPT_VIDEO * 8),	"         Video Options");
+	M_Print (16, 60 + (OPT_VIDEO * 8), "         Video Options");
 
 	// cursor
 	M_DrawCharacter (200, 60 + options_cursor * 8, 12 + ((int) (realtime * 4) & 1));

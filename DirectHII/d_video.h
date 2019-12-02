@@ -5,7 +5,7 @@
 
 #define NO_MODE					0xffffffff
 
-typedef enum {MS_WINDOWED, MS_FULLSCREEN, MS_UNINIT} modestate_t;
+typedef enum { MS_WINDOWED, MS_FULLSCREEN, MS_UNINIT } modestate_t;
 
 extern modestate_t	modestate;
 extern int		vid_modenum;

@@ -137,8 +137,7 @@ Fill background pixels so mipmapping doesn't have haloes - Ed
 =================
 */
 
-typedef struct floodfill_s
-{
+typedef struct floodfill_s {
 	short		x, y;
 } floodfill_t;
 
@@ -149,12 +148,12 @@ typedef struct floodfill_s
 #define FLOODFILL_STEP( off, dx, dy ) \
 { \
 	if (pos[off] == fillcolor) \
-	{ \
+		{ \
 		pos[off] = 255; \
 		fifo[inpt].x = x + (dx), fifo[inpt].y = y + (dy); \
 		inpt = (inpt + 1) & FLOODFILL_FIFO_MASK; \
-	} \
-	else if (pos[off] != 255) fdc = pos[off]; \
+		} \
+		else if (pos[off] != 255) fdc = pos[off]; \
 }
 
 void Mod_FloodFillSkin (byte *skin, int skinwidth, int skinheight)
@@ -255,12 +254,12 @@ void *Mod_LoadAllSkins (aliashdr_t *pheader, int numskins, daliasskintype_t *psk
 		sprintf (name, "%s_%i", loadmodel->name, i);
 
 		if (mdl_flags & EF_HOLEY)
-			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_holey, TEX_MIPMAP | TEX_HOLEY);
+			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_holey, TEX_MIPMAP | TEX_HOLEY | TEX_UPSCALE);
 		else if (mdl_flags & EF_TRANSPARENT)
-			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_trans, TEX_MIPMAP | TEX_TRANSPARENT);
+			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_trans, TEX_MIPMAP | TEX_TRANSPARENT | TEX_UPSCALE);
 		else if (mdl_flags & EF_SPECIAL_TRANS)
-			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_spec, TEX_MIPMAP | TEX_SPECIAL_TRANS);
-		else pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_rgba, TEX_MIPMAP);
+			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_spec, TEX_MIPMAP | TEX_SPECIAL_TRANS | TEX_UPSCALE);
+		else pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_UPSCALE);
 
 		pskintype = (daliasskintype_t *) ((byte *) (pskintype + 1) + s);
 	}
@@ -301,7 +300,7 @@ void Mod_LoadAliasModelNew (model_t *mod, void *buffer)
 	//	Con_Printf("Loading NEW model %s\n",mod->name);
 	// allocate space for a working header, plus all the data except the frames,
 	// skin and group info
-	size = 	sizeof (aliashdr_t) + (LittleLong (pinmodel->numframes) - 1) * sizeof (pheader->frames[0]);
+	size = sizeof (aliashdr_t) + (LittleLong (pinmodel->numframes) - 1) * sizeof (pheader->frames[0]);
 	pheader = Hunk_Alloc (MAP_HUNK, size);
 
 	mod->flags = LittleLong (pinmodel->flags);
@@ -440,7 +439,7 @@ void Mod_LoadAliasModel (model_t *mod, void *buffer)
 
 	// allocate space for a working header, plus all the data except the frames,
 	// skin and group info
-	size = 	sizeof (aliashdr_t) + (LittleLong (pinmodel->numframes) - 1) * sizeof (pheader->frames[0]);
+	size = sizeof (aliashdr_t) + (LittleLong (pinmodel->numframes) - 1) * sizeof (pheader->frames[0]);
 	pheader = Hunk_Alloc (MAP_HUNK, size);
 
 	mod->flags = LittleLong (pinmodel->flags);

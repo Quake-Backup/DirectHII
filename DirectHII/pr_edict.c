@@ -56,8 +56,7 @@ static qboolean RemoveBadReferences;
 #define	MAX_FIELD_LEN	64
 #define GEFV_CACHESIZE	2
 
-typedef struct gefv_cache_s
-{
+typedef struct gefv_cache_s {
 	ddef_t	*pcache;
 	char	field[MAX_FIELD_LEN];
 } gefv_cache;
@@ -541,8 +540,8 @@ void ED_Print (edict_t *ed)
 		d = &pr_fielddefs[i];
 		name = pr_strings + d->s_name;
 
-		if ((name[strlen (name)-2] == '_') &&
-		((name[strlen (name)-1] == 'x') || (name[strlen (name)-1] == 'y') || (name[strlen (name)-1] == 'z')))
+		if ((name[strlen (name) - 2] == '_') &&
+			((name[strlen (name) - 1] == 'x') || (name[strlen (name) - 1] == 'y') || (name[strlen (name) - 1] == 'z')))
 			continue;	// skip _x, _y, _z vars
 
 		v = (int *) ((char *) &ed->v + d->ofs * 4);
@@ -604,7 +603,7 @@ void ED_Write (FILE *f, edict_t *ed)
 		name = pr_strings + d->s_name;
 		length = strlen (name);
 
-		if (name[length-2] == '_' && name[length-1] >= 'x' && name[length-1] <= 'z')
+		if (name[length - 2] == '_' && name[length - 1] >= 'x' && name[length - 1] <= 'z')
 			continue;	// skip _x, _y, _z vars
 
 		v = (int *) ((char *) &ed->v + d->ofs * 4);
@@ -721,7 +720,7 @@ void ED_Count (void)
 /*
 ==============================================================================
 
-					ARCHIVING GLOBALS
+ARCHIVING GLOBALS
 
 FIXME: need to tag constants, doesn't really work
 ==============================================================================
@@ -752,8 +751,8 @@ void ED_WriteGlobals (FILE *f)
 		type &= ~DEF_SAVEGLOBAL;
 
 		if (type != ev_string
-		&& type != ev_float
-		&& type != ev_entity)
+			&& type != ev_float
+			&& type != ev_entity)
 			continue;
 
 		name = pr_strings + def->s_name;
@@ -867,11 +866,11 @@ qboolean	ED_ParseEpair (void *base, ddef_t *key, char *s)
 	switch (key->type & ~DEF_SAVEGLOBAL)
 	{
 	case ev_string:
-		* (string_t *) d = ED_NewString (s) - pr_strings;
+		*(string_t *) d = ED_NewString (s) - pr_strings;
 		break;
 
 	case ev_float:
-		* (float *) d = atof (s);
+		*(float *) d = atof (s);
 		break;
 
 	case ev_vector:
@@ -885,14 +884,14 @@ qboolean	ED_ParseEpair (void *base, ddef_t *key, char *s)
 				v++;
 
 			*v = 0;
-			((float *) d) [i] = atof (w);
+			((float *) d)[i] = atof (w);
 			w = v = v + 1;
 		}
 
 		break;
 
 	case ev_entity:
-		* (int *) d = EDICT_TO_PROG (EDICT_NUM (atoi (s)));
+		*(int *) d = EDICT_TO_PROG (EDICT_NUM (atoi (s)));
 		break;
 
 	case ev_field:
@@ -904,7 +903,7 @@ qboolean	ED_ParseEpair (void *base, ddef_t *key, char *s)
 			return false;
 		}
 
-		* (int *) d = G_INT (def->ofs);
+		*(int *) d = G_INT (def->ofs);
 		break;
 
 	case ev_function:
@@ -916,7 +915,7 @@ qboolean	ED_ParseEpair (void *base, ddef_t *key, char *s)
 			return false;
 		}
 
-		* (func_t *) d = func - pr_functions;
+		*(func_t *) d = func - pr_functions;
 		break;
 
 	default:
@@ -980,9 +979,9 @@ char *ED_ParseEdict (char *data, edict_t *ent)
 		// another hack to fix heynames with trailing spaces
 		n = strlen (keyname);
 
-		while (n && keyname[n-1] == ' ')
+		while (n && keyname[n - 1] == ' ')
 		{
-			keyname[n-1] = 0;
+			keyname[n - 1] = 0;
 			n--;
 		}
 
@@ -1186,8 +1185,8 @@ void ED_LoadFromFile (char *data)
 		}
 
 		if ((current_skill == 0 && ((int) ent->v.spawnflags & SPAWNFLAG_NOT_EASY))
-		|| (current_skill == 1 && ((int) ent->v.spawnflags & SPAWNFLAG_NOT_MEDIUM))
-		|| (current_skill >= 2 && ((int) ent->v.spawnflags & SPAWNFLAG_NOT_HARD)))
+			|| (current_skill == 1 && ((int) ent->v.spawnflags & SPAWNFLAG_NOT_MEDIUM))
+			|| (current_skill >= 2 && ((int) ent->v.spawnflags & SPAWNFLAG_NOT_HARD)))
 		{
 			ED_Free (ent);
 			inhibit++;
@@ -1253,7 +1252,7 @@ void PR_LoadProgs (void)
 
 			if (test)
 			{
-				build[strlen (build)-2] = 0;
+				build[strlen (build) - 2] = 0;
 				test = strchr (build, ' ');
 
 				if (test)
@@ -1285,7 +1284,7 @@ void PR_LoadProgs (void)
 
 	// byte swap the header
 	for (i = 0; i < sizeof (*progs) / 4; i++)
-		((int *) progs) [i] = LittleLong (((int *) progs) [i]);
+		((int *) progs)[i] = LittleLong (((int *) progs)[i]);
 
 	if (progs->version != PROG_VERSION)
 		Sys_Error ("progs.dat has wrong version number (%i should be %i)", progs->version, PROG_VERSION);
@@ -1343,7 +1342,7 @@ void PR_LoadProgs (void)
 		}
 
 		for (i = 0; i < progs->numglobals; i++)
-			((int *) pr_globals) [i] = LittleLong (((int *) pr_globals) [i]);
+			((int *) pr_globals)[i] = LittleLong (((int *) pr_globals)[i]);
 	}
 }
 
