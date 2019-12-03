@@ -105,12 +105,6 @@ static void D_DescribeTexture (D3D11_TEXTURE2D_DESC *Desc, int Width, int Height
 	Desc->MipLevels = (flags & TEX_MIPMAP) ? 0 : 1;
 	Desc->ArraySize = ArraySize;
 
-	if (flags & TEX_UPSCALE)
-	{
-		Desc->Width <<= 1;
-		Desc->Height <<= 1;
-	}
-
 	// select the appropriate format
 	if (flags & TEX_R32F)
 		Desc->Format = DXGI_FORMAT_R32_FLOAT;
@@ -269,14 +263,6 @@ void D_FillTexture32 (int texnum, unsigned *data, int width, int height, int str
 {
 	int hunkmark = Hunk_LowMark (LOAD_HUNK);
 
-	if (flags & TEX_UPSCALE)
-	{
-		data = Image_Upscale32 (data, width, height);
-		width <<= 1;
-		height <<= 1;
-		stride <<= 1;
-	}
-
 	D_CreateTextureMiplevels (texnum, data, width, height, flags);
 	Hunk_FreeToLowMark (LOAD_HUNK, hunkmark);
 }
@@ -318,19 +304,7 @@ int D_LoadTexture (char *identifier, int width, int height, int stride, byte *da
 	{
 		// call the appropriate loader
 		if (data && palette)
-		{
-			/*
-			if (flags & TEX_UPSCALE)
-			{
-				data = Image_Upscale8 (data, width, height);
-				width <<= 1;
-				height <<= 1;
-				stride <<= 1;
-			}
-			*/
-
 			D_FillTexture8 (texnum, data, width, height, stride, palette, flags);
-		}
 		else if (data)
 			D_FillTexture32 (texnum, (unsigned *) data, width, height, stride, flags);
 

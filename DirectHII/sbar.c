@@ -694,15 +694,6 @@ static int CalcAC (void)
 	return a;
 }
 
-//==========================================================================
-//
-// SB_Changed
-//
-//==========================================================================
-
-void SB_Changed (void)
-{
-}
 
 //==========================================================================
 //
@@ -1620,8 +1611,7 @@ void SB_InvChanged (void)
 
 	memset (examined, 0, sizeof (examined)); // examined[x] = false
 
-	if (cl.inv_selected >= 0 &&
-		(&cl.v.cnt_torch)[cl.inv_order[cl.inv_selected]] == 0)
+	if (cl.inv_selected >= 0 && (&cl.v.cnt_torch)[cl.inv_order[cl.inv_selected]] == 0)
 		ForceUpdate = true;
 
 	// removed items we no longer have from the order
@@ -1639,6 +1629,7 @@ void SB_InvChanged (void)
 
 	// add in the new items
 	for (counter = 0; counter < INV_MAX_CNT; counter++)
+	{
 		if (!examined[counter])
 		{
 			//if (Inv_GetCount(counter) > 0)
@@ -1648,6 +1639,7 @@ void SB_InvChanged (void)
 				position++;
 			}
 		}
+	}
 
 	cl.inv_count = position;
 
@@ -1675,6 +1667,7 @@ void SB_InvChanged (void)
 		if (cl.inv_startpos < 0) cl.inv_startpos = 0;
 	}
 }
+
 
 //==========================================================================
 //

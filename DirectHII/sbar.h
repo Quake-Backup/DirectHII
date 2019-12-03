@@ -8,7 +8,6 @@
 // PUBLIC FUNCTION PROTOTYPES ----------------------------------------------
 
 void SB_Init (void);
-void SB_Changed (void);
 void SB_Draw (void);
 void SB_IntermissionOverlay (void);
 void SB_FinaleOverlay (void);

@@ -10,9 +10,6 @@
 #include "d_draw.h"
 #include "d_texture.h"
 
-cvar_t gl_texturemode = {"gl_texturemode", "GL_LINEAR_MIPMAP_LINEAR", true};
-cvar_t gl_texture_anisotropy = {"gl_texture_anisotropy", "1", true};
-
 extern int ColorIndex[16];
 extern unsigned ColorPercent[16];
 extern qboolean	vid_initialized;
@@ -189,22 +186,6 @@ qpic_t *Draw_CachePic (char *path)
 }
 
 
-/*
-===============
-R_SetTextureMode
-===============
-*/
-void R_SetTextureMode (void)
-{
-	int anisotropy = 1;
-
-	for (anisotropy = 1; anisotropy < gl_texture_anisotropy.value; anisotropy <<= 1);
-	if (anisotropy > 16) anisotropy = 16;
-
-	D_SetTextureMode (gl_texturemode.string, anisotropy);
-}
-
-
 void Draw_LoadCrosshair (void)
 {
 	byte chbase[] = {
@@ -238,9 +219,6 @@ Draw_Init
 void Draw_Init (void)
 {
 	int	i;
-
-	Cvar_RegisterVariable (&gl_texturemode, R_SetTextureMode);
-	Cvar_RegisterVariable (&gl_texture_anisotropy, R_SetTextureMode);
 
 	char_texture = D_LoadTexture ("charset", 256, 128, 256, FS_LoadFile (LOAD_HUNK, "gfx/menu/conchars.lmp"), d_8to24table_char, TEX_ALPHA);
 	char_smalltexture = D_LoadTexture ("smallcharset", 128, 32, 128, W_GetLumpName ("tinyfont"), d_8to24table_char, TEX_ALPHA);
@@ -279,7 +257,7 @@ void Draw_CrossHair (void)
 			0,
 			1,
 			crosshair_texture
-			);
+		);
 	}
 }
 
@@ -322,7 +300,7 @@ void Draw_Character (int x, int y, unsigned int num)
 		frow,
 		frow + ysize,
 		char_texture
-		);
+	);
 }
 
 /*
@@ -385,7 +363,7 @@ void Draw_SmallCharacter (int x, int y, int num)
 		frow,
 		frow + ysize,
 		char_smalltexture
-		);
+	);
 }
 
 
@@ -518,7 +496,7 @@ void Draw_TransPicTranslate (int x, int y, qpic_t *pic, int classnum, int color)
 		0,
 		1,
 		translate_texture[classnum]
-		);
+	);
 }
 
 
@@ -558,7 +536,7 @@ int M_DrawBigCharacter (int x, int y, int num, int numNext)
 		frow,
 		frow + ysize,
 		char_menufonttexture
-		);
+	);
 
 	if (numNext < 0 || numNext >= 27) return 0;
 
@@ -658,8 +636,6 @@ void Draw_FadeScreen (void)
 
 		D_DrawColouredQuad (bx, by, (ex - bx), (ey - by), COLOR_FROM_RGBA (208, 180, 80, 10));
 	}
-
-	SB_Changed ();
 }
 
 

@@ -254,12 +254,12 @@ void *Mod_LoadAllSkins (aliashdr_t *pheader, int numskins, daliasskintype_t *psk
 		sprintf (name, "%s_%i", loadmodel->name, i);
 
 		if (mdl_flags & EF_HOLEY)
-			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_holey, TEX_MIPMAP | TEX_HOLEY | TEX_UPSCALE);
+			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_holey, TEX_MIPMAP | TEX_HOLEY);
 		else if (mdl_flags & EF_TRANSPARENT)
-			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_trans, TEX_MIPMAP | TEX_TRANSPARENT | TEX_UPSCALE);
+			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_trans, TEX_MIPMAP | TEX_TRANSPARENT);
 		else if (mdl_flags & EF_SPECIAL_TRANS)
-			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_spec, TEX_MIPMAP | TEX_SPECIAL_TRANS | TEX_UPSCALE);
-		else pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_UPSCALE);
+			pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_spec, TEX_MIPMAP | TEX_SPECIAL_TRANS);
+		else pheader->texnum[i] = D_LoadTexture (name, pheader->skinwidth, pheader->skinheight, pheader->skinwidth, (byte *) (pskintype + 1), d_8to24table_rgba, TEX_MIPMAP);
 
 		pskintype = (daliasskintype_t *) ((byte *) (pskintype + 1) + s);
 	}

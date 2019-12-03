@@ -818,8 +818,6 @@ void CL_ParseClientdata (int bits)
 	if (cl.items != i)
 	{
 		// set flash times
-		SB_Changed ();
-
 		for (j = 0; j < 32; j++)
 			if ((i & (1 << j)) && !(cl.items & (1 << j)))
 				cl.item_gettime[j] = cl.time;
@@ -839,7 +837,6 @@ void CL_ParseClientdata (int bits)
 	if (bits & SU_ARMOR)
 	{
 		cl.stats[STAT_ARMOR] = MSG_ReadByte ();
-		SB_Changed ();
 	}
 
 	if (bits & SU_WEAPON)
@@ -848,8 +845,6 @@ void CL_ParseClientdata (int bits)
 
 		if (cl.viewent.model != cl.model_precache[cl.stats[STAT_WEAPON]])
 			cl.viewent.lerpflags |= LERP_RESETANIM; // don't lerp animation across model changes
-
-		SB_Changed ();
 	}
 
 	/*	sc1 = sc2 = 0;
@@ -970,7 +965,6 @@ void CL_ParseClientdata (int bits)
 		cl.v.flags = MSG_ReadFloat ();
 
 		if ((sc1 & SC1_STAT_BAR) || (sc2 & SC2_STAT_BAR))
-		SB_Changed ();
 
 		if ((sc1 & SC1_INV) || (sc2 & SC2_INV))
 		SB_InvChanged ();*/
@@ -1322,7 +1316,6 @@ void CL_ParseServerMessage (void)
 			break;
 
 		case svc_updatename:
-			SB_Changed ();
 			i = MSG_ReadByte ();
 
 			if (i >= cl.maxclients)
@@ -1332,7 +1325,6 @@ void CL_ParseServerMessage (void)
 			break;
 
 		case svc_updateclass:
-			SB_Changed ();
 			i = MSG_ReadByte ();
 
 			if (i >= cl.maxclients)
@@ -1342,7 +1334,6 @@ void CL_ParseServerMessage (void)
 			break;
 
 		case svc_updatefrags:
-			SB_Changed ();
 			i = MSG_ReadByte ();
 
 			if (i >= cl.maxclients)
@@ -1356,7 +1347,6 @@ void CL_ParseServerMessage (void)
 			break;
 
 		case svc_updatecolors:
-			SB_Changed ();
 			i = MSG_ReadByte ();
 
 			if (i >= cl.maxclients)
@@ -1801,9 +1791,6 @@ void CL_ParseServerMessage (void)
 
 			if (sc2 & SC2_OBJ2)
 				cl.info_mask2 = MSG_ReadLong ();
-
-			if ((sc1 & SC1_STAT_BAR) || (sc2 & SC2_STAT_BAR))
-				SB_Changed ();
 
 			if ((sc1 & SC1_INV) || (sc2 & SC2_INV))
 				SB_InvChanged ();

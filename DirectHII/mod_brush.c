@@ -76,7 +76,7 @@ void Mod_LoadTextures (lump_t *l)
 
 		if (!strncmp (mt->name, "sky", 3))
 			D_LoadSkyTextures ((byte *) (mt + 1), d_8to24table_char);
-		else tx->texnum = D_LoadTexture (mt->name, tx->width, tx->height, tx->width, (byte *) (mt + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_DISPOSABLE | TEX_UPSCALE);
+		else tx->texnum = D_LoadTexture (mt->name, tx->width, tx->height, tx->width, (byte *) (mt + 1), d_8to24table_rgba, TEX_MIPMAP | TEX_DISPOSABLE);
 
 		loadmodel->textures[i] = tx;
 	}

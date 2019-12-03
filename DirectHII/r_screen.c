@@ -766,8 +766,9 @@ void SCR_BeginLoadingPlaque (void)
 	scr_centertime_off = 0;
 	scr.ConCurrent = 0;
 
+	// huh???
 	scr_drawloading = true;
-	SB_Changed ();
+	// SB_Changed ();
 	scr_drawloading = false;
 
 	scr_disabled_for_loading = true;

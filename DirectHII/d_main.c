@@ -238,28 +238,9 @@ void D_PartRegister (void)
 {
 	d3d_ParticleCircleShader = D_CreateShaderBundleForQuadBatch (IDR_PARTICLESHADER, "ParticleCircleVS", "ParticleCirclePS");
 	d3d_ParticleSquareShader = D_CreateShaderBundleForQuadBatch (IDR_PARTICLESHADER, "ParticleSquareVS", "ParticleSquarePS");
-	d3d_ParticleShader = d3d_ParticleCircleShader;
+	d3d_ParticleShader = d3d_ParticleSquareShader;
 }
 
-void D_SetParticleMode (D3D11_FILTER mode)
-{
-	switch (mode)
-	{
-		// all of the modes for which MAG is POINT choose the square particle mode
-		// not all of these are currently exposed through gl_texturemode, but we check them anyway in case we ever do so
-	case D3D11_FILTER_MIN_MAG_MIP_POINT:
-	case D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR:
-	case D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT:
-	case D3D11_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR:
-		d3d_ParticleShader = d3d_ParticleSquareShader;
-		break;
-
-	default:
-		// any other mode, including ANISOTROPIC, chooses the circle particle mode
-		d3d_ParticleShader = d3d_ParticleCircleShader;
-		break;
-	}
-}
 
 void D_BeginParticles (void)
 {

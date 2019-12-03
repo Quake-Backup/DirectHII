@@ -20,7 +20,6 @@
 #define TEX_R32F			(1 << 9) // single-channel 32-bit floating-point texture
 #define TEX_NOISE			(1 << 10) // 2-channel 16-bit per channel signed-normalized format for use with noise
 #define TEX_PLAYERTEXTURE	(1 << 11) // used for player colour translations
-#define TEX_UPSCALE			(1 << 12) // upscale 2x for added crunchiness
 
 // if any of these are set the texture may be processed for having an alpha channel
 #define TEX_ANYALPHA		(TEX_ALPHA | TEX_TRANSPARENT | TEX_HOLEY | TEX_SPECIAL_TRANS)
@@ -45,7 +44,6 @@ int D_FindTexture (char *identifier, int width, int height, int arraysize, int c
 int D_GetTexture (char *identifier, int width, int height, int arraysize, int crc, int flags);
 
 void D_ClearTextureBindings (void);
-void D_SetTextureMode (char *mode, int anisotropy);
 void D_PurgePlayerTextures (void);
 
 

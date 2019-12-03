@@ -41,8 +41,8 @@ ID3D11SamplerState *D_CreateSamplerState (D3D11_FILTER Filter, D3D11_TEXTURE_ADD
 	desc.MinLOD = 0;
 	desc.MipLODBias = 0;
 
-	// sampler states are volatile so don't cache them
 	d3d_Device->lpVtbl->CreateSamplerState (d3d_Device, &desc, &ss);
+	D_CacheObject ((ID3D11DeviceChild *) ss, "ID3D11SamplerState");
 
 	return ss;
 }
@@ -187,11 +187,6 @@ void D_StateOnReset (void)
 
 void D_StateOnRelease (void)
 {
-	// samplers are volatile by gl_texturemode; everything else is cached
-	SAFE_RELEASE (d3d_MainSampler);
-	SAFE_RELEASE (d3d_LMapSampler);
-	SAFE_RELEASE (d3d_WarpSampler);
-	SAFE_RELEASE (d3d_DrawSampler);
 }
 
 void D_StateRegister (void)
@@ -209,9 +204,9 @@ void D_StateRegister (void)
 	d3d_RSFullCull = D_CreateRasterizerState (D3D11_FILL_SOLID, D3D11_CULL_FRONT, TRUE, FALSE);
 	d3d_RSNoCull = D_CreateRasterizerState (D3D11_FILL_SOLID, D3D11_CULL_NONE, TRUE, FALSE);
 
-	if (!d3d_MainSampler)
-		d3d_MainSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP, D3D11_FLOAT32_MAX, 1);
-
+	// CRUNCHY PIXELS
+	// the low-res source art is very obviously designed so that it looks better with crunchy pixels, so we just do crucnhy pixels all the time
+	d3d_MainSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP, D3D11_FLOAT32_MAX, 1);
 	d3d_LMapSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, 0, 1);
 	d3d_WarpSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP, 0, 1);
 	d3d_DrawSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP, 0, 1);
@@ -323,58 +318,6 @@ void D_BindIndexBuffer (ID3D11Buffer *Buffer, DXGI_FORMAT Format)
 		OldBuffer = Buffer;
 		OldFormat = Format;
 	}
-}
-
-
-typedef struct texturemode_s {
-	char *name;
-	D3D11_FILTER Filter;
-	float MaxLOD;
-} texturemode_t;
-
-texturemode_t d_TextureModes[] = {
-	{"GL_NEAREST", D3D11_FILTER_MIN_MAG_MIP_POINT, 0},
-	{"GL_LINEAR", D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT, 0},
-	{"GL_NEAREST_MIPMAP_NEAREST", D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_FLOAT32_MAX},
-	{"GL_LINEAR_MIPMAP_NEAREST", D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT, D3D11_FLOAT32_MAX},
-	{"GL_NEAREST_MIPMAP_LINEAR", D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR, D3D11_FLOAT32_MAX},
-	{"GL_LINEAR_MIPMAP_LINEAR", D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_FLOAT32_MAX}
-};
-
-
-texturemode_t *d_CurrentTextureMode = &d_TextureModes[5];
-
-
-void D_SetTextureMode (char *mode, int anisotropy)
-{
-	int	i;
-
-	for (i = 0; i < 6; i++)
-	{
-		if (!stricmp (d_TextureModes[i].name, mode))
-		{
-			d_CurrentTextureMode = &d_TextureModes[i];
-
-			// release existing sampler
-			SAFE_RELEASE (d3d_MainSampler);
-
-			// and recreate it
-			if (anisotropy > 1)
-			{
-				d3d_MainSampler = D_CreateSamplerState (D3D11_FILTER_ANISOTROPIC, D3D11_TEXTURE_ADDRESS_WRAP, d_TextureModes[i].MaxLOD, anisotropy);
-				D_SetParticleMode (D3D11_FILTER_ANISOTROPIC);
-			}
-			else
-			{
-				d3d_MainSampler = D_CreateSamplerState (d_TextureModes[i].Filter, D3D11_TEXTURE_ADDRESS_WRAP, d_TextureModes[i].MaxLOD, 1);
-				D_SetParticleMode (d_TextureModes[i].Filter);
-			}
-
-			return;
-		}
-	}
-
-	VID_Printf ("bad filter name\n");
 }
 
 

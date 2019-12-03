@@ -21,7 +21,3 @@ byte Image_GammaVal16to8 (unsigned short val, float gamma);
 unsigned short Image_GammaVal16to16 (unsigned short val, float gamma);
 void Image_ApplyTranslationRGB (byte *rgb, int size, byte *rtable, byte *gtable, byte *btable);
 
-// upscale
-byte *Image_Upscale8 (byte *in, int inwidth, int inheight);
-unsigned *Image_Upscale32 (unsigned *in, int inwidth, int inheight);
-
