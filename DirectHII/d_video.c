@@ -655,6 +655,9 @@ MAIN SCENE/RENDERTARGETS
 
 void D_BeginRendering (void)
 {
+	// clear bindings from the previois frame so that everything will recache
+	D_ClearState ();
+
 	// bind everything that needs to be bound once-per-frame
 	D_BindConstantBuffers ();
 	D_BindSamplers ();

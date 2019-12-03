@@ -189,6 +189,7 @@ typedef struct client_state_s {
 	double		oldtime;		// previous cl.time, time-oldtime is used
 	// to decay light values and smooth step ups
 
+	double		lastparticletime;
 
 	float		last_received_message;	// (realtime) for net trouble icon
 

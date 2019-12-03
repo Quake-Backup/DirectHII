@@ -280,7 +280,9 @@
     <ClCompile Include="r_main.c" />
     <ClCompile Include="r_mesh.c" />
     <ClCompile Include="r_misc.c" />
+    <ClCompile Include="r_particles.c" />
     <ClCompile Include="r_screen.c" />
+    <ClCompile Include="r_sprite.c" />
     <ClCompile Include="r_surf.c" />
     <ClCompile Include="r_vcache.c" />
     <ClCompile Include="sbar.c" />

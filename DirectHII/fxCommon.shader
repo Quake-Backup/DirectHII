@@ -40,8 +40,6 @@ cbuffer cbPerMesh : register(b3) {
 cbuffer cbPerLight : register(b4) {
 	float3 LightOrigin : packoffset(c0.x);
 	float LightRadius : packoffset(c0.w);
-	float3 LightColour : packoffset(c1.x);
-	float MinLight : packoffset(c1.w);
 };
 
 
@@ -124,7 +122,7 @@ float4 GenericDynamicPS (PS_DYNAMICLIGHT ps_in) : SV_TARGET0
 	// using our own custom attenuation, again it's not correct per-theory but matches the Quake tools
 	float Add = max ((LightRadius - length (ps_in.LightVector)) * Angle, 0.0f);
 
-	return float4 (diff.rgb * LightColour * Add * AlphaVal, 0.0f);
+	return float4 (diff.rgb * Add * AlphaVal, 0.0f);
 }
 #endif
 

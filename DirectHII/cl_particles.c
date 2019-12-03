@@ -47,32 +47,20 @@ void R_InitParticles (void)
 
 //==========================================================================
 //
-// AllocParticle
+// R_GetParticle
 //
 //==========================================================================
 
-#define EXTRA_PARTICLES	256
-
-void R_AllocParticles (void)
-{
-	int i;
-
-	free_particles = (particle_t *) Hunk_Alloc (MAP_HUNK, sizeof (particle_t) * EXTRA_PARTICLES);
-
-	for (i = 1; i < EXTRA_PARTICLES; i++)
-	{
-		free_particles[i - 1].next = &free_particles[i];
-		free_particles[i].next = NULL;
-	}
-}
-
-
-static particle_t *AllocParticle (void)
+static particle_t *R_GetParticle (void)
 {
 	if (!free_particles)
 	{
-		R_AllocParticles ();
-		return AllocParticle ();
+		// init a new particle
+		free_particles = (particle_t *) Hunk_Alloc (MAP_HUNK, sizeof (particle_t));
+		free_particles->next = NULL;
+
+		// call recursively to fill in the rest
+		return R_GetParticle ();
 	}
 	else
 	{
@@ -95,8 +83,7 @@ void R_ClearParticles (void)
 {
 	active_particles = NULL;
 	free_particles = NULL;
-
-	R_AllocParticles ();
+	cl.lastparticletime = cl.time;
 }
 
 
@@ -123,7 +110,7 @@ void R_DarkFieldParticles (entity_t *ent)
 		{
 			for (k = 0; k < 32; k += 8)
 			{
-				if (!(p = AllocParticle ())) return;
+				if (!(p = R_GetParticle ())) return;
 
 				p->die = cl.time + 0.2 + (rand () & 7) * 0.02;
 				p->color = 150 + rand () % 6;
@@ -177,7 +164,7 @@ void R_ReadPointFile_f (void)
 
 		c++;
 
-		if (!(p = AllocParticle ()))
+		if (!(p = R_GetParticle ()))
 		{
 			Con_Printf (PRINT_NORMAL, "Not enough free particles\n");
 			break;
@@ -301,7 +288,7 @@ void R_ParticleExplosion (vec3_t org)
 
 	for (i = 0; i < 1024; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 5;
 		p->color = ramp1[0];
@@ -344,7 +331,7 @@ void R_RunParticleEffect (vec3_t org, vec3_t dir, int color, int count)
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		if (count == 1024)
 		{
@@ -405,7 +392,7 @@ void R_RunParticleEffect2 (vec3_t org, vec3_t dmin, vec3_t dmax, int color, int 
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 2;//0.1*(rand ()%5);
 		p->color = color;
@@ -436,7 +423,7 @@ void R_RunParticleEffect3 (vec3_t org, vec3_t box, int color, int effect, int co
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 2;//0.1*(rand ()%5);
 		p->color = color;
@@ -466,7 +453,7 @@ void R_RunParticleEffect4 (vec3_t org, float radius, int color, int effect, int 
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 2;//0.1*(rand ()%5);
 		p->color = color;
@@ -502,7 +489,7 @@ void R_LavaSplash (vec3_t org)
 		{
 			for (k = 0; k < 1; k++)
 			{
-				if (!(p = AllocParticle ())) return;
+				if (!(p = R_GetParticle ())) return;
 
 				p->die = cl.time + 2 + (rand () & 31) * 0.02;
 				p->color = 224 + (rand () & 7);
@@ -543,7 +530,7 @@ void R_TeleportSplash (vec3_t org)
 		{
 			for (k = -24; k < 32; k += 4)
 			{
-				if (!(p = AllocParticle ())) return;
+				if (!(p = R_GetParticle ())) return;
 
 				p->die = cl.time + 0.2 + (rand () & 7) * 0.02;
 				p->color = 7 + (rand () & 7);
@@ -579,7 +566,7 @@ void R_RunQuakeEffect (vec3_t org, float distance)
 
 	for (i = 0; i < 100; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 0.3 * (rand () % 5);
 		p->color = (rand () & 3) + ((rand () % 3) * 16) + (13 * 16) + 256 + 11;
@@ -629,7 +616,7 @@ void R_SunStaffTrail (vec3_t source, vec3_t dest)
 	{
 		length -= size;
 
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 2;
 
@@ -659,7 +646,7 @@ void RiderParticle (int count, vec3_t origin)
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 4;
 		p->color = 256 + 16 + 15;
@@ -692,7 +679,7 @@ void GravityWellParticle (int count, vec3_t origin, int color)
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 4;
 		p->color = color + (rand () & 15);
@@ -766,7 +753,7 @@ void R_RocketTrail (vec3_t start, vec3_t end, int type)
 	{
 		len -= size;
 
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		VectorCopy (vec3_origin, p->vel);
 		p->die = cl.time + lifetime;
@@ -1013,7 +1000,7 @@ void R_RainEffect (vec3_t org, vec3_t e_size, int x_dir, int y_dir, int color, i
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->vel[0] = x_dir;  //X and Y motion
 		p->vel[1] = y_dir;
@@ -1055,7 +1042,7 @@ void R_SnowEffect (vec3_t org1, vec3_t org2, int flags, vec3_t alldir, int count
 
 	for (i = 0; i < count; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->vel[0] = alldir[0];  //X and Y motion
 		p->vel[1] = alldir[1];
@@ -1123,7 +1110,7 @@ void R_ColoredParticleExplosion (vec3_t org, int color, int radius, int counter)
 
 	for (i = 0; i < counter; i++)
 	{
-		if (!(p = AllocParticle ())) return;
+		if (!(p = R_GetParticle ())) return;
 
 		p->die = cl.time + 3;
 		p->color = color;
@@ -1168,9 +1155,18 @@ void R_UpdateParticles (void)
 	extern	cvar_t	sv_gravity;
 
 	if (cls.state == ca_disconnected)
+	{
+		cl.lastparticletime = cl.time;
 		return;
+	}
 
-	frametime = cl.time - cl.oldtime;
+	// particle effects advance at no more than 50fps, even if running faster
+	if (cl.time - cl.lastparticletime >= 0.02)
+	{
+		frametime = cl.time - cl.lastparticletime;
+		cl.lastparticletime = cl.time;
+	}
+	else return;
 
 	time4 = frametime * 20;
 	time3 = frametime * 15;

@@ -618,10 +618,10 @@ void Draw_FadeScreen (void)
 	int coverage = (40 * vid.width2d * vid.height2d) / (640 * 480);
 
 	// first pass darkens the screen
-	D_DrawColouredQuad (0, 0, vid.width2d, vid.height2d, COLOR_FROM_RGBA (0, 0, 0, 64));
+	D_DrawColouredQuad (0, 0, vid.width2d, vid.height2d, COLOR_FROM_RGBA (0, 0, 0, 128));
 
 	// second pass lays the baseline
-	D_DrawColouredQuad (0, 0, vid.width2d, vid.height2d, COLOR_FROM_RGBA (248, 220, 120, 50));
+	D_DrawColouredQuad (0, 0, vid.width2d, vid.height2d, COLOR_FROM_RGBA (248, 220, 120, 25));
 
 	// keep the random framerate-independent
 	srand ((unsigned int) (realtime * 36.0));

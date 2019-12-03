@@ -48,8 +48,6 @@ typedef struct cbdlight_s {
 	// this is the stuff needed for drawing the light and it goes in a cbuffer
 	float origin[3];
 	float radius;
-	float rgb[3];
-	float minlight;	// cbuffer padding; might use later
 } cbdlight_t;
 
 ID3D11Buffer *d3d_DLightConstants = NULL;
@@ -135,7 +133,7 @@ void D_LightRegister (void)
 }
 
 
-void D_CreateLightmapTexture (lighttexel_t *data[MAX_LIGHTMAPS], int numlightmaps)
+void D_CreateLightmapTexture (void *data[MAX_LIGHTMAPS], int numlightmaps)
 {
 	int i;
 
@@ -175,8 +173,6 @@ void D_SetupDynamicLight (float *origin, float intensity)
 
 	Vector3Copy (consts.origin, origin);
 	consts.radius = intensity;
-	Vector3Set (consts.rgb, 1, 1, 1);
-	consts.minlight = 0;
 
 	d3d_Context->lpVtbl->UpdateSubresource (d3d_Context, (ID3D11Resource *) d3d_DLightConstants, 0, NULL, &consts, 0, 0);
 

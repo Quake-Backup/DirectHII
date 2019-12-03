@@ -176,19 +176,6 @@ void D_SetRenderStates (ID3D11BlendState *bs, ID3D11DepthStencilState *ds, ID3D1
 }
 
 
-void D_StateOnLost (void)
-{
-}
-
-void D_StateOnReset (void)
-{
-	D_ClearState ();
-}
-
-void D_StateOnRelease (void)
-{
-}
-
 void D_StateRegister (void)
 {
 	d3d_BSNone = D_CreateBlendState (FALSE, D3D11_BLEND_SRC_ALPHA, D3D11_BLEND_INV_SRC_ALPHA, D3D11_BLEND_OP_ADD);
@@ -210,9 +197,6 @@ void D_StateRegister (void)
 	d3d_LMapSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_CLAMP, 0, 1);
 	d3d_WarpSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_MIP_LINEAR, D3D11_TEXTURE_ADDRESS_WRAP, 0, 1);
 	d3d_DrawSampler = D_CreateSamplerState (D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP, 0, 1);
-
-	D_ClearState ();
-	VID_RegisterHandlers (D_StateOnRelease, D_StateOnLost, D_StateOnReset);
 }
 
 
@@ -228,6 +212,7 @@ void D_ClearState (void)
 	D_SetVertexShader (NULL);
 	D_SetGeometryShader (NULL);
 	D_SetPixelShader (NULL);
+
 	D_ClearTextureBindings ();
 	D_SetRenderStates (NULL, NULL, NULL);
 	D_BindIndexBuffer (NULL, DXGI_FORMAT_UNKNOWN);

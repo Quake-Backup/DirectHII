@@ -203,6 +203,10 @@ a lot of this should move to r_light
 =============================================================================
 */
 
+typedef struct lighttexel_s {
+	byte styles[4];
+} lighttexel_t;
+
 // allocations can be thrown away when lightmap building is completed
 lighttexel_t *lm_data[MAX_LIGHTMAPS];
 
