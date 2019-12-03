@@ -674,7 +674,7 @@ void D_EndRendering (int syncInterval)
 }
 
 
-void D_CaptureScreenshot (char *checkname, float gammaval)
+void D_CaptureScreenshot (char *checkname, float gammaval, float contrastval)
 {
 	int i;
 	byte inversegamma[256];
@@ -725,6 +725,14 @@ void D_CaptureScreenshot (char *checkname, float gammaval)
 	}
 	else
 		for (i = 0; i < 256; i++) inversegamma[i] = 255 - i;
+
+	for (i = 0; i < 256; i++)
+	{
+		if (contrastval > 0)
+		{
+			inversegamma[i] = (float) inversegamma[i] / contrastval;
+		}
+	}
 
 	// now convert it down
 	Image_CollapseRowPitch ((unsigned *) msr.pData, descRT.Width, descRT.Height, msr.RowPitch >> 2);

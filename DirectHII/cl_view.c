@@ -136,6 +136,8 @@ cshift_t	cshift_slime = {{0, 25, 5}, 150};
 cshift_t	cshift_lava = {{255, 80, 0}, 150};
 
 cvar_t		v_gamma = {"gamma", "1", true};
+cvar_t		v_contrast = {"contrast", "1", true};
+
 
 float		v_blend[4];		// rgba 0.0 - 1.0
 
@@ -825,6 +827,7 @@ void V_Init (void)
 	Cvar_RegisterVariable (&v_kickpitch, NULL);
 
 	Cvar_RegisterVariable (&v_gamma, NULL);
+	Cvar_RegisterVariable (&v_contrast, NULL);
 }
 
 

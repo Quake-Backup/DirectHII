@@ -1,6 +1,8 @@
 // view.h
 
 extern	cvar_t		v_gamma;
+extern	cvar_t		v_contrast;
+
 extern float v_blend[4];
 
 extern cvar_t lcd_x;

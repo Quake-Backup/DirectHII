@@ -12,3 +12,4 @@ implement gl_finish via D_SyncPipeline
 
 check sizing of MAX_QUAD_VERTS and MAX_QUAD_INDEXES
 
+inverse gamma table for screenshots needs to account for contrast too....

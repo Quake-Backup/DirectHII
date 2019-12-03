@@ -33,7 +33,7 @@ void D_EndRendering (int syncInterval);
 qboolean D_BeginWaterWarp (void);
 void D_DoWaterWarp (int width, int height);
 
-void D_CaptureScreenshot (char *checkname, float gammaval);
+void D_CaptureScreenshot (char *checkname, float gammaval, float contrastval);
 
 void D_UpdateDrawConstants (int width, int height, float gammaval, float contrastval);
 

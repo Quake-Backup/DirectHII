@@ -407,7 +407,7 @@ void SCR_CalcRefdef (void)
 	else SCR_SetFOV (&r_viewmodel_refdef, 90.0f, vid.width, vid.height - sb_lines);
 
 	// deferred to after the refdef is set because we may be scaling up the 2d view
-	D_UpdateDrawConstants (vid.width2d, vid.height2d, v_gamma.value, 1.0f);
+	D_UpdateDrawConstants (vid.width2d, vid.height2d, v_gamma.value, v_contrast.value);
 }
 
 
@@ -741,7 +741,7 @@ void SCR_ScreenShot_f (void)
 		return;
 	}
 
-	D_CaptureScreenshot (checkname, v_gamma.value);
+	D_CaptureScreenshot (checkname, v_gamma.value, v_contrast.value);
 }
 
 
