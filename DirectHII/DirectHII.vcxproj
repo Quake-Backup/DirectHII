@@ -223,6 +223,7 @@
     <ClCompile Include="d_light.c" />
     <ClCompile Include="d_main.c" />
     <ClCompile Include="d_mesh.c" />
+    <ClCompile Include="d_particles.c" />
     <ClCompile Include="d_quadbatch.c" />
     <ClCompile Include="d_shader.c" />
     <ClCompile Include="d_state.c" />

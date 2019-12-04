@@ -19,11 +19,9 @@ PARTICLES
 
 void R_DrawParticles (void)
 {
-	particle_t		*p, *kill;
-
 	for (;;)
 	{
-		kill = active_particles;
+		particle_t *kill = active_particles;
 
 		if (kill && kill->die < cl.time)
 		{
@@ -41,11 +39,11 @@ void R_DrawParticles (void)
 
 	D_BeginParticles ();
 
-	for (p = active_particles; p; p = p->next)
+	for (particle_t *p = active_particles; p; p = p->next)
 	{
 		for (;;)
 		{
-			kill = p->next;
+			particle_t *kill = p->next;
 
 			if (kill && kill->die < cl.time)
 			{
@@ -59,8 +57,8 @@ void R_DrawParticles (void)
 		}
 
 		if (p->color > 255)
-			D_AddParticle (p->org, d_8to24table_part[((int) p->color - 256) & 255]);
-		else D_AddParticle (p->org, d_8to24table_rgba[((int) p->color) & 255]);
+			D_AddParticle (p->org, d_8to24table_part[((int) p->color - 256) & 255], p->size);
+		else D_AddParticle (p->org, d_8to24table_rgba[((int) p->color) & 255], p->size);
 	}
 
 	D_EndParticles ();

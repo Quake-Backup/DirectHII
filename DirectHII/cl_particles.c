@@ -65,9 +65,12 @@ static particle_t *R_GetParticle (void)
 	else
 	{
 		particle_t *p = free_particles;
+
 		free_particles = p->next;
 		p->next = active_particles;
 		active_particles = p;
+
+		p->size = (rand () & 7) + 7;
 
 		return p;
 	}
