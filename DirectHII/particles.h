@@ -70,7 +70,7 @@ typedef struct particle_s {
 	// driver-usable fields
 	vec3_t		org;
 	float		color;
-	int			size;
+	float		size;
 
 	// drivers never touch the following fields
 	struct particle_s	*next;

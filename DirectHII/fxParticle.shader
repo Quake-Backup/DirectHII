@@ -1,5 +1,13 @@
 
 
+struct VS_PARTICLE {
+	float4 Position : POSITION;
+	float4 Color : COLOUR;
+	float Size : SIZE;
+	float2 Offsets : OFFSETS;
+};
+
+
 struct PS_PARTICLE {
 	float4 Position : SV_POSITION;
 	float4 Color : COLOUR;
@@ -35,6 +43,24 @@ PS_PARTICLE ParticleSquareVS (VS_QUADBATCH vs_in)
 {
 	return GetParticleVert (vs_in, 0.002f, 0.5f);
 }
+
+PS_PARTICLE ParticleInstancedVS (VS_PARTICLE vs_in)
+{
+	PS_PARTICLE vs_out;
+
+	// hack a scale up to keep particles from disapearing
+	float2 ScaleUp = vs_in.Offsets * (1.0f + dot (vs_in.Position.xyz - viewOrigin, viewForward) * 0.002f);
+
+	// compute new particle origin
+	float3 Position = vs_in.Position.xyz + (viewRight * ScaleUp.x + viewUp * ScaleUp.y) * 0.5f * vs_in.Size;
+
+	// and finally write it out
+	vs_out.Position = mul (mvpMatrix, float4 (Position, 1.0f));
+	vs_out.Color = vs_in.Color;
+	vs_out.TexCoord = vs_in.Offsets;
+
+	return vs_out;
+}
 #endif
 
 
@@ -46,6 +72,12 @@ float4 ParticleCirclePS (PS_PARTICLE ps_in) : SV_TARGET0
 }
 
 float4 ParticleSquarePS (PS_PARTICLE ps_in) : SV_TARGET0
+{
+	// procedurally generate the particle dot for good speed and per-pixel accuracy at any scale
+	return GetGamma (ps_in.Color);
+}
+
+float4 ParticleInstancedPS (PS_PARTICLE ps_in) : SV_TARGET0
 {
 	// procedurally generate the particle dot for good speed and per-pixel accuracy at any scale
 	return GetGamma (ps_in.Color);
