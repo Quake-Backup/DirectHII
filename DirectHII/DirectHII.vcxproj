@@ -230,6 +230,7 @@
     <ClCompile Include="d_surf.c" />
     <ClCompile Include="d_texture.c" />
     <ClCompile Include="d_video.c" />
+    <ClCompile Include="d_waterwarp.c" />
     <ClCompile Include="host.c" />
     <ClCompile Include="host_cmd.c" />
     <ClCompile Include="in_win.c" />

@@ -505,6 +505,9 @@
     <ClCompile Include="d_particles.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="d_waterwarp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="bugs.txt" />

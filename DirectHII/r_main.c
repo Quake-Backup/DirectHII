@@ -375,8 +375,8 @@ void R_RenderView (void)
 	// render normal view
 	R_SetupFrame ();
 
-	// a contents shift > 0 implies in water (need to check this...)
 	// if we're water-warping we must use a full-screen viewport and we'll reduce it for sb_lines when drawing the warped view back
+	// this is the same test as software quake used
 	if (r_dowarp)
 	{
 		if (D_BeginWaterWarp ())

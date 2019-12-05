@@ -70,7 +70,7 @@ static particle_t *R_GetParticle (void)
 		p->next = active_particles;
 		active_particles = p;
 
-		p->size = (float) ((rand () & 7) + 7) * 0.0666f;
+		p->size = (float) ((rand () & 7) + 7) * 0.0333f;
 
 		return p;
 	}
