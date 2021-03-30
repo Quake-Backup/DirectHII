@@ -86,9 +86,9 @@ struct EffectT {
 			vec3_t	velocity[16];
 			vec3_t	avel[3];
 			vec3_t	origin;
-			unsigned char type;
+			unsigned int type;
 			vec3_t	srcVel;
-			unsigned char numChunks;
+			unsigned int numChunks;
 			float	time_amount;
 			float	aveScale;
 		} Chunk;
