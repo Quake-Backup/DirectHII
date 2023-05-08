@@ -123,8 +123,8 @@ void IN_ReadRawInput (HRAWINPUT hRawInput)
 		if ((in_mlook.state & 1) || freelook.value)
 		{
 			// compensate for different scaling
-			if (ri_Data.data.mouse.lLastX) cl.viewangles[1] -= m_yaw.value * (float) ri_Data.data.mouse.lLastX * sensitivity.value * 6.666f;
-			if (ri_Data.data.mouse.lLastY) cl.viewangles[0] += m_pitch.value * (float) ri_Data.data.mouse.lLastY * sensitivity.value * 6.666f;
+			if (ri_Data.data.mouse.lLastX) cl.viewangles[1] -= m_yaw.value * (float) ri_Data.data.mouse.lLastX * sensitivity.value;
+			if (ri_Data.data.mouse.lLastY) cl.viewangles[0] += m_pitch.value * (float) ri_Data.data.mouse.lLastY * sensitivity.value;
 
 			// clamp pitch
 			if (cl.viewangles[0] > 80) cl.viewangles[0] = 80;
