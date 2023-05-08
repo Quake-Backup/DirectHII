@@ -764,7 +764,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 #ifdef _DEBUG
 	static	char	debugcmdline[1024];
 
-	strcpy (debugcmdline, "-width 1024 -height 600 -window");
+	strcpy (debugcmdline, "-width 1600 -height 900 -window");
 	realcmdline = debugcmdline;
 
 	// force a working directory for debug builds because the exe isn't going to be in the correct game path
