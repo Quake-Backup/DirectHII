@@ -369,16 +369,11 @@ void SCR_CalcRefdef (void)
 
 	if (scr_viewsize.value < 100)
 	{
-		// figure minimum sizes; assumes aspect is never < 4:3
-		int minheight = 200;
-		int minwidth = (vid.width * minheight) / vid.height;
+		// simple aspect scale
+		float aspectscale = 1.0f + 0.025 * (100.0f - scr_viewsize.value);
 
-		// figure scaling percentage
-		int pct = ((scr_viewsize.value - 30) * 100) / 70;
-
-		// and apply it
-		vid.width2d = minwidth + ((vid.width - minwidth) * pct) / 100;
-		vid.height2d = minheight + ((vid.height - minheight) * pct) / 100;
+		vid.width2d = vid.width / aspectscale;
+		vid.height2d = vid.height / aspectscale;
 	}
 	else
 	{
